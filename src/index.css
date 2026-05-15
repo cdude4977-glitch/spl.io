@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-mono: "Space Grotesk", monospace;
+
+  --color-brand-blue: #2563eb;
+  --color-brand-neon: #22d3ee;
+  --color-brand-dark: #050608;
+  --color-brand-charcoal: #0a0b0e;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-dark text-gray-100 font-sans antialiased selection:bg-brand-neon selection:text-brand-dark;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tighter uppercase font-black;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
+  }
+
+  .neon-glow {
+    @apply shadow-[0_0_20px_rgba(34,211,238,0.2)] border-brand-neon/30;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-brand-blue to-brand-neon text-white font-black py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-brand-neon/30 active:scale-95 text-xs uppercase tracking-widest;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-brand-dark;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-brand-neon;
+}
+
+/* Animations */
+@keyframes pulse-neon {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-neon-pulse {
+  animation: pulse-neon 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
