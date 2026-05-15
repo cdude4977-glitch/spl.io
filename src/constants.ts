@@ -2,24 +2,24 @@ import { SportType, Team, Player, Match, Notice } from './types';
 
 export const TEAMS: Team[] = [
   // Cricket (5 teams)
-  { id: 'c1', name: 'Shalom Hurricanes', logo: '/input_file_0.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#3b82f6' },
-  { id: 'c2', name: 'Shalom Tornados', logo: '/input_file_1.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#eab308' },
-  { id: 'c3', name: 'Shalom Stromers', logo: '/input_file_2.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#22c55e' },
-  { id: 'c4', name: 'Shalom Lightning', logo: '/input_file_3.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#06b6d4' },
-  { id: 'c5', name: 'Shalom Thunders', logo: '/input_file_4.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#15803d' },
+  { id: 'c1', name: 'Shalom Hurricanes', logo: '/input_file_0.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#3b82f6' },
+  { id: 'c2', name: 'Shalom Tornados', logo: '/input_file_1.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#eab308' },
+  { id: 'c3', name: 'Shalom Stromers', logo: '/input_file_2.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#22c55e' },
+  { id: 'c4', name: 'Shalom Lightning', logo: '/input_file_3.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#06b6d4' },
+  { id: 'c5', name: 'Shalom Thunders', logo: '/input_file_4.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#15803d' },
 
   // Football (5 teams)
-  { id: 'f1', name: 'Shalom City FC', logo: '/input_file_5.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#60a5fa' },
-  { id: 'f2', name: 'Shalom Blazers', logo: '/input_file_6.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#ef4444' },
-  { id: 'f3', name: 'Shalom Spurs FC', logo: '/input_file_7.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#1e3a8a' },
-  { id: 'f4', name: 'Shalom Athletico FC', logo: '/input_file_8.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#dc2626' },
-  { id: 'f5', name: 'Real Shalom FC', logo: '/input_file_9.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#111827' },
+  { id: 'f1', name: 'Shalom City FC', logo: '/input_file_5.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#60a5fa' },
+  { id: 'f2', name: 'Shalom Blazers', logo: '/input_file_6.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#ef4444' },
+  { id: 'f3', name: 'Shalom Spurs FC', logo: '/input_file_7.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#1e3a8a' },
+  { id: 'f4', name: 'Shalom Athletico FC', logo: '/input_file_8.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#dc2626' },
+  { id: 'f5', name: 'Real Shalom FC', logo: '/input_file_9.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#111827' },
 
   // Basketball (4 teams)
-  { id: 'b1', name: 'Shalom Hills Warriors', logo: '/input_file_10.png', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#1d4ed8' },
-  { id: 'b2', name: 'Shalom Hills Sonics', logo: '/input_file_11.png', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#2563eb' },
-  { id: 'b3', name: 'Shalom Hills Pacers', logo: '/input_file_12.png', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#fbbf24' },
-  { id: 'b4', name: 'Shalom Hills Rovers', logo: '/input_file_13.png', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, wins: 0, losses: 0, points: 0, color: '#4338ca' },
+  { id: 'b1', name: 'Shalom Hills Warriors', logo: '/input_file_10.png', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#1d4ed8' },
+  { id: 'b2', name: 'Shalom Hills Sonics', logo: '/input_file_11.png', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#2563eb' },
+  { id: 'b3', name: 'Shalom Hills Pacers', logo: '/input_file_12.png', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#fbbf24' },
+  { id: 'b4', name: 'Shalom Hills Rovers', logo: '/input_file_13.png', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#4338ca' },
 ];
 
 export const PLAYERS: Player[] = [

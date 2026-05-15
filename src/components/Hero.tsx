@@ -105,10 +105,10 @@ export default function Hero({ onNavigate }: { onNavigate: (tab: TabType) => voi
               </motion.span>
             </button>
             <button 
-              onClick={() => onNavigate('Auction')}
+              onClick={() => onNavigate('Timeline')}
               className="bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10 text-white font-bold py-3 px-8 rounded-full transition-all group"
             >
-              LIVE AUCTION
+              VIEW TIMELINE
             </button>
           </div>
 

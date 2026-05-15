@@ -5,9 +5,7 @@ import { TabType } from '../App';
 
 const NAV_LINKS: { name: TabType; displayName: string }[] = [
   { name: 'Home', displayName: 'Home' },
-  { name: 'Sports', displayName: 'Sports' },
   { name: 'Timeline', displayName: 'Timeline' },
-  { name: 'Auction', displayName: 'Auction' },
   { name: 'Brochure', displayName: 'Brochure' },
   { name: 'Fixtures', displayName: 'Fixtures' },
   { name: 'Leaderboard', displayName: 'Leaderboard' },

@@ -4,7 +4,7 @@ export interface Player {
   id: string;
   name: string;
   sport: SportType;
-  ageCategory: 'Under 14' | 'Under 17' | 'Open';
+  ageCategory: 'Under 14' | 'Under 15' | 'Under 17' | 'Open';
   basePrice: number;
   currentBid: number;
   teamId: string | null;

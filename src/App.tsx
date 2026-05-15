@@ -16,7 +16,7 @@ import AdminPage from './components/AdminPage';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronUp } from 'lucide-react';
 
-export type TabType = 'Home' | 'Sports' | 'Timeline' | 'Auction' | 'Fixtures' | 'Standings' | 'Leaderboard' | 'Rules' | 'Gallery' | 'Registration' | 'Contact' | 'Admin' | 'Brochure';
+export type TabType = 'Home' | 'Timeline' | 'Fixtures' | 'Standings' | 'Leaderboard' | 'Rules' | 'Gallery' | 'Registration' | 'Contact' | 'Admin' | 'Brochure';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -56,15 +56,10 @@ export default function App() {
             <Hero onNavigate={setActiveTab} />
             <StatsSection />
             <SportsGrid />
-            <TimelineSection />
           </motion.div>
         );
-      case 'Sports':
-        return <motion.div key="sports" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><SportsGrid /></motion.div>;
       case 'Timeline':
         return <motion.div key="timeline_page" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><TimelineSection /></motion.div>;
-      case 'Auction':
-        return <motion.div key="auction" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><AuctionSection /></motion.div>;
       case 'Fixtures':
         return <motion.div key="fixtures" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><FixturesSection /></motion.div>;
       case 'Standings':
