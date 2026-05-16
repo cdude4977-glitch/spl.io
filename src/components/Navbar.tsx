@@ -45,30 +45,30 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
           : 'bg-transparent py-6'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-8 xl:px-12">
+        <div className="flex justify-between items-center gap-4">
           {/* Logo */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3 cursor-pointer"
+            className="flex items-center gap-2 sm:gap-3 cursor-pointer shrink-0"
             onClick={() => setActiveTab('Home')}
           >
-            <div className="w-12 h-12 rounded-lg flex items-center justify-center transition-transform hover:scale-110">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center transition-transform hover:scale-110">
               <img src={dataService.getPublicLogoUrl(branding.schoolLogo)} className="w-full h-full object-contain" alt="Logo" />
             </div>
-            <div className="flex flex-col leading-tight">
-              <span className="font-display font-extrabold text-lg tracking-tighter uppercase">
+            <div className="flex flex-col leading-tight max-w-[150px] sm:max-w-none">
+              <span className="font-display font-extrabold text-base sm:text-lg tracking-tighter uppercase line-clamp-1 sm:line-clamp-none">
                 {branding.eventName.split(' ')[0]} <span className="text-white/60">{branding.eventName.split(' ').slice(1).join(' ')}</span>
               </span>
-              <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-brand-neon">
+              <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.2em] font-bold text-brand-neon">
                 Summer Edition 2026
               </span>
             </div>
           </motion.div>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center lg:gap-5 xl:gap-8">
             {NAV_LINKS.map((link, idx) => (
               <motion.button
                 key={link.name}
@@ -76,7 +76,7 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-xs xl:text-sm font-medium transition-colors whitespace-nowrap ${
                   activeTab === link.name ? 'text-brand-neon' : 'text-white/70 hover:text-white'
                 }`}
               >
@@ -89,7 +89,7 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
               animate={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`bg-brand-neon text-brand-dark font-bold px-6 py-2.5 rounded-full text-sm shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:shadow-[0_0_30px_rgba(0,240,255,0.5)] transition-all ${
+              className={`bg-brand-neon text-brand-dark font-bold px-4 xl:px-6 py-2 xl:py-2.5 rounded-full text-xs xl:text-sm shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:shadow-[0_0_30px_rgba(0,240,255,0.5)] transition-all whitespace-nowrap ${
                 activeTab === 'Registration' ? 'ring-2 ring-white ring-offset-2 ring-offset-brand-dark' : ''
               }`}
             >
