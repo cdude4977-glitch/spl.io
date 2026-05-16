@@ -1,4 +1,4 @@
-export type SportType = 'Football' | 'Cricket' | 'Basketball' | 'Table Tennis';
+export type SportType = 'Football' | 'Cricket' | 'Basketball';
 
 export type AgeCategory = 'U11' | 'U13' | 'U15' | 'U19';
 export type Gender = 'Boys' | 'Girls';

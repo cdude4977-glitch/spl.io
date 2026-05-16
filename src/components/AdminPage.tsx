@@ -5,7 +5,7 @@ import {
   ShieldCheck, Database, RefreshCcw, AlertTriangle, CheckCircle2,
   LayoutDashboard, Play, History, BarChart3, Image as LucideImage,
   Bell, FileText, LogOut, ChevronRight, Menu, X, DollarSign,
-  TrendingUp, Activity, UserPlus, Star, Clock, MapPin, Zap
+  TrendingUp, Activity, UserPlus, Star, Clock, MapPin, Zap, User, Trash2
 } from 'lucide-react';
 import { PLAYERS, TEAMS, MATCHES, NOTICES } from '../constants';
 import { dataService } from '../services/dataService';
@@ -430,8 +430,7 @@ function PlayerManagement({ players, teams }: { players: Player[], teams: Team[]
                       <option value="Football">Football</option>
                       <option value="Cricket">Cricket</option>
                       <option value="Basketball">Basketball</option>
-                      <option value="Table Tennis">Table Tennis</option>
-                   </select>
+                    </select>
                 </div>
                 <div className="space-y-2">
                    <label className="text-[10px] uppercase font-black tracking-widest text-white/40 ml-1">Primary Role</label>
@@ -733,7 +732,7 @@ function TeamManagement({ teams, setTeams }: { teams: Team[], setTeams: React.Di
                     <option value="Football">Football</option>
                     <option value="Cricket">Cricket</option>
                     <option value="Basketball">Basketball</option>
-                    <option value="Table Tennis">Table Tennis</option>
+                    
                  </select>
               </div>
               <div className="space-y-1">
@@ -1266,7 +1265,7 @@ function FixturesManagement() {
               onChange={(e) => setActiveSport(e.target.value as SportType)}
               className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-[10px] font-bold uppercase tracking-widest outline-none focus:border-brand-neon/50"
             >
-              {['Football', 'Cricket', 'Basketball', 'Table Tennis'].map(s => <option key={s} value={s}>{s}</option>)}
+              {['Football', 'Cricket', 'Basketball'].map(s => <option key={s} value={s}>{s}</option>)}
             </select>
             <select 
               value={activeGender} 
@@ -1577,7 +1576,7 @@ function LeaderboardControl() {
               onChange={(e) => setActiveSport(e.target.value as SportType)}
               className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-[10px] font-bold uppercase tracking-widest outline-none"
             >
-              {['Football', 'Cricket', 'Basketball', 'Table Tennis'].map(s => <option key={s} value={s}>{s}</option>)}
+              {['Football', 'Cricket', 'Basketball'].map(s => <option key={s} value={s}>{s}</option>)}
             </select>
             <select 
               value={activeGender} 

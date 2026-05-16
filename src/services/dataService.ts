@@ -19,6 +19,7 @@ export const dataService = {
         gender: t.gender,
         purseRemaining: t.purse_remaining || t.purseRemaining,
         players: t.players || [],
+        played: t.played || 0,
         wins: t.wins || 0,
         losses: t.losses || 0,
         draws: t.draws || 0,

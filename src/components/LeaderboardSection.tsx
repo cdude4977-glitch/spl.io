@@ -27,7 +27,7 @@ export default function LeaderboardSection() {
       .sort((a, b) => b.points - a.points);
   }, [teams, activeSport, activeGender, activeAge]);
 
-  const sports: SportType[] = ['Football', 'Cricket', 'Basketball', 'Table Tennis'];
+  const sports: SportType[] = ['Football', 'Cricket', 'Basketball'];
   const ageCategories: AgeCategory[] = ['U11', 'U13', 'U15', 'U19'];
 
   return (
