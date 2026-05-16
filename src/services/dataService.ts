@@ -7,7 +7,7 @@ export const dataService = {
     try {
       const { data, error } = await supabase.from('teams').select('*');
       if (error) throw error;
-      return (data as Team[]) || TEAMS;
+      return (data && data.length > 0) ? (data as Team[]) : TEAMS;
     } catch (err) {
       console.error('Error fetching teams:', err);
       return TEAMS;
@@ -18,7 +18,7 @@ export const dataService = {
     try {
       const { data, error } = await supabase.from('players').select('*');
       if (error) throw error;
-      return (data as Player[]) || PLAYERS;
+      return (data && data.length > 0) ? (data as Player[]) : PLAYERS;
     } catch (err) {
       console.error('Error fetching players:', err);
       return PLAYERS;
@@ -29,7 +29,7 @@ export const dataService = {
     try {
       const { data, error } = await supabase.from('matches').select('*');
       if (error) throw error;
-      return (data as Match[]) || MATCHES;
+      return (data && data.length > 0) ? (data as Match[]) : MATCHES;
     } catch (err) {
       console.error('Error fetching matches:', err);
       return MATCHES;
@@ -40,7 +40,7 @@ export const dataService = {
     try {
       const { data, error } = await supabase.from('notices').select('*', { count: 'exact' });
       if (error) throw error;
-      return (data as Notice[]) || NOTICES;
+      return (data && data.length > 0) ? (data as Notice[]) : NOTICES;
     } catch (err) {
       console.error('Error fetching notices:', err);
       return NOTICES;
@@ -57,7 +57,7 @@ export const dataService = {
     }
   },
 
-  async uploadImage(file: File, bucket: string = 'logo'): Promise<{ url: string | null, error: any }> {
+  async uploadImage(file: File, bucket: string = 'logos'): Promise<{ url: string | null, error: any }> {
     try {
       const fileExt = file.name.split('.').pop();
       const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
@@ -124,7 +124,15 @@ export const dataService = {
   getPublicLogoUrl(path: string): string {
     if (!path) return '';
     if (path.startsWith('http')) return path;
-    const { data } = supabase.storage.from('logo').getPublicUrl(path);
-    return data.publicUrl;
+    if (path.startsWith('/')) return path; // Handle local assets or existing relative paths
+    
+    // If it doesn't look like a path or URL, it might be an emoji or fallback text
+    // Only try Supabase if it looks like a filename/path (contains dot or dash/underscore)
+    if (path.includes('.') || path.includes('/') || path.length > 10) {
+      const { data } = supabase.storage.from('logos').getPublicUrl(path);
+      return data.publicUrl;
+    }
+    
+    return path; 
   }
 };

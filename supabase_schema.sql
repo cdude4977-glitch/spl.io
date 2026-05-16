@@ -192,8 +192,8 @@ CREATE POLICY "Admin All Access" ON site_config FOR ALL USING (auth.role() = 'au
 -- Note: In Supabase, buckets are often created through the dashboard or API.
 -- These policies assume a bucket named 'logos' exists.
 
--- Allow public access to 'logo' bucket for reading
-CREATE POLICY "Public Read Access Logos" ON storage.objects FOR SELECT USING (bucket_id = 'logo');
+-- Allow public access to 'logos' bucket for reading
+CREATE POLICY "Public Read Access Logos" ON storage.objects FOR SELECT USING (bucket_id = 'logos');
 
--- Allow authenticated users (Admins) to upload/update/delete in 'logo' bucket
-CREATE POLICY "Admin CRUD Access Logos" ON storage.objects FOR ALL USING (bucket_id = 'logo' AND auth.role() = 'authenticated');
+-- Allow authenticated users (Admins) to upload/update/delete in 'logos' bucket
+CREATE POLICY "Admin CRUD Access Logos" ON storage.objects FOR ALL USING (bucket_id = 'logos' AND auth.role() = 'authenticated');

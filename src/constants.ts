@@ -2,24 +2,24 @@ import { SportType, Team, Player, Match, Notice } from './types';
 
 export const TEAMS: Team[] = [
   // Cricket (5 teams)
-  { id: 'c1', name: 'Shalom Hurricanes', logo: 'hurricanes.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#3b82f6' },
-  { id: 'c2', name: 'Shalom Tornados', logo: 'tornados.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#eab308' },
-  { id: 'c3', name: 'Shalom Stromers', logo: 'stromers.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#22c55e' },
-  { id: 'c4', name: 'Shalom Lightning', logo: 'lightning.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#06b6d4' },
-  { id: 'c5', name: 'Shalom Thunders', logo: 'thunders.png', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#15803d' },
+  { id: 'c1', name: 'Shalom Hurricanes', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.36%20(1).jpeg', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#3b82f6' },
+  { id: 'c2', name: 'Shalom Tornados', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.36.jpeg', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#eab308' },
+  { id: 'c3', name: 'Shalom Stromers', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.35%20(2).jpeg', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#22c55e' },
+  { id: 'c4', name: 'Shalom Lightning', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.35%20(1).jpeg', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#06b6d4' },
+  { id: 'c5', name: 'Shalom Thunders', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.35.jpeg', captain: 'Pending', sport: 'Cricket', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#15803d' },
 
   // Football (5 teams)
-  { id: 'f1', name: 'Shalom City FC', logo: 'cityfc.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#60a5fa' },
-  { id: 'f2', name: 'Shalom Blazers', logo: 'blazers.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#ef4444' },
-  { id: 'f3', name: 'Shalom Spurs FC', logo: 'spurs.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#1e3a8a' },
-  { id: 'f4', name: 'Shalom Athletico FC', logo: 'athletico.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#dc2626' },
-  { id: 'f5', name: 'Real Shalom FC', logo: 'realshalom.png', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#111827' },
+  { id: 'f1', name: 'Shalom City FC', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.41%20(2).jpeg', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#60a5fa' },
+  { id: 'f2', name: 'Shalom Blazers', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.41%20(4).jpeg', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#ef4444' },
+  { id: 'f3', name: 'Shalom Spurs FC', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.41%20(3).jpeg', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#1e3a8a' },
+  { id: 'f4', name: 'Shalom Athletico FC', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.40%20(3).jpeg', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#dc2626' },
+  { id: 'f5', name: 'Real Shalom FC', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.40%20(2).jpeg', captain: 'Pending', sport: 'Football', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#111827' },
 
   // Basketball (4 teams)
-  { id: 'b1', name: 'Shalom Hills Warriors', logo: 'warriors.png', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#1d4ed8' },
-  { id: 'b2', name: 'Shalom Hills Sonics', logo: 'sonics.png', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#2563eb' },
-  { id: 'b3', name: 'Shalom Hills Pacers', logo: 'pacers.png', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#fbbf24' },
-  { id: 'b4', name: 'Shalom Hills Rovers', logo: 'rovers.png', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#4338ca' },
+  { id: 'b1', name: 'Shalom Hills Warriors', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.25.02%20(1).jpeg', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#1d4ed8' },
+  { id: 'b2', name: 'Shalom Hills Sonics', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.25.02.jpeg', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#2563eb' },
+  { id: 'b3', name: 'Shalom Hills Pacers', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.25.01%20(1).jpeg', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#fbbf24' },
+  { id: 'b4', name: 'Shalom Hills Rovers', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.25.01.jpeg', captain: 'Pending', sport: 'Basketball', purseRemaining: 50, players: [], wins: 0, losses: 0, points: 0, color: '#4338ca' },
 ];
 
 export const PLAYERS: Player[] = [

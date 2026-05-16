@@ -12,7 +12,7 @@ import { dataService } from '../services/dataService';
 import { Player, Team, Match, Notice } from '../types';
 
 type AdminModule = 
-  | 'Dashboard' | 'Players' | 'Teams' | 'Auction' | 'Fixtures' 
+  | 'Dashboard' | 'Players' | 'Team Management' | 'Auction' | 'Fixtures' 
   | 'Live Scores' | 'Leaderboard' | 'Statistics' | 'Registrations' 
   | 'Gallery' | 'Notices' | 'Settings';
 
@@ -24,6 +24,26 @@ export default function AdminPage() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [dbStatus, setDbStatus] = useState<{ loading: boolean, success?: boolean, error?: string }>({ loading: false });
   const [loginError, setLoginError] = useState('');
+  const [teams, setTeams] = useState<Team[]>(TEAMS);
+  const [players, setPlayers] = useState<Player[]>(PLAYERS);
+  const [loadingData, setLoadingData] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      loadAllData();
+    }
+  }, [isLoggedIn]);
+
+  const loadAllData = async () => {
+    setLoadingData(true);
+    const [fetchedTeams, fetchedPlayers] = await Promise.all([
+      dataService.getTeams(),
+      dataService.getPlayers()
+    ]);
+    setTeams(fetchedTeams);
+    setPlayers(fetchedPlayers);
+    setLoadingData(false);
+  };
 
   // Handle Login
   const handleLogin = (e: React.FormEvent) => {
@@ -98,10 +118,10 @@ export default function AdminPage() {
                exit={{ opacity: 0, y: -10 }}
                transition={{ duration: 0.2 }}
              >
-               {activeModule === 'Dashboard' && <DashboardOverview />}
-               {activeModule === 'Players' && <PlayerManagement />}
-               {activeModule === 'Teams' && <TeamManagement />}
-               {activeModule === 'Auction' && <AuctionControl />}
+                {activeModule === 'Dashboard' && <DashboardOverview teams={teams} players={players} />}
+                {activeModule === 'Players' && <PlayerManagement players={players} teams={teams} />}
+                {activeModule === 'Team Management' && <TeamManagement teams={teams} setTeams={setTeams} />}
+                {activeModule === 'Auction' && <AuctionControl players={players} teams={teams} />}
                {activeModule === 'Fixtures' && <FixturesManagement />}
                {activeModule === 'Live Scores' && <LiveScoreCenter />}
                {activeModule === 'Leaderboard' && <LeaderboardControl />}
@@ -183,7 +203,7 @@ function Sidebar({ activeModule, setActiveModule, isCollapsed, setIsCollapsed, o
   const menuItems: { name: AdminModule, icon: any }[] = [
     { name: 'Dashboard', icon: LayoutDashboard },
     { name: 'Players', icon: Users },
-    { name: 'Teams', icon: Trophy },
+    { name: 'Team Management', icon: Trophy },
     { name: 'Auction', icon: Gavel },
     { name: 'Fixtures', icon: Calendar },
     { name: 'Live Scores', icon: Play },
@@ -234,10 +254,10 @@ function Sidebar({ activeModule, setActiveModule, isCollapsed, setIsCollapsed, o
   );
 }
 
-function DashboardOverview() {
+function DashboardOverview({ teams, players }: { teams: Team[], players: Player[] }) {
   const stats = [
-    { label: 'Total Players', val: '1,420', trend: '+12%', icon: Users, color: 'text-blue-500' },
-    { label: 'Total Teams', val: '32', trend: 'Full', icon: Trophy, color: 'text-yellow-500' },
+    { label: 'Total Players', val: players.length.toString(), trend: '+12%', icon: Users, color: 'text-blue-500' },
+    { label: 'Total Teams', val: teams.length.toString(), trend: 'Full', icon: Trophy, color: 'text-yellow-500' },
     { label: 'Live Matches', val: '2', trend: 'Active', icon: Activity, color: 'text-red-500' },
     { label: 'Auction Purse', val: '₹12.5Cr', trend: 'Sold', icon: DollarSign, color: 'text-brand-neon' },
   ];
@@ -322,9 +342,15 @@ function DashboardOverview() {
   );
 }
 
-function PlayerManagement() {
+function PlayerManagement({ players, teams }: { players: Player[], teams: Team[] }) {
   const [searchTerm, setSearchTerm] = useState('');
   
+  const filteredPlayers = players.filter(p => 
+    p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    p.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (p.teamId && teams.find(t => t.id === p.teamId)?.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -361,7 +387,7 @@ function PlayerManagement() {
                 </tr>
              </thead>
              <tbody className="divide-y divide-white/5">
-                {PLAYERS.map(player => (
+                {filteredPlayers.map(player => (
                   <tr key={player.id} className="hover:bg-white/5 transition-colors group relative">
                     <td className="p-8">
                        <div className="flex items-center gap-6">
@@ -390,7 +416,7 @@ function PlayerManagement() {
                        <div className="flex items-center gap-3">
                           <div className={`w-2 h-2 rounded-full ${player.teamId ? 'bg-emerald-500' : 'bg-yellow-500'} animate-pulse`} />
                           <div>
-                            <p className="text-xs font-bold">{player.teamId ? TEAMS.find(t => t.id === player.teamId)?.name : 'FREE AGENT'}</p>
+                            <p className="text-xs font-bold">{player.teamId ? teams.find(t => t.id === player.teamId)?.name : 'FREE AGENT'}</p>
                             <p className="text-[10px] text-white/30 uppercase tracking-widest">{player.status}</p>
                           </div>
                        </div>
@@ -417,18 +443,19 @@ function PlayerManagement() {
   );
 }
 
-function TeamManagement() {
-  const [teams, setTeams] = useState<Team[]>(TEAMS);
+function TeamLogo({ logo, className = "w-full h-full object-cover", teamName = "" }: { logo: string, className?: string, teamName?: string }) {
+  const url = dataService.getPublicLogoUrl(logo);
+  const isEmoji = !url.startsWith('http') && !url.startsWith('/');
+
+  if (isEmoji) {
+    return <span className="text-3xl flex items-center justify-center w-full h-full bg-white/5">{logo}</span>;
+  }
+
+  return <img src={url} className={className} alt={teamName} referrerPolicy="no-referrer" />;
+}
+
+function TeamManagement({ teams, setTeams }: { teams: Team[], setTeams: React.Dispatch<React.SetStateAction<Team[]>> }) {
   const [isUploading, setIsUploading] = useState<string | null>(null);
-
-  useEffect(() => {
-    loadTeams();
-  }, []);
-
-  const loadTeams = async () => {
-    const data = await dataService.getTeams();
-    setTeams(data);
-  };
 
   const handleLogoUpload = async (teamId: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -467,7 +494,7 @@ function TeamManagement() {
                   <div className="flex justify-between items-start mb-8 relative z-10">
                      <div className="relative group/logo">
                         <div className="w-20 h-20 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden shadow-xl group-hover:shadow-white/5 transition-all">
-                           <img src={dataService.getPublicLogoUrl(team.logo)} className="w-full h-full object-cover" alt="" />
+                           <TeamLogo logo={team.logo} className="w-full h-full object-contain" teamName={team.name} />
                            {isUploading === team.id && (
                              <div className="absolute inset-0 bg-brand-dark/80 flex items-center justify-center">
                                <RefreshCcw className="w-6 h-6 text-brand-neon animate-spin" />
@@ -538,8 +565,9 @@ function TeamManagement() {
   );
 }
 
-function AuctionControl() {
-  const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(PLAYERS[0]);
+function AuctionControl({ players, teams }: { players: Player[], teams: Team[] }) {
+  const auctionPlayers = players.filter(p => p.status === 'In Auction');
+  const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(auctionPlayers[0] || players[0]);
   const [isBidding, setIsBidding] = useState(false);
   const [timer, setTimer] = useState(60);
 
@@ -622,12 +650,14 @@ function AuctionControl() {
                 </div>
                 <div className="text-right">
                    <p className="text-[10px] text-white/40 uppercase font-mono tracking-widest mb-1">Winning Franchise</p>
-                   {selectedPlayer?.teamId ? (
-                     <div className="flex items-center justify-end gap-3">
-                        <img src={dataService.getPublicLogoUrl(TEAMS.find(t => t.id === selectedPlayer.teamId)?.logo || '')} className="w-8 h-8 object-contain" alt="" />
-                        <p className="text-xl font-black uppercase italic">{TEAMS.find(t => t.id === selectedPlayer.teamId)?.name}</p>
-                     </div>
-                   ) : (
+                    {selectedPlayer?.teamId ? (
+                      <div className="flex items-center justify-end gap-3">
+                         <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
+                            <TeamLogo logo={teams.find(t => t.id === selectedPlayer.teamId)?.logo || ''} className="w-full h-full object-contain" />
+                         </div>
+                         <p className="text-xl font-black uppercase italic">{teams.find(t => t.id === selectedPlayer.teamId)?.name}</p>
+                      </div>
+                    ) : (
                      <p className="text-xl font-black text-white/20 uppercase italic">Awaiting First Bid</p>
                    )}
                 </div>
@@ -655,9 +685,9 @@ function AuctionControl() {
                 <div className=" space-y-4">
                    <p className="text-[10px] text-white/40 uppercase font-mono text-center tracking-widest">Select Franchise to Place Bid</p>
                    <div className="grid grid-cols-4 gap-2">
-                      {TEAMS.map(team => (
-                        <button key={team.id} className="aspect-square rounded-xl bg-white/5 border border-white/10 hover:border-brand-neon/50 text-xl flex items-center justify-center group transition-all">
-                           <img src={dataService.getPublicLogoUrl(team.logo)} className="w-8 h-8 object-contain group-hover:scale-110 transition-transform" alt={team.name} />
+                      {teams.map(team => (
+                        <button key={team.id} title={team.name} className="aspect-square rounded-xl bg-white/5 border border-white/10 hover:border-brand-neon/50 flex items-center justify-center group transition-all overflow-hidden p-1">
+                           <TeamLogo logo={team.logo} className="w-full h-full object-contain group-hover:scale-110 transition-transform" />
                         </button>
                       ))}
                       <button className="aspect-square rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/20 hover:text-white transition-all"><Plus className="w-6 h-6" /></button>
@@ -682,7 +712,7 @@ function AuctionControl() {
                    <span className="text-[10px] font-mono text-white/20">8 Remaining</span>
                 </div>
                 <div className="flex-1 overflow-y-auto space-y-4 pr-2 custom-scrollbar">
-                   {PLAYERS.map(player => (
+                   {players.map(player => (
                      <button 
                        key={player.id} 
                        onClick={() => setSelectedPlayer(player)}
