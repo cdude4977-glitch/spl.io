@@ -418,6 +418,36 @@ function PlayerManagement() {
 }
 
 function TeamManagement() {
+  const [teams, setTeams] = useState<Team[]>(TEAMS);
+  const [isUploading, setIsUploading] = useState<string | null>(null);
+
+  useEffect(() => {
+    loadTeams();
+  }, []);
+
+  const loadTeams = async () => {
+    const data = await dataService.getTeams();
+    setTeams(data);
+  };
+
+  const handleLogoUpload = async (teamId: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(teamId);
+    const { url, error } = await dataService.uploadImage(file);
+    
+    if (url) {
+      const success = await dataService.updateTeamLogo(teamId, url);
+      if (success) {
+        setTeams(prev => prev.map(t => t.id === teamId ? { ...t, logo: url } : t));
+      }
+    } else {
+      alert('Upload failed: ' + (error?.message || 'Unknown error'));
+    }
+    setIsUploading(null);
+  };
+
   return (
     <div className="space-y-8">
        <div className="flex justify-between items-center">
@@ -428,15 +458,36 @@ function TeamManagement() {
        </div>
 
        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {TEAMS.map(team => (
+          {teams.map(team => (
             <div key={team.id} className="glass-card p-1 bg-gradient-to-br from-white/10 to-transparent rounded-[2.5rem] group hover:scale-[1.02] transition-all">
                <div className="bg-[#0A0A0A] m-[1px] rounded-[2.5rem] p-8 h-full flex flex-col relative overflow-hidden">
                   {/* Team Accent Background */}
                   <div className="absolute top-0 right-0 w-32 h-32 blur-[80px] rounded-full opacity-20 transition-all group-hover:opacity-40" style={{ backgroundColor: team.color }} />
                   
                   <div className="flex justify-between items-start mb-8 relative z-10">
-                     <div className="w-16 h-16 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-4xl shadow-xl group-hover:shadow-white/5 transition-all">
-                        {team.logo}
+                     <div className="relative group/logo">
+                        <div className="w-20 h-20 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden shadow-xl group-hover:shadow-white/5 transition-all">
+                           {team.logo?.startsWith('http') || team.logo?.startsWith('/') ? (
+                             <img src={team.logo} className="w-full h-full object-cover" alt="" />
+                           ) : (
+                             <span className="text-4xl">{team.logo}</span>
+                           )}
+                           {isUploading === team.id && (
+                             <div className="absolute inset-0 bg-brand-dark/80 flex items-center justify-center">
+                               <RefreshCcw className="w-6 h-6 text-brand-neon animate-spin" />
+                             </div>
+                           )}
+                        </div>
+                        <label className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-brand-neon text-brand-dark flex items-center justify-center cursor-pointer hover:scale-110 transition-all border-2 border-brand-dark shadow-lg">
+                           <Plus className="w-4 h-4" />
+                           <input 
+                             type="file" 
+                             className="hidden" 
+                             accept="image/*"
+                             onChange={(e) => handleLogoUpload(team.id, e)}
+                             disabled={isUploading !== null}
+                           />
+                        </label>
                      </div>
                      <div className="text-right">
                         <div className="px-3 py-1 rounded bg-white/5 text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2 inline-block font-mono">#{team.id}</div>
@@ -667,7 +718,123 @@ function StatsModule() { return <Placeholder module="Advanced Statistics" descri
 function RegistrationManager() { return <Placeholder module="Registration Portal" description="Complete CRM for managing school registrations, payment verification and student documentation." icon={UserPlus} />; }
 function GalleryAdmin() { return <Placeholder module="Media Control" description="High-performance media center for uploading multi-category high-res match imagery and video highlights." icon={LucideImage} />; }
 function NoticeManager() { return <Placeholder module="Notice Center" description="Global broadcast center for match updates, auction results and high-priority tournament alerts." icon={Bell} />; }
-function SettingsPanel() { return <Placeholder module="System Settings" description="Core configuration for website theme, API endpoints, registration links and sponsor branding." icon={Settings} />; }
+function SettingsPanel() {
+  const [config, setConfig] = useState<any>({
+    schoolLogo: 'https://shalomhills.com/wp-content/themes/shalomhills/images/logo.png',
+    eventName: 'Shalom Premier League',
+    registrationStatus: true
+  });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    loadConfig();
+  }, []);
+
+  const loadConfig = async () => {
+    const data = await dataService.getSiteConfig('branding');
+    if (data) setConfig(data);
+    setLoading(false);
+  };
+
+  const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setSaving(true);
+    const { url, error } = await dataService.uploadImage(file);
+    
+    if (url) {
+      const newConfig = { ...config, schoolLogo: url };
+      const success = await dataService.updateSiteConfig('branding', newConfig);
+      if (success) setConfig(newConfig);
+    } else {
+      alert('Upload failed: ' + (error?.message || 'Unknown error'));
+    }
+    setSaving(false);
+  };
+
+  if (loading) {
+     return <div className="p-20 text-center"><RefreshCcw className="w-10 h-10 animate-spin mx-auto text-brand-neon mb-4" /><p className="text-white/40 uppercase tracking-widest text-xs font-black">Loading Configuration...</p></div>;
+  }
+
+  return (
+    <div className="max-w-4xl space-y-8">
+       <div className="glass-card p-10 rounded-[3rem] border border-white/5 bg-brand-charcoal/20">
+          <h3 className="text-2xl font-display font-black uppercase italic tracking-tighter mb-8 bg-gradient-to-r from-brand-neon to-white bg-clip-text text-transparent">Site Branding & Identity</h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+             <div className="space-y-6">
+                <div className="space-y-2">
+                   <label className="text-[10px] uppercase font-bold text-white/40 tracking-widest">Main School Logo</label>
+                   <div className="relative group">
+                      <div className="w-full aspect-video rounded-3xl bg-white/5 border-2 border-dashed border-white/10 flex items-center justify-center overflow-hidden transition-all group-hover:border-brand-neon/30">
+                         {config.schoolLogo ? (
+                           <img src={config.schoolLogo} className="max-h-full max-w-full object-contain p-8" alt="School Logo" />
+                         ) : (
+                           <LucideImage className="w-12 h-12 text-white/10" />
+                         )}
+                         {saving && <div className="absolute inset-0 bg-brand-dark/80 flex items-center justify-center"><RefreshCcw className="w-8 h-8 text-brand-neon animate-spin" /></div>}
+                      </div>
+                      <label className="absolute inset-0 cursor-pointer">
+                         <input type="file" className="hidden" accept="image/*" onChange={handleLogoUpload} disabled={saving} />
+                      </label>
+                      <div className="absolute top-4 right-4 bg-brand-neon text-brand-dark px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest shadow-xl opacity-0 group-hover:opacity-100 transition-all pointer-events-none">Click to Change</div>
+                   </div>
+                   <p className="text-[10px] text-white/20 italic mt-2">Recommended: PNG with transparent background. Max size 2MB.</p>
+                </div>
+             </div>
+
+             <div className="space-y-6">
+                <div className="space-y-2">
+                   <label className="text-[10px] uppercase font-bold text-white/40 tracking-widest">Event Season Name</label>
+                   <input 
+                     type="text" 
+                     value={config.eventName}
+                     onChange={(e) => setConfig({ ...config, eventName: e.target.value })}
+                     onBlur={() => dataService.updateSiteConfig('branding', config)}
+                     className="w-full bg-white/5 border border-white/10 rounded-xl py-4 px-6 focus:outline-none focus:border-brand-neon transition-all font-mono text-sm"
+                   />
+                </div>
+
+                <div className="space-y-2">
+                   <label className="text-[10px] uppercase font-bold text-white/40 tracking-widest">Registration Status</label>
+                   <div className="flex gap-4">
+                      <button 
+                        onClick={() => { const nc = { ...config, registrationStatus: true }; setConfig(nc); dataService.updateSiteConfig('branding', nc); }}
+                        className={`flex-1 py-4 rounded-xl border font-black text-[10px] uppercase tracking-widest transition-all ${config.registrationStatus ? 'bg-emerald-500 border-emerald-500 text-brand-dark' : 'bg-white/5 border-white/10 text-white/40'}`}
+                      >
+                         Open
+                      </button>
+                      <button 
+                         onClick={() => { const nc = { ...config, registrationStatus: false }; setConfig(nc); dataService.updateSiteConfig('branding', nc); }}
+                         className={`flex-1 py-4 rounded-xl border font-black text-[10px] uppercase tracking-widest transition-all ${!config.registrationStatus ? 'bg-red-500 border-red-500 text-white' : 'bg-white/5 border-white/10 text-white/40'}`}
+                      >
+                         Closed
+                      </button>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+
+       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="glass-card p-10 rounded-[3rem] border border-white/5 bg-brand-charcoal/20">
+             <h4 className="text-lg font-black uppercase italic tracking-tighter mb-6 flex items-center gap-3">
+                <ShieldCheck className="w-5 h-5 text-brand-neon" /> Security & Access
+             </h4>
+             <button className="w-full py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Change Admin Password</button>
+          </div>
+          <div className="glass-card p-10 rounded-[3rem] border border-white/5 bg-brand-charcoal/20">
+             <h4 className="text-lg font-black uppercase italic tracking-tighter mb-6 flex items-center gap-3">
+                <Database className="w-5 h-5 text-brand-blue" /> Data Management
+             </h4>
+             <button className="w-full py-4 bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white border border-red-500/20 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Reset All Tournament Data</button>
+          </div>
+       </div>
+    </div>
+  );
+}
 
 function Placeholder({ module, description, icon: Icon }: any) {
   return (

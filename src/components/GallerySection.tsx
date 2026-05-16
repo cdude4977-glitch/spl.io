@@ -4,7 +4,6 @@ const GALLERY_IMAGES = [
   { url: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=400', title: 'Stadium View', sport: 'Football' },
   { url: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=400', title: 'The Shot', sport: 'Basketball' },
   { url: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=400', title: 'Match Day', sport: 'Football' },
-  { url: 'https://images.unsplash.com/photo-1544320290-8c9e913a492d?q=80&w=400', title: 'Auction Prep', sport: 'Cricket' },
   { url: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=400', title: 'Trophy Reveal', sport: 'All' },
   { url: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=400', title: 'MVP Moment', sport: 'Basketball' },
 ];

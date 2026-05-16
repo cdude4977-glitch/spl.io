@@ -93,9 +93,6 @@ export default function SportsGrid() {
                        </div>
                      ))}
                    </div>
-                   <button className="w-full bg-white text-brand-dark font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-brand-neon hover:text-brand-dark transition-all">
-                     View Complete Rules <Trophy className="w-4 h-4" />
-                   </button>
                 </div>
               </div>
 

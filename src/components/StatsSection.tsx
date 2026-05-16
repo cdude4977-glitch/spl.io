@@ -2,10 +2,9 @@ import { motion, useInView } from 'motion/react';
 import { useRef, useState, useEffect } from 'react';
 
 const STATS = [
-  { label: 'Teams Participating', value: 24, suffix: '' },
-  { label: 'Registered Players', value: 350, suffix: '+' },
-  { label: 'Matches Scheduled', value: 48, suffix: '' },
-  { label: 'Prizes Won', value: 100000, prefix: '₹', suffix: '' },
+  { label: 'Teams Participating', value: 14, suffix: '' },
+  { label: 'Registered Players', value: 100, suffix: '+' },
+  { label: 'Matches Scheduled', value: 26, suffix: '' },
 ];
 
 function CountUp({ end, duration = 2, prefix = '', suffix = '' }: { end: number, duration?: number, prefix?: string, suffix?: string }) {
@@ -50,7 +49,7 @@ export default function StatsSection() {
               className="text-center space-y-2"
             >
               <div className="text-4xl md:text-5xl font-display font-extrabold text-brand-neon">
-                <CountUp end={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
+                <CountUp end={stat.value} suffix={stat.suffix} />
               </div>
               <div className="text-xs md:text-sm uppercase tracking-widest text-white/40 font-mono">
                 {stat.label}

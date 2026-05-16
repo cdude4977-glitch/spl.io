@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 import { TabType } from '../App';
+import { dataService } from '../services/dataService';
 
 const NAV_LINKS: { name: TabType; displayName: string }[] = [
   { name: 'Home', displayName: 'Home' },
@@ -17,12 +18,22 @@ const NAV_LINKS: { name: TabType; displayName: string }[] = [
 export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType; setActiveTab: (tab: TabType) => void }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [branding, setBranding] = useState({
+    schoolLogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbBh0o1D522SioDfbVK_ik-uIHIkRLz50oOQ&s',
+    eventName: 'Shalom Premier League'
+  });
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
+    
+    // Load branding from Supabase
+    dataService.getSiteConfig('branding').then(data => {
+      if (data) setBranding(data);
+    });
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -44,11 +55,11 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
             onClick={() => setActiveTab('Home')}
           >
             <div className="w-12 h-12 rounded-lg flex items-center justify-center transition-transform hover:scale-110">
-              <img src="https://images.unsplash.com/photo-1599305090598-fe179d501227?q=80&w=200&auto=format&fit=crop" className="w-full h-full object-contain" alt="Shalom School Logo" />
+              <img src={branding.schoolLogo} className="w-full h-full object-contain" alt="Logo" />
             </div>
             <div className="flex flex-col leading-tight">
               <span className="font-display font-extrabold text-lg tracking-tighter uppercase">
-                SHALOM <span className="text-white/60">PREMIER</span>
+                {branding.eventName.split(' ')[0]} <span className="text-white/60">{branding.eventName.split(' ').slice(1).join(' ')}</span>
               </span>
               <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-brand-neon">
                 Summer Edition 2026
@@ -93,7 +104,7 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
               className="flex items-center"
             >
               <img 
-                src="https://shalomhills.com/wp-content/themes/shalomhills/images/logo.png" 
+                src={branding.schoolLogo} 
                 alt="Shalom Hills International School" 
                 className="h-12 w-auto brightness-125 filter drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
                 onError={(e) => {
