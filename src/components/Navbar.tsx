@@ -20,7 +20,7 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [branding, setBranding] = useState({
     schoolLogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbBh0o1D522SioDfbVK_ik-uIHIkRLz50oOQ&s',
-    eventName: 'Shalom Premier League'
+    eventName: 'Shalom Hills International School'
   });
 
   useEffect(() => {

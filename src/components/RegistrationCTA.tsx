@@ -47,7 +47,7 @@ export default function RegistrationCTA({ onNavigate }: RegistrationCTAProps) {
                      </div>
                      <div>
                         <p className="text-[10px] uppercase font-bold text-white/40 tracking-widest">Hard Deadline</p>
-                        <h4 className="text-2xl font-display font-black tracking-tight">17 MAY 2026</h4>
+                        <h4 className="text-2xl font-display font-black tracking-tight">18 MAY 2026</h4>
                         <p className="text-xs text-white/40 italic">Final Entries Only</p>
                      </div>
                   </div>
