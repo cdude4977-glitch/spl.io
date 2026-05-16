@@ -13,6 +13,7 @@ import BrochureSection from './components/BrochureSection';
 import RegistrationCTA from './components/RegistrationCTA';
 import Footer from './components/Footer';
 import AdminPage from './components/AdminPage';
+import NoticeBanner from './components/NoticeBanner';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronUp } from 'lucide-react';
 import { dataService } from './services/dataService';
@@ -116,28 +117,8 @@ export default function App() {
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
       
       <main className="pt-20">
-        {/* News Ticker - Always show if not on Home if desired, or keep it consistent */}
-        <div className="bg-brand-blue py-3 overflow-hidden whitespace-nowrap border-y border-white/10">
-           <motion.div 
-             animate={{ x: [0, -1000] }}
-             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-             className="flex gap-12 items-center"
-           >
-             {[...Array(5)].map((_, i) => (
-                <div key={i} className="flex gap-12 items-center">
-                  <span className="text-brand-dark font-black uppercase text-xs tracking-widest">
-                    ★ AUCTION DAY: 19 MAY @ SCHOOL AUDITORIUM
-                  </span>
-                  <span className="text-brand-dark font-black uppercase text-xs tracking-widest">
-                    ★ REGISTRATION DEADLINE: 18 MAY
-                  </span>
-                  <span className="text-brand-dark font-black uppercase text-xs tracking-widest">
-                    ★ KICKS OFF: 20 MAY 2026
-                  </span>
-                </div>
-             ))}
-           </motion.div>
-        </div>
+        <NoticeBanner />
+                
 
         <AnimatePresence mode="wait">
           {renderContent()}

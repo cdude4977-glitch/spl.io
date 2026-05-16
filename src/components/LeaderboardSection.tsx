@@ -1,42 +1,90 @@
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Trophy, Medal, Star, TrendingUp, ChevronRight } from 'lucide-react';
+import { Trophy, Medal, Star, TrendingUp, ChevronRight, User, Users } from 'lucide-react';
 import { TEAMS } from '../constants';
-import { SportType } from '../types';
+import { Team, SportType, AgeCategory, Gender } from '../types';
 import { dataService } from '../services/dataService';
 
 export default function LeaderboardSection() {
   const [activeSport, setActiveSport] = useState<SportType>('Football');
+  const [activeGender, setActiveGender] = useState<Gender>('Boys');
+  const [activeAge, setActiveAge] = useState<AgeCategory>('U15');
+  const [teams, setTeams] = useState<Team[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  React.useEffect(() => {
+     const loadData = async () => {
+        const data = await dataService.getTeams();
+        setTeams(data);
+        setLoading(false);
+     };
+     loadData();
+  }, []);
 
   const sortedTeams = useMemo(() => {
-    return [...TEAMS]
-      .filter(t => t.sport === activeSport)
+    return [...teams]
+      .filter(t => t.sport === activeSport && t.gender === activeGender && t.ageCategory === activeAge)
       .sort((a, b) => b.points - a.points);
-  }, [activeSport]);
+  }, [teams, activeSport, activeGender, activeAge]);
 
-  const sports: SportType[] = ['Football', 'Cricket', 'Basketball'];
+  const sports: SportType[] = ['Football', 'Cricket', 'Basketball', 'Table Tennis'];
+  const ageCategories: AgeCategory[] = ['U11', 'U13', 'U15', 'U19'];
 
   return (
     <section id="leaderboard" className="py-24 bg-brand-charcoal/30">
       <div className="section-container">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
           <div className="space-y-4">
             <span className="text-brand-neon font-mono text-sm tracking-widest uppercase">The Rankings</span>
             <h2 className="text-4xl md:text-6xl font-extrabold uppercase">Official <span className="text-brand-blue">Standings</span></h2>
           </div>
           
-          <div className="flex bg-brand-dark overflow-hidden rounded-xl border border-white/5 p-1">
-            {sports.map(sport => (
-              <button
-                key={sport}
-                onClick={() => setActiveSport(sport)}
-                className={`px-6 py-2.5 rounded-lg text-xs font-bold transition-all uppercase tracking-widest ${
-                  activeSport === sport ? 'bg-brand-neon text-brand-dark' : 'text-white/40 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                {sport}
-              </button>
-            ))}
+          <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+            {/* Sport Selector */}
+            <div className="flex bg-brand-dark overflow-hidden rounded-xl border border-white/5 p-1">
+              {sports.map(sport => (
+                <button
+                  key={sport}
+                  onClick={() => setActiveSport(sport)}
+                  className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all uppercase tracking-widest ${
+                    activeSport === sport ? 'bg-brand-neon text-brand-dark' : 'text-white/40 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {sport}
+                </button>
+              ))}
+            </div>
+
+            {/* Gender Selector */}
+            <div className="flex bg-brand-dark overflow-hidden rounded-xl border border-white/5 p-1">
+              {(['Boys', 'Girls'] as Gender[]).map(gender => (
+                <button
+                  key={gender}
+                  onClick={() => setActiveGender(gender)}
+                  className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all uppercase tracking-widest flex items-center gap-2 ${
+                    activeGender === gender ? 'bg-brand-blue text-white' : 'text-white/40 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  <User className="w-3 h-3" />
+                  {gender}
+                </button>
+              ))}
+            </div>
+
+            {/* Age Category Selector */}
+            <div className="flex bg-brand-dark overflow-hidden rounded-xl border border-white/5 p-1">
+              {ageCategories.map(age => (
+                <button
+                  key={age}
+                  onClick={() => setActiveAge(age)}
+                  className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all uppercase tracking-widest ${
+                    activeAge === age ? 'bg-white text-brand-dark' : 'text-white/40 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {age}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -44,6 +92,13 @@ export default function LeaderboardSection() {
           {/* Main Standings Table */}
           <div className="lg:col-span-2 space-y-4">
             <div className="glass-card overflow-hidden">
+               <div className="px-6 py-4 bg-white/5 border-b border-white/5 flex justify-between items-center">
+                  <h3 className="text-sm font-bold uppercase tracking-widest flex items-center gap-2">
+                    <Trophy className="w-4 h-4 text-brand-neon" />
+                    {activeSport} {activeAge} {activeGender} Leaderboard
+                  </h3>
+                  <span className="text-[10px] font-mono text-white/20 uppercase">{sortedTeams.length} Teams Competing</span>
+               </div>
                <div className="grid grid-cols-6 p-6 border-b border-white/5 bg-white/5 text-[10px] uppercase font-bold tracking-widest text-white/40">
                   <div className="col-span-1">Rank</div>
                   <div className="col-span-3">Team</div>
@@ -53,13 +108,14 @@ export default function LeaderboardSection() {
                <div className="divide-y divide-white/5 min-h-[400px]">
                  <AnimatePresence mode="wait">
                    <motion.div
-                     key={activeSport}
+                     key={`${activeSport}-${activeGender}-${activeAge}`}
                      initial={{ opacity: 0, y: 10 }}
                      animate={{ opacity: 1, y: 0 }}
                      exit={{ opacity: 0, y: -10 }}
                      transition={{ duration: 0.2 }}
                    >
-                     {sortedTeams.map((team, idx) => (
+                     {sortedTeams.length > 0 ? (
+                       sortedTeams.map((team, idx) => (
                        <div 
                          key={team.id}
                          className="grid grid-cols-6 p-6 items-center hover:bg-white/5 transition-colors group"
@@ -86,7 +142,13 @@ export default function LeaderboardSection() {
                             {team.points}
                          </div>
                        </div>
-                     ))}
+                       ))
+                     ) : (
+                       <div className="flex flex-col items-center justify-center h-[400px] text-white/20">
+                          <Users className="w-12 h-12 mb-4 opacity-10" />
+                          <p className="uppercase font-mono text-xs tracking-widest">No teams registered in this category</p>
+                       </div>
+                     )}
                    </motion.div>
                  </AnimatePresence>
                </div>

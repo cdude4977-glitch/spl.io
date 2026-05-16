@@ -1,43 +1,99 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Calendar, MapPin, Clock, Trophy } from 'lucide-react';
+import { Calendar, MapPin, Clock, Trophy, User, Users } from 'lucide-react';
 import { MATCHES, TEAMS } from '../constants';
-import { Match, SportType } from '../types';
+import { Match, SportType, AgeCategory, Gender } from '../types';
 import { dataService } from '../services/dataService';
 
 export default function FixturesSection() {
   const [activeSport, setActiveSport] = useState<SportType>('Football');
+  const [activeGender, setActiveGender] = useState<Gender>('Boys');
+  const [activeAge, setActiveAge] = useState<AgeCategory>('U15');
+  const [matches, setMatches] = useState<Match[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const filteredMatches = MATCHES.filter(m => m.sport === activeSport);
+  React.useEffect(() => {
+     const loadData = async () => {
+        const data = await dataService.getMatches();
+        setMatches(data);
+        setLoading(false);
+     };
+     loadData();
+  }, []);
+
+  const filteredMatches = useMemo(() => {
+    return matches.filter(m => 
+      m.sport === activeSport && 
+      m.gender === activeGender && 
+      m.ageCategory === activeAge
+    );
+  }, [matches, activeSport, activeGender, activeAge]);
+
+  const sports: SportType[] = ['Football', 'Cricket', 'Basketball', 'Table Tennis'];
+  const ageCategories: AgeCategory[] = ['U11', 'U13', 'U15', 'U19'];
 
   return (
     <section id="fixtures" className="py-24 bg-brand-dark">
       <div className="section-container">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
           <div className="space-y-4">
             <span className="text-brand-neon font-mono text-sm tracking-widest uppercase">Match Center</span>
             <h2 className="text-4xl md:text-6xl font-extrabold uppercase">Fixtures & <span className="text-brand-blue">Results</span></h2>
           </div>
           
-          <div className="flex bg-brand-charcoal rounded-full p-1 border border-white/10">
-            {(['Football', 'Cricket', 'Basketball'] as SportType[]).map((sport) => (
-              <button
-                key={sport}
-                onClick={() => setActiveSport(sport)}
-                className={`px-8 py-3 rounded-full text-xs font-bold transition-all ${
-                  activeSport === sport ? 'bg-brand-neon text-brand-dark' : 'text-white/40 hover:text-white'
-                }`}
-              >
-                {sport}
-              </button>
-            ))}
+          <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+            {/* Sport Selector */}
+            <div className="flex bg-brand-charcoal overflow-hidden rounded-xl border border-white/10 p-1">
+              {sports.map((sport) => (
+                <button
+                  key={sport}
+                  onClick={() => setActiveSport(sport)}
+                  className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all uppercase tracking-widest ${
+                    activeSport === sport ? 'bg-brand-neon text-brand-dark' : 'text-white/40 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {sport}
+                </button>
+              ))}
+            </div>
+
+            {/* Gender Selector */}
+            <div className="flex bg-brand-charcoal overflow-hidden rounded-xl border border-white/10 p-1">
+              {(['Boys', 'Girls'] as Gender[]).map(gender => (
+                <button
+                  key={gender}
+                  onClick={() => setActiveGender(gender)}
+                  className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all uppercase tracking-widest flex items-center gap-2 ${
+                    activeGender === gender ? 'bg-brand-blue text-white' : 'text-white/40 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  <User className="w-3 h-3" />
+                  {gender}
+                </button>
+              ))}
+            </div>
+
+            {/* Age Category Selector */}
+            <div className="flex bg-brand-charcoal overflow-hidden rounded-xl border border-white/10 p-1">
+              {ageCategories.map(age => (
+                <button
+                  key={age}
+                  onClick={() => setActiveAge(age)}
+                  className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all uppercase tracking-widest ${
+                    activeAge === age ? 'bg-white text-brand-dark' : 'text-white/40 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {age}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 gap-6">
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeSport}
+              key={`${activeSport}-${activeGender}-${activeAge}`}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
@@ -48,9 +104,14 @@ export default function FixturesSection() {
                   <MatchCard key={match.id} match={match} />
                 ))
               ) : (
-                <div className="glass-card py-20 text-center space-y-4">
-                   <Calendar className="w-12 h-12 text-white/10 mx-auto" />
-                   <p className="text-white/40 italic">No matches scheduled for {activeSport} yet. Stay tuned!</p>
+                <div className="glass-card py-24 text-center space-y-6 flex flex-col items-center justify-center">
+                   <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center">
+                      <Calendar className="w-8 h-8 text-white/10" />
+                   </div>
+                   <div className="space-y-2">
+                     <p className="text-xl font-display font-bold uppercase italic text-white/60">Schedule Pending</p>
+                     <p className="text-white/20 text-xs uppercase tracking-widest font-mono">No matches scheduled for {activeSport} {activeAge} {activeGender} yet.</p>
+                   </div>
                 </div>
               )}
             </motion.div>
@@ -90,14 +151,18 @@ const MatchCard: React.FC<{ match: Match }> = ({ match }) => {
         <div className="flex-1 flex flex-col md:flex-row items-center justify-around gap-8 md:gap-16">
           {/* Team A */}
           <div className="flex flex-col items-center gap-4 group">
-            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center border border-white/10 group-hover:border-brand-neon transition-colors overflow-hidden">
-               <img src={dataService.getPublicLogoUrl(teamA?.logo || '')} alt={teamA?.name} className="w-full h-full object-cover" />
+            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center border border-white/10 group-hover:border-brand-neon transition-colors overflow-hidden p-2">
+               <img src={dataService.getPublicLogoUrl(teamA?.logo || '')} alt={teamA?.name} className="w-full h-full object-contain" />
             </div>
-            <h4 className="font-display font-extrabold text-xl uppercase tracking-tighter text-center">{teamA?.name}</h4>
+            <h4 className="font-display font-extrabold text-lg uppercase tracking-tighter text-center max-w-[120px]">{teamA?.name}</h4>
           </div>
 
           {/* Score/VS */}
-          <div className="flex flex-col items-center gap-2">
+          <div className="flex flex-col items-center gap-4">
+             <div className="flex items-center gap-2">
+               <span className="px-2 py-0.5 rounded bg-white/5 text-[8px] font-bold text-white/40 uppercase tracking-widest">{match.gender}</span>
+               <span className="px-2 py-0.5 rounded bg-brand-neon/10 text-[8px] font-bold text-brand-neon uppercase tracking-widest">{match.ageCategory}</span>
+             </div>
              {match.status === 'Upcoming' ? (
                 <div className="text-4xl font-display font-black text-white/10 italic select-none">VS</div>
              ) : (
@@ -111,10 +176,10 @@ const MatchCard: React.FC<{ match: Match }> = ({ match }) => {
 
           {/* Team B */}
           <div className="flex flex-col items-center gap-4 group">
-            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center border border-white/10 group-hover:border-brand-neon transition-colors overflow-hidden">
-               <img src={dataService.getPublicLogoUrl(teamB?.logo || '')} alt={teamB?.name} className="w-full h-full object-cover" />
+            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center border border-white/10 group-hover:border-brand-neon transition-colors overflow-hidden p-2">
+               <img src={dataService.getPublicLogoUrl(teamB?.logo || '')} alt={teamB?.name} className="w-full h-full object-contain" />
             </div>
-            <h4 className="font-display font-extrabold text-xl uppercase tracking-tighter text-center">{teamB?.name}</h4>
+            <h4 className="font-display font-extrabold text-lg uppercase tracking-tighter text-center max-w-[120px]">{teamB?.name}</h4>
           </div>
         </div>
 

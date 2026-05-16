@@ -1,10 +1,14 @@
-export type SportType = 'Football' | 'Cricket' | 'Basketball';
+export type SportType = 'Football' | 'Cricket' | 'Basketball' | 'Table Tennis';
+
+export type AgeCategory = 'U11' | 'U13' | 'U15' | 'U19';
+export type Gender = 'Boys' | 'Girls';
 
 export interface Player {
   id: string;
   name: string;
   sport: SportType;
-  ageCategory: 'Under 14' | 'Under 15' | 'Under 17' | 'Open';
+  ageCategory: AgeCategory;
+  gender: Gender;
   basePrice: number;
   currentBid: number;
   teamId: string | null;
@@ -27,10 +31,14 @@ export interface Team {
   logo: string;
   captain: string;
   sport: SportType;
+  ageCategory: AgeCategory;
+  gender: Gender;
   purseRemaining: number;
   players: string[]; // Player IDs
+  played: number;
   wins: number;
   losses: number;
+  draws: number;
   points: number;
   color: string;
 }
@@ -38,6 +46,8 @@ export interface Team {
 export interface Match {
   id: string;
   sport: SportType;
+  ageCategory: AgeCategory;
+  gender: Gender;
   teamAId: string;
   teamBId: string;
   time: string;
