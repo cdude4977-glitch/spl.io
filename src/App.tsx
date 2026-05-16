@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import AdminPage from './components/AdminPage';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronUp } from 'lucide-react';
+import { dataService } from './services/dataService';
 
 export type TabType = 'Home' | 'Timeline' | 'Fixtures' | 'Standings' | 'Leaderboard' | 'Rules' | 'Gallery' | 'Registration' | 'Contact' | 'Admin' | 'Brochure';
 
@@ -91,7 +92,7 @@ export default function App() {
            transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }}
            className="w-32 h-32 flex items-center justify-center mb-8"
         >
-          <img src="https://images.unsplash.com/photo-1599305090598-fe179d501227?q=80&w=200&auto=format&fit=crop" className="w-full h-full object-contain" alt="Loading Logo" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbBh0o1D522SioDfbVK_ik-uIHIkRLz50oOQ&s" className="w-full h-full object-contain" alt="Loading Logo" />
         </motion.div>
         <div className="flex flex-col items-center">
           <h2 className="text-2xl font-display font-extrabold tracking-tighter uppercase mb-2">

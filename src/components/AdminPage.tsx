@@ -467,11 +467,7 @@ function TeamManagement() {
                   <div className="flex justify-between items-start mb-8 relative z-10">
                      <div className="relative group/logo">
                         <div className="w-20 h-20 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden shadow-xl group-hover:shadow-white/5 transition-all">
-                           {team.logo?.startsWith('http') || team.logo?.startsWith('/') ? (
-                             <img src={team.logo} className="w-full h-full object-cover" alt="" />
-                           ) : (
-                             <span className="text-4xl">{team.logo}</span>
-                           )}
+                           <img src={dataService.getPublicLogoUrl(team.logo)} className="w-full h-full object-cover" alt="" />
                            {isUploading === team.id && (
                              <div className="absolute inset-0 bg-brand-dark/80 flex items-center justify-center">
                                <RefreshCcw className="w-6 h-6 text-brand-neon animate-spin" />
@@ -628,7 +624,7 @@ function AuctionControl() {
                    <p className="text-[10px] text-white/40 uppercase font-mono tracking-widest mb-1">Winning Franchise</p>
                    {selectedPlayer?.teamId ? (
                      <div className="flex items-center justify-end gap-3">
-                        <span className="text-2xl">{TEAMS.find(t => t.id === selectedPlayer.teamId)?.logo}</span>
+                        <img src={dataService.getPublicLogoUrl(TEAMS.find(t => t.id === selectedPlayer.teamId)?.logo || '')} className="w-8 h-8 object-contain" alt="" />
                         <p className="text-xl font-black uppercase italic">{TEAMS.find(t => t.id === selectedPlayer.teamId)?.name}</p>
                      </div>
                    ) : (
@@ -661,7 +657,7 @@ function AuctionControl() {
                    <div className="grid grid-cols-4 gap-2">
                       {TEAMS.map(team => (
                         <button key={team.id} className="aspect-square rounded-xl bg-white/5 border border-white/10 hover:border-brand-neon/50 text-xl flex items-center justify-center group transition-all">
-                           <span className="group-hover:scale-110 transition-transform">{team.logo}</span>
+                           <img src={dataService.getPublicLogoUrl(team.logo)} className="w-8 h-8 object-contain group-hover:scale-110 transition-transform" alt={team.name} />
                         </button>
                       ))}
                       <button className="aspect-square rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/20 hover:text-white transition-all"><Plus className="w-6 h-6" /></button>

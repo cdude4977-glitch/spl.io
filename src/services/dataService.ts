@@ -57,7 +57,7 @@ export const dataService = {
     }
   },
 
-  async uploadImage(file: File, bucket: string = 'logos'): Promise<{ url: string | null, error: any }> {
+  async uploadImage(file: File, bucket: string = 'logo'): Promise<{ url: string | null, error: any }> {
     try {
       const fileExt = file.name.split('.').pop();
       const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
@@ -119,5 +119,12 @@ export const dataService = {
       console.error(`Error updating site config for ${key}:`, err);
       return false;
     }
+  },
+
+  getPublicLogoUrl(path: string): string {
+    if (!path) return '';
+    if (path.startsWith('http')) return path;
+    const { data } = supabase.storage.from('logo').getPublicUrl(path);
+    return data.publicUrl;
   }
 };

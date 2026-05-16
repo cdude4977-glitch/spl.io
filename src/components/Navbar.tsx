@@ -55,7 +55,7 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
             onClick={() => setActiveTab('Home')}
           >
             <div className="w-12 h-12 rounded-lg flex items-center justify-center transition-transform hover:scale-110">
-              <img src={branding.schoolLogo} className="w-full h-full object-contain" alt="Logo" />
+              <img src={dataService.getPublicLogoUrl(branding.schoolLogo)} className="w-full h-full object-contain" alt="Logo" />
             </div>
             <div className="flex flex-col leading-tight">
               <span className="font-display font-extrabold text-lg tracking-tighter uppercase">
@@ -95,24 +95,6 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
             >
               REGISTER NOW
             </motion.button>
-
-            {/* Authentic Shalom Hills Logo - Top Right */}
-            <div className="h-10 w-px bg-white/10 mx-2" />
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="flex items-center"
-            >
-              <img 
-                src={branding.schoolLogo} 
-                alt="Shalom Hills International School" 
-                className="h-12 w-auto brightness-125 filter drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
-                onError={(e) => {
-                  // Fallback if the logo URL fails
-                  e.currentTarget.src = "https://images.unsplash.com/photo-1599305090598-fe179d501227?q=80&w=200&auto=format&fit=crop";
-                }}
-              />
-            </motion.div>
           </div>
 
           {/* Mobile Toggle */}

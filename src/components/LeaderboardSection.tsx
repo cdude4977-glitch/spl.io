@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Trophy, Medal, Star, TrendingUp, ChevronRight } from 'lucide-react';
 import { TEAMS } from '../constants';
 import { SportType } from '../types';
+import { dataService } from '../services/dataService';
 
 export default function LeaderboardSection() {
   const [activeSport, setActiveSport] = useState<SportType>('Football');
@@ -74,7 +75,7 @@ export default function LeaderboardSection() {
                          </div>
                          <div className="col-span-3 flex items-center gap-4">
                             <div className="w-10 h-10 rounded-lg overflow-hidden border border-white/10 group-hover:border-brand-neon/50 transition-all">
-                               <img src={team.logo} alt={team.name} className="w-full h-full object-cover" />
+                               <img src={dataService.getPublicLogoUrl(team.logo)} alt={team.name} className="w-full h-full object-cover" />
                             </div>
                             <h4 className="font-display font-bold group-hover:text-brand-neon transition-colors uppercase italic tracking-tight">{team.name}</h4>
                          </div>

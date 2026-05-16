@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Calendar, MapPin, Clock, Trophy } from 'lucide-react';
 import { MATCHES, TEAMS } from '../constants';
 import { Match, SportType } from '../types';
+import { dataService } from '../services/dataService';
 
 export default function FixturesSection() {
   const [activeSport, setActiveSport] = useState<SportType>('Football');
@@ -90,11 +91,7 @@ const MatchCard: React.FC<{ match: Match }> = ({ match }) => {
           {/* Team A */}
           <div className="flex flex-col items-center gap-4 group">
             <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center border border-white/10 group-hover:border-brand-neon transition-colors overflow-hidden">
-              {teamA?.logo.startsWith('/') || teamA?.logo.startsWith('http') ? (
-                <img src={teamA.logo} alt={teamA.name} className="w-full h-full object-cover" />
-              ) : (
-                <span className="text-4xl">{teamA?.logo}</span>
-              )}
+               <img src={dataService.getPublicLogoUrl(teamA?.logo || '')} alt={teamA?.name} className="w-full h-full object-cover" />
             </div>
             <h4 className="font-display font-extrabold text-xl uppercase tracking-tighter text-center">{teamA?.name}</h4>
           </div>
@@ -115,11 +112,7 @@ const MatchCard: React.FC<{ match: Match }> = ({ match }) => {
           {/* Team B */}
           <div className="flex flex-col items-center gap-4 group">
             <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center border border-white/10 group-hover:border-brand-neon transition-colors overflow-hidden">
-              {teamB?.logo.startsWith('/') || teamB?.logo.startsWith('http') ? (
-                <img src={teamB.logo} alt={teamB.name} className="w-full h-full object-cover" />
-              ) : (
-                <span className="text-4xl">{teamB?.logo}</span>
-              )}
+               <img src={dataService.getPublicLogoUrl(teamB?.logo || '')} alt={teamB?.name} className="w-full h-full object-cover" />
             </div>
             <h4 className="font-display font-extrabold text-xl uppercase tracking-tighter text-center">{teamB?.name}</h4>
           </div>

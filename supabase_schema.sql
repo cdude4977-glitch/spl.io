@@ -138,7 +138,7 @@ INSERT INTO teams (id, name, logo, captain, sport, purse_remaining, color) VALUE
 ('f4', 'Shalom Athletico FC', '/input_file_8.png', 'Pending', 'Football', 50.0, '#dc2626'),
 ('f5', 'Real Shalom FC', '/input_file_9.png', 'Pending', 'Football', 50.0, '#111827'),
 -- Basketball
-('b1', 'Shalom Hills Warriors', '/input_file_10.png', 'Pending', 'Basketball', 50.0, '#1d4ed8'),
+('b1', 'Shalom Hills Warriors', 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.25.02%20(1).jpeg', 'Pending', 'Basketball', 50.0, '#1d4ed8'),
 ('b2', 'Shalom Hills Sonics', '/input_file_11.png', 'Pending', 'Basketball', 50.0, '#2563eb'),
 ('b3', 'Shalom Hills Pacers', '/input_file_12.png', 'Pending', 'Basketball', 50.0, '#fbbf24'),
 ('b4', 'Shalom Hills Rovers', '/input_file_13.png', 'Pending', 'Basketball', 50.0, '#4338ca');
@@ -192,8 +192,8 @@ CREATE POLICY "Admin All Access" ON site_config FOR ALL USING (auth.role() = 'au
 -- Note: In Supabase, buckets are often created through the dashboard or API.
 -- These policies assume a bucket named 'logos' exists.
 
--- Allow public access to 'logos' bucket for reading
-CREATE POLICY "Public Read Access Logos" ON storage.objects FOR SELECT USING (bucket_id = 'logos');
+-- Allow public access to 'logo' bucket for reading
+CREATE POLICY "Public Read Access Logos" ON storage.objects FOR SELECT USING (bucket_id = 'logo');
 
--- Allow authenticated users (Admins) to upload/update/delete in 'logos' bucket
-CREATE POLICY "Admin CRUD Access Logos" ON storage.objects FOR ALL USING (bucket_id = 'logos' AND auth.role() = 'authenticated');
+-- Allow authenticated users (Admins) to upload/update/delete in 'logo' bucket
+CREATE POLICY "Admin CRUD Access Logos" ON storage.objects FOR ALL USING (bucket_id = 'logo' AND auth.role() = 'authenticated');
