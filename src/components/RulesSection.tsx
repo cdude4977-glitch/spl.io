@@ -17,16 +17,16 @@ const RULES_DATA: Record<SportType, { title: string, content: string[] }> = {
     ]
   },
   Cricket: {
-    title: 'Cricket Summer League rules',
+    title: 'Cricket Summer League Rules',
     content: [
       'Age Category: Under 11, 13, 15, 19 Boys & Girls.',
       'Team members should be in proper white Cricket dress.',
       'Matches consist of 6 overs per innings, with 5 bowlers used per innings.',
-      'Teams should have Maximum 8 players (7 playing + 1 Impact player).',
+      'Teams should have a maximum of 8 players (7 playing + 1 Impact Player).',
       'No LBW (Leg Before Wicket) will be allowed.',
-      'In case of a tie, there will be a SUPER OVER.',
+      'In case of a tie, there will be a Super Over.',
       'In absence of clarification, ICC rules apply.',
-      'U-11/U-13 matches in morning (6-10 AM), U-15/U-19 in evening (4-7 PM).'
+      'U-11/U-13 matches in morning (6:00 - 10:00 AM), U-15/U-19 in evening (4:00 - 7:00 PM).'
     ]
   },
   Basketball: {

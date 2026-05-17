@@ -14,7 +14,7 @@ import { Player, Team, Match, Notice, SportType, AgeCategory, Gender } from '../
 
 type AdminModule = 
   | 'Dashboard' | 'Players' | 'Team Management' | 'Auction' | 'Fixtures' 
-  | 'Live Scores' | 'Leaderboard' | 'Statistics' | 'Registrations' 
+  | 'Live Scores' | 'Leaderboard' | 'Statistics' 
   | 'Gallery' | 'Notices' | 'Settings';
 
 export default function AdminPage() {
@@ -127,7 +127,6 @@ export default function AdminPage() {
                {activeModule === 'Live Scores' && <LiveScoreCenter />}
                {activeModule === 'Leaderboard' && <LeaderboardControl />}
                {activeModule === 'Statistics' && <StatsModule />}
-               {activeModule === 'Registrations' && <RegistrationManager />}
                {activeModule === 'Gallery' && <GalleryAdmin />}
                {activeModule === 'Notices' && <NoticeManager />}
                {activeModule === 'Settings' && <SettingsPanel />}
@@ -210,7 +209,6 @@ function Sidebar({ activeModule, setActiveModule, isCollapsed, setIsCollapsed, o
     { name: 'Live Scores', icon: Play },
     { name: 'Leaderboard', icon: BarChart3 },
     { name: 'Statistics', icon: TrendingUp },
-    { name: 'Registrations', icon: UserPlus },
     { name: 'Gallery', icon: LucideImage },
     { name: 'Notices', icon: Bell },
     { name: 'Settings', icon: Settings },
@@ -1686,7 +1684,7 @@ function LeaderboardControl() {
 }
 
 function StatsModule() { return <Placeholder module="Advanced Statistics" description="D3-powered tournament analytics dashboard showing player heatmaps and team performance metrics." icon={TrendingUp} />; }
-function RegistrationManager() { return <Placeholder module="Registration Portal" description="Complete CRM for managing school registrations, payment verification and student documentation." icon={UserPlus} />; }
+function RegistrationManager() { return null; }
 function GalleryAdmin() { return <Placeholder module="Media Control" description="High-performance media center for uploading multi-category high-res match imagery and video highlights." icon={LucideImage} />; }
 function NoticeManager() {
   const [notices, setNotices] = useState<Notice[]>([]);

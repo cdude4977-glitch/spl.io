@@ -24,7 +24,7 @@ export default function Footer({ onNavigate }: { onNavigate?: (tab: TabType) => 
                  Shalom <span className="text-brand-blue underline decoration-brand-neon underline-offset-8">Premier</span> League
                </h2>
                <p className="text-white/40 max-w-lg">
-                 The elite inter-school sports competition hosted by Shalom Hills International School. Where talent meets opportunity and spirits reach new heights.
+                 Shalom Hills International School proudly hosts the premier inter-school sports tournament. Experience a platform where talent meets opportunity and excellence reaches new heights.
                </p>
             </div>
 

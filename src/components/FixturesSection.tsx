@@ -110,7 +110,7 @@ export default function FixturesSection() {
                    </div>
                    <div className="space-y-2">
                      <p className="text-xl font-display font-bold uppercase italic text-white/60">Schedule Pending</p>
-                     <p className="text-white/20 text-xs uppercase tracking-widest font-mono">No matches scheduled for {activeSport} {activeAge} {activeGender} yet.</p>
+                     <p className="text-white/20 text-xs uppercase tracking-widest font-mono">No matches have been scheduled for {activeSport} {activeAge} {activeGender} yet.</p>
                    </div>
                 </div>
               )}

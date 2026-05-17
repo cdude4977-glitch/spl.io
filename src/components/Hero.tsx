@@ -96,19 +96,19 @@ export default function Hero({ onNavigate }: { onNavigate: (tab: TabType) => voi
           {/* Action Buttons */}
           <div className="flex flex-wrap justify-center gap-4 pt-8">
             <button 
-              onClick={() => onNavigate('Registration')}
+              onClick={() => onNavigate('Timeline')}
               className="btn-primary flex items-center gap-2 group"
             >
-              REGISTER NOW
+              EXPLORE TIMELINE
               <motion.span animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity }}>
                 →
               </motion.span>
             </button>
             <button 
-              onClick={() => onNavigate('Timeline')}
+              onClick={() => onNavigate('Fixtures')}
               className="bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10 text-white font-bold py-3 px-8 rounded-full transition-all group"
             >
-              VIEW TIMELINE
+              UPCOMING FIXTURES
             </button>
           </div>
 
@@ -140,7 +140,7 @@ export default function Hero({ onNavigate }: { onNavigate: (tab: TabType) => voi
           <div className="flex flex-wrap justify-center gap-6 pt-12 text-white/50 text-xs md:text-sm font-mono">
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-brand-neon" />
-              Starts: 20 May 2026 (Grades V-XII)
+              Tournament Commences: 20 May 2026 (Grades V-XII)
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-brand-neon" />

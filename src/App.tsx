@@ -9,8 +9,6 @@ import LeaderboardSection from './components/LeaderboardSection';
 import RulesSection from './components/RulesSection';
 import TimelineSection from './components/TimelineSection';
 import GallerySection from './components/GallerySection';
-import BrochureSection from './components/BrochureSection';
-import RegistrationCTA from './components/RegistrationCTA';
 import Footer from './components/Footer';
 import AdminPage from './components/AdminPage';
 import NoticeBanner from './components/NoticeBanner';
@@ -18,7 +16,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ChevronUp } from 'lucide-react';
 import { dataService } from './services/dataService';
 
-export type TabType = 'Home' | 'Timeline' | 'Fixtures' | 'Standings' | 'Leaderboard' | 'Rules' | 'Gallery' | 'Registration' | 'Contact' | 'Admin' | 'Brochure';
+export type TabType = 'Home' | 'Timeline' | 'Fixtures' | 'Standings' | 'Leaderboard' | 'Rules' | 'Gallery' | 'Contact' | 'Admin';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -71,10 +69,6 @@ export default function App() {
         return <motion.div key="rules" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><RulesSection /></motion.div>;
       case 'Gallery':
         return <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><GallerySection /></motion.div>;
-      case 'Brochure':
-        return <motion.div key="brochure" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><BrochureSection /></motion.div>;
-      case 'Registration':
-        return <motion.div key="registration" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><RegistrationCTA onNavigate={setActiveTab} /></motion.div>;
       case 'Contact':
         return <motion.div key="contact_page" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><Footer onNavigate={setActiveTab} /></motion.div>;
       case 'Admin':
@@ -116,7 +110,7 @@ export default function App() {
     <div className="relative min-h-screen bg-brand-dark text-white selection:bg-brand-neon selection:text-brand-dark overflow-x-hidden">
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
       
-      <main className="pt-20">
+      <main className="pt-24 sm:pt-32 lg:pt-36">
         <NoticeBanner />
                 
 

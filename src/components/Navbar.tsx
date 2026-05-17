@@ -7,7 +7,6 @@ import { dataService } from '../services/dataService';
 const NAV_LINKS: { name: TabType; displayName: string }[] = [
   { name: 'Home', displayName: 'Home' },
   { name: 'Timeline', displayName: 'Timeline' },
-  { name: 'Brochure', displayName: 'Brochure' },
   { name: 'Fixtures', displayName: 'Fixtures' },
   { name: 'Leaderboard', displayName: 'Leaderboard' },
   { name: 'Rules', displayName: 'Rules' },
@@ -25,7 +24,7 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     
@@ -45,23 +44,39 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
           : 'bg-transparent py-6'
       }`}
     >
-      <div className="max-w-[1400px] mx-auto px-4 md:px-8 xl:px-12">
-        <div className="flex justify-between items-center gap-4">
-          {/* Logo */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="flex justify-between items-center gap-8">
+          {/* Logo Group */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-2 sm:gap-3 cursor-pointer shrink-0"
+            className="flex items-center gap-4 cursor-pointer shrink-0"
             onClick={() => setActiveTab('Home')}
           >
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center transition-transform hover:scale-110">
-              <img src={dataService.getPublicLogoUrl(branding.schoolLogo)} className="w-full h-full object-contain" alt="Logo" />
+            <div className={`transition-all duration-500 flex items-center justify-center hover:scale-110 ${
+              isScrolled 
+                ? 'w-10 h-10 sm:w-12 sm:h-12' 
+                : 'w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16'
+            }`}>
+              <img 
+                src={dataService.getPublicLogoUrl(branding.schoolLogo)} 
+                className="w-full h-full object-contain" 
+                alt="Logo" 
+              />
             </div>
-            <div className="flex flex-col leading-tight max-w-[150px] sm:max-w-none">
-              <span className="font-display font-extrabold text-base sm:text-lg tracking-tighter uppercase line-clamp-1 sm:line-clamp-none">
-                {branding.eventName.split(' ')[0]} <span className="text-white/60">{branding.eventName.split(' ').slice(1).join(' ')}</span>
+            <div className="flex flex-col leading-tight">
+              <span className={`font-display font-black tracking-tighter uppercase whitespace-nowrap text-white transition-all duration-500 ${
+                isScrolled 
+                  ? 'text-sm sm:text-base' 
+                  : 'text-base sm:text-xl lg:text-2xl'
+              }`}>
+                {branding.eventName}
               </span>
-              <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.2em] font-bold text-brand-neon">
+              <span className={`uppercase font-black text-brand-neon transition-all duration-500 ${
+                isScrolled 
+                  ? 'text-[7px] sm:text-[9px] tracking-[0.1em]' 
+                  : 'text-[9px] sm:text-[11px] lg:text-xs tracking-[0.15em] sm:tracking-[0.2em]'
+              }`}>
                 Summer Edition 2026
               </span>
             </div>
@@ -83,18 +98,6 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
                 {link.displayName}
               </motion.button>
             ))}
-            <motion.button
-              onClick={() => setActiveTab('Registration')}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`bg-brand-neon text-brand-dark font-bold px-4 xl:px-6 py-2 xl:py-2.5 rounded-full text-xs xl:text-sm shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:shadow-[0_0_30px_rgba(0,240,255,0.5)] transition-all whitespace-nowrap ${
-                activeTab === 'Registration' ? 'ring-2 ring-white ring-offset-2 ring-offset-brand-dark' : ''
-              }`}
-            >
-              REGISTER NOW
-            </motion.button>
           </div>
 
           {/* Mobile Toggle */}
@@ -133,17 +136,6 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
                   {link.displayName}
                 </button>
               ))}
-              <div className="pt-4">
-                <button 
-                  onClick={() => {
-                    setActiveTab('Registration');
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="w-full bg-brand-neon text-brand-dark font-bold py-4 rounded-xl shadow-lg"
-                >
-                  REGISTER NOW
-                </button>
-              </div>
             </div>
           </motion.div>
         )}
