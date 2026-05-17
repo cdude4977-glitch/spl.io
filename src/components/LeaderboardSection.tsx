@@ -41,12 +41,12 @@ export default function LeaderboardSection() {
           
           <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
             {/* Sport Selector */}
-            <div className="flex bg-brand-dark overflow-hidden rounded-xl border border-white/5 p-1">
+            <div className="flex bg-brand-dark overflow-x-auto no-scrollbar rounded-xl border border-white/5 p-1 shrink-0">
               {sports.map(sport => (
                 <button
                   key={sport}
                   onClick={() => setActiveSport(sport)}
-                  className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all uppercase tracking-widest ${
+                  className={`px-3 sm:px-4 py-2 rounded-lg text-[9px] sm:text-[10px] font-bold transition-all uppercase tracking-widest whitespace-nowrap ${
                     activeSport === sport ? 'bg-brand-neon text-brand-dark' : 'text-white/40 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -56,12 +56,12 @@ export default function LeaderboardSection() {
             </div>
 
             {/* Gender Selector */}
-            <div className="flex bg-brand-dark overflow-hidden rounded-xl border border-white/5 p-1">
+            <div className="flex bg-brand-dark overflow-hidden rounded-xl border border-white/5 p-1 shrink-0">
               {(['Boys', 'Girls'] as Gender[]).map(gender => (
                 <button
                   key={gender}
                   onClick={() => setActiveGender(gender)}
-                  className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all uppercase tracking-widest flex items-center gap-2 ${
+                  className={`px-3 sm:px-4 py-2 rounded-lg text-[9px] sm:text-[10px] font-bold transition-all uppercase tracking-widest flex items-center gap-1 sm:gap-2 whitespace-nowrap ${
                     activeGender === gender ? 'bg-brand-blue text-white' : 'text-white/40 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -72,12 +72,12 @@ export default function LeaderboardSection() {
             </div>
 
             {/* Age Category Selector */}
-            <div className="flex bg-brand-dark overflow-hidden rounded-xl border border-white/5 p-1">
+            <div className="flex bg-brand-dark overflow-x-auto no-scrollbar rounded-xl border border-white/5 p-1 shrink-0">
               {ageCategories.map(age => (
                 <button
                   key={age}
                   onClick={() => setActiveAge(age)}
-                  className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all uppercase tracking-widest ${
+                  className={`px-3 sm:px-4 py-2 rounded-lg text-[9px] sm:text-[10px] font-bold transition-all uppercase tracking-widest whitespace-nowrap ${
                     activeAge === age ? 'bg-white text-brand-dark' : 'text-white/40 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -130,15 +130,15 @@ export default function LeaderboardSection() {
                             </span>
                          </div>
                          <div className="col-span-3 flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-lg overflow-hidden border border-white/10 group-hover:border-brand-neon/50 transition-all">
+                            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg overflow-hidden border border-white/10 group-hover:border-brand-neon/50 transition-all shrink-0">
                                <img src={dataService.getPublicLogoUrl(team.logo)} alt={team.name} className="w-full h-full object-cover" />
                             </div>
-                            <h4 className="font-display font-bold group-hover:text-brand-neon transition-colors uppercase italic tracking-tight">{team.name}</h4>
+                            <h4 className="font-display font-bold group-hover:text-brand-neon transition-colors uppercase italic tracking-tight text-xs sm:text-base">{team.name}</h4>
                          </div>
-                         <div className="col-span-1 text-center font-mono text-xs text-white/40">
+                         <div className="col-span-1 text-center font-mono text-[10px] sm:text-xs text-white/40">
                             {team.wins} - {team.losses}
                          </div>
-                         <div className="col-span-1 text-right font-display font-black text-xl text-brand-neon italic">
+                         <div className="col-span-1 text-right font-display font-black text-base sm:text-xl text-brand-neon italic">
                             {team.points}
                          </div>
                        </div>

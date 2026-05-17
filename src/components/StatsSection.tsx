@@ -38,7 +38,7 @@ export default function StatsSection() {
   return (
     <section className="bg-brand-charcoal py-20 border-y border-white/5">
       <div className="section-container">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
           {STATS.map((stat, idx) => (
             <motion.div
               key={idx}

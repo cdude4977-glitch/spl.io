@@ -43,12 +43,12 @@ export default function FixturesSection() {
           
           <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
             {/* Sport Selector */}
-            <div className="flex bg-brand-charcoal overflow-hidden rounded-xl border border-white/10 p-1">
+            <div className="flex bg-brand-charcoal overflow-x-auto no-scrollbar rounded-xl border border-white/10 p-1 shrink-0">
               {sports.map((sport) => (
                 <button
                   key={sport}
                   onClick={() => setActiveSport(sport)}
-                  className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all uppercase tracking-widest ${
+                  className={`px-3 sm:px-4 py-2 rounded-lg text-[9px] sm:text-[10px] font-bold transition-all uppercase tracking-widest whitespace-nowrap ${
                     activeSport === sport ? 'bg-brand-neon text-brand-dark' : 'text-white/40 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -58,12 +58,12 @@ export default function FixturesSection() {
             </div>
 
             {/* Gender Selector */}
-            <div className="flex bg-brand-charcoal overflow-hidden rounded-xl border border-white/10 p-1">
+            <div className="flex bg-brand-charcoal overflow-hidden rounded-xl border border-white/10 p-1 shrink-0">
               {(['Boys', 'Girls'] as Gender[]).map(gender => (
                 <button
                   key={gender}
                   onClick={() => setActiveGender(gender)}
-                  className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all uppercase tracking-widest flex items-center gap-2 ${
+                  className={`px-3 sm:px-4 py-2 rounded-lg text-[9px] sm:text-[10px] font-bold transition-all uppercase tracking-widest flex items-center gap-1 sm:gap-2 whitespace-nowrap ${
                     activeGender === gender ? 'bg-brand-blue text-white' : 'text-white/40 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -74,12 +74,12 @@ export default function FixturesSection() {
             </div>
 
             {/* Age Category Selector */}
-            <div className="flex bg-brand-charcoal overflow-hidden rounded-xl border border-white/10 p-1">
+            <div className="flex bg-brand-charcoal overflow-x-auto no-scrollbar rounded-xl border border-white/10 p-1 shrink-0">
               {ageCategories.map(age => (
                 <button
                   key={age}
                   onClick={() => setActiveAge(age)}
-                  className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all uppercase tracking-widest ${
+                  className={`px-3 sm:px-4 py-2 rounded-lg text-[9px] sm:text-[10px] font-bold transition-all uppercase tracking-widest whitespace-nowrap ${
                     activeAge === age ? 'bg-white text-brand-dark' : 'text-white/40 hover:text-white hover:bg-white/5'
                   }`}
                 >

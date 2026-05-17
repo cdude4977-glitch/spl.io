@@ -44,7 +44,7 @@ export default function NoticeBanner() {
       animate={{ height: 'auto', opacity: 1 }}
       className="bg-brand-charcoal/50 backdrop-blur-md border-b border-white/5 relative overflow-hidden"
     >
-      <div className="section-container relative z-10 flex items-center justify-between py-3 gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex items-center justify-between py-3 gap-4">
         <div className="flex items-center gap-4 flex-1 overflow-hidden">
           <div className="flex-shrink-0 animate-pulse">
             <Bell className="w-4 h-4 text-brand-neon" />

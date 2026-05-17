@@ -44,19 +44,19 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
           : 'bg-transparent py-6'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="flex justify-between items-center gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
+        <div className="flex justify-between items-center gap-4 sm:gap-8">
           {/* Logo Group */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-4 cursor-pointer shrink-0"
+            className="flex items-center gap-2 sm:gap-4 cursor-pointer shrink-0 min-w-0"
             onClick={() => setActiveTab('Home')}
           >
-            <div className={`transition-all duration-500 flex items-center justify-center hover:scale-110 ${
+            <div className={`transition-all duration-500 flex items-center justify-center hover:scale-110 shrink-0 ${
               isScrolled 
-                ? 'w-10 h-10 sm:w-12 sm:h-12' 
-                : 'w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16'
+                ? 'w-8 h-8 sm:w-12 sm:h-12' 
+                : 'w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16'
             }`}>
               <img 
                 src={dataService.getPublicLogoUrl(branding.schoolLogo)} 
@@ -64,18 +64,18 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
                 alt="Logo" 
               />
             </div>
-            <div className="flex flex-col leading-tight">
-              <span className={`font-display font-black tracking-tighter uppercase whitespace-nowrap text-white transition-all duration-500 ${
+            <div className="flex flex-col leading-tight min-w-0">
+              <span className={`font-display font-black tracking-tighter uppercase text-white transition-all duration-500 ${
                 isScrolled 
-                  ? 'text-sm sm:text-base' 
-                  : 'text-base sm:text-xl lg:text-2xl'
+                  ? 'text-xs sm:text-base' 
+                  : 'text-sm sm:text-xl lg:text-2xl'
               }`}>
                 {branding.eventName}
               </span>
-              <span className={`uppercase font-black text-brand-neon transition-all duration-500 ${
+              <span className={`uppercase font-black text-brand-neon transition-all duration-500 hidden sm:block ${
                 isScrolled 
-                  ? 'text-[7px] sm:text-[9px] tracking-[0.1em]' 
-                  : 'text-[9px] sm:text-[11px] lg:text-xs tracking-[0.15em] sm:tracking-[0.2em]'
+                  ? 'text-[6px] sm:text-[9px] tracking-[0.1em]' 
+                  : 'text-[8px] sm:text-[11px] lg:text-xs tracking-[0.15em] sm:tracking-[0.2em]'
               }`}>
                 Summer Edition 2026
               </span>
