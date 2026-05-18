@@ -1,25 +1,48 @@
-import { SportType, Team, Player, Match, Notice } from './types';
+import { SportType, Team, Player, Match, Notice, AgeCategory, Gender } from './types';
 
-export const TEAMS: Team[] = [
-  // Cricket (8 categories)
-  { id: 'c-u11-b', name: 'Hurricanes U11', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.36%20(1).jpeg', captain: 'Pending', sport: 'Cricket', ageCategory: 'U11', gender: 'Boys', purseRemaining: 50, players: [], played: 0, wins: 0, losses: 0, draws: 0, points: 0, color: '#3b82f6' },
-  { id: 'c-u11-g', name: 'Strikers U11', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.36.jpeg', captain: 'Pending', sport: 'Cricket', ageCategory: 'U11', gender: 'Girls', purseRemaining: 50, players: [], played: 0, wins: 0, losses: 0, draws: 0, points: 0, color: '#eab308' },
-  { id: 'c-u13-b', name: 'Tornados U13', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.35%20(2).jpeg', captain: 'Pending', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', purseRemaining: 50, players: [], played: 0, wins: 0, losses: 0, draws: 0, points: 0, color: '#22c55e' },
-  { id: 'c-u13-g', name: 'Lightning U13', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.35%20(1).jpeg', captain: 'Pending', sport: 'Cricket', ageCategory: 'U13', gender: 'Girls', purseRemaining: 50, players: [], played: 0, wins: 0, losses: 0, draws: 0, points: 0, color: '#06b6d4' },
-  { id: 'c-u15-b', name: 'Thunders U15', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.35.jpeg', captain: 'Pending', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', purseRemaining: 50, players: [], played: 0, wins: 0, losses: 0, draws: 0, points: 0, color: '#15803d' },
-  { id: 'c-u15-g', name: 'Stormers U15', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.36%20(1).jpeg', captain: 'Pending', sport: 'Cricket', ageCategory: 'U15', gender: 'Girls', purseRemaining: 50, players: [], played: 0, wins: 0, losses: 0, draws: 0, points: 0, color: '#3b82f6' },
-  { id: 'c-u19-b', name: 'Blaze U19', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.36.jpeg', captain: 'Pending', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', purseRemaining: 50, players: [], played: 0, wins: 0, losses: 0, draws: 0, points: 0, color: '#eab308' },
-  { id: 'c-u19-g', name: 'Heat U19', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.35%20(2).jpeg', captain: 'Pending', sport: 'Cricket', ageCategory: 'U19', gender: 'Girls', purseRemaining: 50, players: [], played: 0, wins: 0, losses: 0, draws: 0, points: 0, color: '#22c55e' },
+const generateTeams = (): Team[] => {
+  const sports: SportType[] = ['Cricket', 'Football', 'Basketball'];
+  const ages: AgeCategory[] = ['U11', 'U13', 'U15', 'U19'];
+  const genders: Gender[] = ['Boys', 'Girls'];
+  const teamNames = ['Hurricanes', 'Strikers', 'Tornados', 'Lightning'];
+  const logos = [
+    'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.36%20(1).jpeg',
+    'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.36.jpeg',
+    'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.35%20(2).jpeg',
+    'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.35%20(1).jpeg'
+  ];
+  const colors = ['#3b82f6', '#eab308', '#22c55e', '#ef4444'];
 
-  // Football (Example)
-  { id: 'f-u11-b', name: 'City FC U11', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.41%20(2).jpeg', captain: 'Pending', sport: 'Football', ageCategory: 'U11', gender: 'Boys', purseRemaining: 50, players: [], played: 0, wins: 0, losses: 0, draws: 0, points: 0, color: '#60a5fa' },
-  { id: 'f-u15-b', name: 'Spurs FC U15', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.41%20(3).jpeg', captain: 'Pending', sport: 'Football', ageCategory: 'U15', gender: 'Boys', purseRemaining: 50, players: [], played: 0, wins: 0, losses: 0, draws: 0, points: 0, color: '#1e3a8a' },
-  { id: 'f-u15-g', name: 'Blazers U15', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.41%20(4).jpeg', captain: 'Pending', sport: 'Football', ageCategory: 'U15', gender: 'Girls', purseRemaining: 50, players: [], played: 0, wins: 0, losses: 0, draws: 0, points: 0, color: '#ef4444' },
+  const teams: Team[] = [];
+  sports.forEach(sport => {
+    ages.forEach(age => {
+      genders.forEach(gender => {
+        teamNames.forEach((name, i) => {
+          teams.push({
+            id: `${sport[0].toLowerCase()}-${age.toLowerCase()}-${gender[0].toLowerCase()}-${i + 1}`,
+            name: `${name} ${gender[0]} ${age}`,
+            logo: logos[i],
+            captain: 'Pending',
+            sport,
+            ageCategory: age,
+            gender,
+            purseRemaining: 50,
+            players: [],
+            played: 3,
+            wins: 3 - i,
+            losses: i,
+            draws: 0,
+            points: (3 - i) * 3,
+            color: colors[i]
+          });
+        });
+      });
+    });
+  });
+  return teams;
+};
 
-  // Basketball (Example)
-  { id: 'b-u15-b', name: 'Warriors U15', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.25.02%20(1).jpeg', captain: 'Pending', sport: 'Basketball', ageCategory: 'U15', gender: 'Boys', purseRemaining: 50, players: [], played: 0, wins: 0, losses: 0, draws: 0, points: 0, color: '#1d4ed8' },
-  { id: 'b-u19-g', name: 'Sonics U19', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.25.02.jpeg', captain: 'Pending', sport: 'Basketball', ageCategory: 'U19', gender: 'Girls', purseRemaining: 50, players: [], played: 0, wins: 0, losses: 0, draws: 0, points: 0, color: '#2563eb' },
-];
+export const TEAMS: Team[] = generateTeams();
 
 export const PLAYERS: Player[] = [
   {
@@ -30,12 +53,26 @@ export const PLAYERS: Player[] = [
     gender: 'Boys',
     basePrice: 500,
     currentBid: 0,
-    teamId: 'f1',
+    teamId: 'f-u15-b-1',
     role: 'Forward',
     status: 'In Auction',
     photo: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?q=80&w=200&h=200&auto=format&fit=crop',
     stats: { matches: 8, goals: 12 }
   },
+  {
+    id: 'p2',
+    name: 'Vihaan Gupta',
+    sport: 'Cricket',
+    ageCategory: 'U15',
+    gender: 'Boys',
+    basePrice: 1000,
+    currentBid: 0,
+    teamId: 'c-u15-b-1',
+    role: 'All Rounder',
+    status: 'In Auction',
+    photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&h=200&auto=format&fit=crop',
+    stats: { matches: 12, runs: 450, wickets: 15 }
+  }
 ];
 
 export const MATCHES: Match[] = [
@@ -44,8 +81,8 @@ export const MATCHES: Match[] = [
     sport: 'Football',
     ageCategory: 'U15',
     gender: 'Boys',
-    teamAId: 'f-u15-b',
-    teamBId: 'f1',
+    teamAId: 'f-u15-b-1',
+    teamBId: 'f-u15-b-2',
     time: '16:00',
     date: '20 May 2026',
     venue: 'Main Stadium',
@@ -56,8 +93,8 @@ export const MATCHES: Match[] = [
     sport: 'Basketball',
     ageCategory: 'U15',
     gender: 'Boys',
-    teamAId: 'b-u15-b',
-    teamBId: 'b1',
+    teamAId: 'b-u15-b-1',
+    teamBId: 'b-u15-b-2',
     time: '18:30',
     date: '21 May 2026',
     venue: 'Indoor Court',
@@ -68,8 +105,8 @@ export const MATCHES: Match[] = [
     sport: 'Cricket',
     ageCategory: 'U15',
     gender: 'Boys',
-    teamAId: 'c-u15-b',
-    teamBId: 'c1',
+    teamAId: 'c-u15-b-1',
+    teamBId: 'c-u15-b-2',
     time: '10:00',
     date: '22 May 2026',
     venue: 'Cricket Ground',
