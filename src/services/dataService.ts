@@ -2,13 +2,23 @@ import { supabase } from '../lib/supabase';
 import { TEAMS, PLAYERS, MATCHES, NOTICES } from '../constants';
 import { Team, Player, Match, Notice } from '../types';
 
-let teamsCache: Team[] | null = null;
-let playersCache: Player[] | null = null;
-let matchesCache: Match[] | null = null;
+let teamsCache: Team[] | null = JSON.parse(localStorage.getItem('teams_cache') || 'null');
+let playersCache: Player[] | null = JSON.parse(localStorage.getItem('players_cache') || 'null');
+let matchesCache: Match[] | null = JSON.parse(localStorage.getItem('matches_cache') || 'null');
 
 export const dataService = {
   async getTeams(forceRefresh = false): Promise<Team[]> {
-    if (!forceRefresh && teamsCache) return teamsCache;
+    if (!forceRefresh && teamsCache) {
+      // Background revalidation
+      if (document.visibilityState === 'visible') {
+        this.revalidateTeams();
+      }
+      return teamsCache;
+    }
+    return this.revalidateTeams();
+  },
+
+  async revalidateTeams(): Promise<Team[]> {
     try {
       const { data, error } = await supabase.from('teams').select('*');
       if (error) throw error;
@@ -32,6 +42,7 @@ export const dataService = {
       }));
       
       teamsCache = teams;
+      localStorage.setItem('teams_cache', JSON.stringify(teams));
       return teams;
     } catch (err) {
       console.error('Error fetching teams:', err);
@@ -40,7 +51,16 @@ export const dataService = {
   },
 
   async getPlayers(forceRefresh = false): Promise<Player[]> {
-    if (!forceRefresh && playersCache) return playersCache;
+    if (!forceRefresh && playersCache) {
+      if (document.visibilityState === 'visible') {
+        this.revalidatePlayers();
+      }
+      return playersCache;
+    }
+    return this.revalidatePlayers();
+  },
+
+  async revalidatePlayers(): Promise<Player[]> {
     try {
       const { data, error } = await supabase.from('players').select('*');
       if (error) throw error;
@@ -61,6 +81,7 @@ export const dataService = {
       }));
 
       playersCache = players;
+      localStorage.setItem('players_cache', JSON.stringify(players));
       return players;
     } catch (err) {
       console.error('Error fetching players:', err);
@@ -69,7 +90,16 @@ export const dataService = {
   },
 
   async getMatches(forceRefresh = false): Promise<Match[]> {
-    if (!forceRefresh && matchesCache) return matchesCache;
+    if (!forceRefresh && matchesCache) {
+      if (document.visibilityState === 'visible') {
+        this.revalidateMatches();
+      }
+      return matchesCache;
+    }
+    return this.revalidateMatches();
+  },
+
+  async revalidateMatches(): Promise<Match[]> {
     try {
       const { data, error } = await supabase.from('matches').select('*');
       if (error) throw error;
@@ -91,11 +121,24 @@ export const dataService = {
       }));
 
       matchesCache = matches;
+      localStorage.setItem('matches_cache', JSON.stringify(matches));
       return matches;
     } catch (err) {
       console.error('Error fetching matches:', err);
       return MATCHES;
     }
+  },
+
+  getCachedTeams(): Team[] | null {
+    return teamsCache;
+  },
+
+  getCachedPlayers(): Player[] | null {
+    return playersCache;
+  },
+
+  getCachedMatches(): Match[] | null {
+    return matchesCache;
   },
 
   async getNotices(): Promise<Notice[]> {

@@ -1,11 +1,11 @@
 import { motion } from 'motion/react';
 
 const GALLERY_IMAGES = [
-  { url: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=400', title: 'Stadium View', sport: 'Football' },
-  { url: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=400', title: 'The Shot', sport: 'Basketball' },
-  { url: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=400', title: 'Match Day', sport: 'Football' },
-  { url: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=400', title: 'Trophy Reveal', sport: 'All' },
-  { url: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=400', title: 'MVP Moment', sport: 'Basketball' },
+  { url: 'https://shalomhills.com//public/uploads/all/221/Untitled-design---2025-07-23T133147.430.png', title: 'Stadium View', sport: 'Football' },
+  { url: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/GALLERY/WhatsApp%20Image%202026-04-04%20at%2019.22.05.jpeg', title: 'The Shot', sport: 'Basketball' },
+  { url: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/GALLERY/WhatsApp%20Image%202026-04-04%20at%2019.22.04.jpeg', title: 'Match Day', sport: 'Football' },
+  { url: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/GALLERY/WhatsApp%20Image%202026-05-18%20at%2023.58.56.jpeg', title: 'MVP Moment', sport: 'Football' },
+  { url: 'https://content3.jdmagicbox.com/v2/comp/gurgaon/52/011p89152/catalogue/shalom-hills-international-school-sushant-lok-phase-1-gurgaon-cbse-schools-ep3v8xdyg0.jpg', title: 'Stadium View', sport: 'Basketball' },
 ];
 
 export default function GallerySection() {

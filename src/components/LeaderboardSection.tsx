@@ -36,8 +36,8 @@ export default function LeaderboardSection() {
   const [activeSport, setActiveSport] = useState<SportType>('Football');
   const [activeGender, setActiveGender] = useState<Gender>('Boys');
   const [activeAge, setActiveAge] = useState<AgeCategory>('U15');
-  const [teams, setTeams] = useState<Team[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [teams, setTeams] = useState<Team[]>(() => dataService.getCachedTeams() || []);
+  const [loading, setLoading] = useState(() => !dataService.getCachedTeams());
 
   useEffect(() => {
      let isMounted = true;

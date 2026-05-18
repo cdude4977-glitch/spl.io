@@ -108,8 +108,8 @@ export default function FixturesSection() {
   const [activeSport, setActiveSport] = useState<SportType>('Football');
   const [activeGender, setActiveGender] = useState<Gender>('Boys');
   const [activeAge, setActiveAge] = useState<AgeCategory>('U15');
-  const [matches, setMatches] = useState<Match[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [matches, setMatches] = useState<Match[]>(() => dataService.getCachedMatches() || []);
+  const [loading, setLoading] = useState(() => !dataService.getCachedMatches());
 
   useEffect(() => {
      let isMounted = true;

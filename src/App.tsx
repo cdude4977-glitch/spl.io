@@ -2,26 +2,18 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import NoticeBanner from './components/NoticeBanner';
+import Hero from './components/Hero';
+import StatsSection from './components/StatsSection';
+import SportsGrid from './components/SportsGrid';
+import FixturesSection from './components/FixturesSection';
+import LeaderboardSection from './components/LeaderboardSection';
+import RulesSection from './components/RulesSection';
+import TimelineSection from './components/TimelineSection';
+import GallerySection from './components/GallerySection';
 import { motion, AnimatePresence } from 'motion/react';
 import { dataService } from './services/dataService';
 
-// Lazy load components
-const Hero = lazy(() => import('./components/Hero'));
-const StatsSection = lazy(() => import('./components/StatsSection'));
-const SportsGrid = lazy(() => import('./components/SportsGrid'));
-const FixturesSection = lazy(() => import('./components/FixturesSection'));
-const LeaderboardSection = lazy(() => import('./components/LeaderboardSection'));
-const RulesSection = lazy(() => import('./components/RulesSection'));
-const TimelineSection = lazy(() => import('./components/TimelineSection'));
-const GallerySection = lazy(() => import('./components/GallerySection'));
-
 export type TabType = 'Home' | 'Timeline' | 'Fixtures' | 'Standings' | 'Leaderboard' | 'Rules' | 'Gallery' | 'Contact';
-
-const LoadingFallback = () => (
-  <div className="flex items-center justify-center min-h-[400px]">
-    <div className="w-12 h-12 border-4 border-brand-neon border-t-transparent rounded-full animate-spin"></div>
-  </div>
-);
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -36,15 +28,29 @@ export default function App() {
     // Pre-fetch critical data for instant transitions
     const prefetchData = async () => {
       try {
-        await Promise.all([
-          dataService.getTeams(),
-          dataService.getPlayers(),
-          dataService.getMatches(),
-          dataService.getNotices()
-        ]);
+        // First try to load from cache if possible
+        const hasCache = dataService.getCachedTeams() && dataService.getCachedMatches();
+        
+        // Don't block the UI if we have cache, just fire the fetch
+        if (hasCache) {
+          setIsLoading(false);
+          Promise.all([
+            dataService.getTeams(),
+            dataService.getPlayers(),
+            dataService.getMatches(),
+            dataService.getNotices()
+          ]);
+        } else {
+          await Promise.all([
+            dataService.getTeams(),
+            dataService.getPlayers(),
+            dataService.getMatches(),
+            dataService.getNotices()
+          ]);
+          setIsLoading(false);
+        }
       } catch (err) {
         console.error('Pre-fetch failed:', err);
-      } finally {
         setIsLoading(false);
       }
     };
@@ -63,53 +69,87 @@ export default function App() {
 
   const renderContent = () => {
     return (
-      <Suspense fallback={<LoadingFallback />}>
-        <AnimatePresence mode="wait">
-          {activeTab === 'Home' && (
-            <motion.div
-              key="home"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Hero onNavigate={setActiveTab} />
-              <StatsSection />
-              <SportsGrid />
-            </motion.div>
-          )}
-          {activeTab === 'Timeline' && (
-            <motion.div key="timeline_page" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <TimelineSection />
-            </motion.div>
-          )}
-          {activeTab === 'Fixtures' && (
-            <motion.div key="fixtures" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <FixturesSection />
-            </motion.div>
-          )}
-          {(activeTab === 'Standings' || activeTab === 'Leaderboard') && (
-            <motion.div key="standings" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <LeaderboardSection />
-            </motion.div>
-          )}
-          {activeTab === 'Rules' && (
-            <motion.div key="rules" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <RulesSection />
-            </motion.div>
-          )}
-          {activeTab === 'Gallery' && (
-            <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <GallerySection />
-            </motion.div>
-          )}
-          {activeTab === 'Contact' && (
-            <motion.div key="contact_page" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <Footer onNavigate={setActiveTab} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </Suspense>
+      <AnimatePresence mode="wait">
+        {activeTab === 'Home' && (
+          <motion.div
+            key="home"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <Hero onNavigate={setActiveTab} />
+            <StatsSection />
+            <SportsGrid />
+          </motion.div>
+        )}
+        {activeTab === 'Timeline' && (
+          <motion.div 
+            key="timeline_page" 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <TimelineSection />
+          </motion.div>
+        )}
+        {activeTab === 'Fixtures' && (
+          <motion.div 
+            key="fixtures" 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <FixturesSection />
+          </motion.div>
+        )}
+        {(activeTab === 'Standings' || activeTab === 'Leaderboard') && (
+          <motion.div 
+            key="standings" 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <LeaderboardSection />
+          </motion.div>
+        )}
+        {activeTab === 'Rules' && (
+          <motion.div 
+            key="rules" 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <RulesSection />
+          </motion.div>
+        )}
+        {activeTab === 'Gallery' && (
+          <motion.div 
+            key="gallery" 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <GallerySection />
+          </motion.div>
+        )}
+        {activeTab === 'Contact' && (
+          <motion.div 
+            key="contact_page" 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <Footer onNavigate={setActiveTab} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     );
   };
 

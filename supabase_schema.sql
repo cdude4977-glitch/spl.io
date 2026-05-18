@@ -147,7 +147,7 @@ INSERT INTO teams (id, name, logo, captain, sport, purse_remaining, color) VALUE
 INSERT INTO site_config (key, value, description) VALUES
 ('auction_active', '{"status": false}', 'Is the live auction currently running?'),
 ('registration_open', '{"status": true}', 'Are registrations currently open?'),
-('event_dates', '{"start": "20 May 2026", "end": "25 May 2026"}', 'Dates for the main event');
+('event_dates', '{"start": "20 May 2026", "end": "23 May 2026"}', 'Dates for the main event');
 
 
 -- ==========================================
