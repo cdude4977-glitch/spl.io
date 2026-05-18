@@ -62,6 +62,7 @@ export default function SportsGrid() {
               <img 
                 src={sport.image} 
                 alt={sport.name} 
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className={`absolute inset-0 bg-gradient-to-t ${sport.color} opacity-90 transition-opacity group-hover:opacity-100`} />

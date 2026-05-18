@@ -20,13 +20,13 @@ const TIMELINE_EVENTS = [
     status: 'Kickoff'
   },
   {
-    date: '21 May – 23 May',
+    date: '21 May – 22 May',
     title: 'Group Stages',
     desc: 'Intense round-robin competition across all three sports.',
     status: 'Ongoing'
   },
   {
-    date: '24 May – 25 May',
+    date: '23 May 2026',
     title: 'The Grand Finale',
     desc: 'Final matches followed by the Trophy Presentation and Closing Ceremony.',
     status: 'Finals'

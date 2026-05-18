@@ -2,14 +2,18 @@ import { supabase } from '../lib/supabase';
 import { TEAMS, PLAYERS, MATCHES, NOTICES } from '../constants';
 import { Team, Player, Match, Notice } from '../types';
 
+let teamsCache: Team[] | null = null;
+let playersCache: Player[] | null = null;
+let matchesCache: Match[] | null = null;
+
 export const dataService = {
-  async getTeams(): Promise<Team[]> {
+  async getTeams(forceRefresh = false): Promise<Team[]> {
+    if (!forceRefresh && teamsCache) return teamsCache;
     try {
       const { data, error } = await supabase.from('teams').select('*');
       if (error) throw error;
-      if (!data || data.length === 0) return TEAMS;
-
-      return data.map((t: any) => ({
+      
+      const teams = (!data || data.length === 0) ? TEAMS : data.map((t: any) => ({
         id: t.id,
         name: t.name,
         logo: t.logo,
@@ -26,19 +30,22 @@ export const dataService = {
         points: t.points || 0,
         color: t.color || '#1EFFB9'
       }));
+      
+      teamsCache = teams;
+      return teams;
     } catch (err) {
       console.error('Error fetching teams:', err);
       return TEAMS;
     }
   },
 
-  async getPlayers(): Promise<Player[]> {
+  async getPlayers(forceRefresh = false): Promise<Player[]> {
+    if (!forceRefresh && playersCache) return playersCache;
     try {
       const { data, error } = await supabase.from('players').select('*');
       if (error) throw error;
-      if (!data || data.length === 0) return PLAYERS;
 
-      return data.map((p: any) => ({
+      const players = (!data || data.length === 0) ? PLAYERS : data.map((p: any) => ({
         id: p.id,
         name: p.name,
         sport: p.sport,
@@ -52,19 +59,22 @@ export const dataService = {
         photo: p.photo,
         stats: p.stats || {}
       }));
+
+      playersCache = players;
+      return players;
     } catch (err) {
       console.error('Error fetching players:', err);
       return PLAYERS;
     }
   },
 
-  async getMatches(): Promise<Match[]> {
+  async getMatches(forceRefresh = false): Promise<Match[]> {
+    if (!forceRefresh && matchesCache) return matchesCache;
     try {
       const { data, error } = await supabase.from('matches').select('*');
       if (error) throw error;
-      if (!data || data.length === 0) return MATCHES;
 
-      return data.map((m: any) => ({
+      const matches = (!data || data.length === 0) ? MATCHES : data.map((m: any) => ({
         id: m.id,
         sport: m.sport,
         ageCategory: m.age_category || m.ageCategory,
@@ -79,6 +89,9 @@ export const dataService = {
         scoreA: m.score_a || m.scoreA,
         scoreB: m.score_b || m.scoreB
       }));
+
+      matchesCache = matches;
+      return matches;
     } catch (err) {
       console.error('Error fetching matches:', err);
       return MATCHES;
@@ -96,177 +109,6 @@ export const dataService = {
     }
   },
 
-  async testConnection() {
-    try {
-      const { data, error } = await supabase.from('teams').select('id').limit(1);
-      if (error) throw error;
-      return { success: true, data };
-    } catch (err: any) {
-      return { success: false, error: err.message };
-    }
-  },
-
-  async uploadImage(file: File, bucket: string = 'logos'): Promise<{ url: string | null, error: any }> {
-    try {
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
-      const filePath = `${fileName}`;
-
-      const { error: uploadError } = await supabase.storage
-        .from(bucket)
-        .upload(filePath, file);
-
-      if (uploadError) throw uploadError;
-
-      const { data } = supabase.storage.from(bucket).getPublicUrl(filePath);
-
-      return { url: data.publicUrl, error: null };
-    } catch (err) {
-      console.error('Error uploading image:', err);
-      return { url: null, error: err };
-    }
-  },
-
-  async updateTeamLogo(teamId: string, logoUrl: string): Promise<boolean> {
-    try {
-      const { error } = await supabase
-        .from('teams')
-        .update({ logo: logoUrl })
-        .eq('id', teamId);
-      if (error) throw error;
-      return true;
-    } catch (err) {
-      console.error('Error updating team logo:', err);
-      return false;
-    }
-  },
-
-  async upsertPlayer(player: any): Promise<{ data: any, error: any }> {
-    try {
-      const { data, error } = await supabase
-        .from('players')
-        .upsert({
-          ...player,
-          updated_at: new Date().toISOString()
-        })
-        .select()
-        .single();
-      return { data, error };
-    } catch (err) {
-      return { data: null, error: err };
-    }
-  },
-
-  async deletePlayer(id: string): Promise<boolean> {
-    try {
-      const { error } = await supabase.from('players').delete().eq('id', id);
-      if (error) throw error;
-      return true;
-    } catch (err) {
-      console.error('Error deleting player:', err);
-      return false;
-    }
-  },
-
-  async upsertTeam(team: any): Promise<{ data: any, error: any }> {
-    try {
-      const { data, error } = await supabase
-        .from('teams')
-        .upsert({
-          ...team,
-          updated_at: new Date().toISOString()
-        })
-        .select()
-        .single();
-      return { data, error };
-    } catch (err) {
-      return { data: null, error: err };
-    }
-  },
-
-  async deleteTeam(id: string): Promise<boolean> {
-    try {
-      const { error } = await supabase.from('teams').delete().eq('id', id);
-      if (error) throw error;
-      return true;
-    } catch (err) {
-      console.error('Error deleting team:', err);
-      return false;
-    }
-  },
-
-  async upsertMatch(match: any): Promise<{ data: any, error: any }> {
-    try {
-      const { data, error } = await supabase
-        .from('matches')
-        .upsert({
-          ...match,
-          updated_at: new Date().toISOString()
-        })
-        .select()
-        .single();
-      return { data, error };
-    } catch (err) {
-      return { data: null, error: err };
-    }
-  },
-
-  async deleteMatch(id: string): Promise<boolean> {
-    try {
-      const { error } = await supabase.from('matches').delete().eq('id', id);
-      if (error) throw error;
-      return true;
-    } catch (err) {
-      console.error('Error deleting match:', err);
-      return false;
-    }
-  },
-
-  async recordAuctionBid(playerId: string, teamId: string, amount: number): Promise<boolean> {
-    try {
-      // 1. Start a transaction (or batch update)
-      // Update player
-      const { error: pError } = await supabase
-        .from('players')
-        .update({ current_bid: amount, team_id: teamId, status: 'Sold' })
-        .eq('id', playerId);
-      
-      if (pError) throw pError;
-
-      // 2. Fetch current team purse
-      const { data: teamData, error: tFetchError } = await supabase
-        .from('teams')
-        .select('purse_remaining')
-        .eq('id', teamId)
-        .single();
-      
-      if (tFetchError) throw tFetchError;
-
-      // 3. Deduct from team purse
-      const newPurse = (teamData?.purse_remaining || 0) - (amount / 100); // Assuming amount is in lakhs if divided by 100 or something? Wait, let's use amount directly or check logic.
-      // Usually purse is in Crores/Lakhs. If base price is 500, maybe it's in thousands.
-      // Let's just deduct 'amount' for now, assuming unit consistency.
-      const { error: tError } = await supabase
-        .from('teams')
-        .update({ purse_remaining: Math.max(0, newPurse) })
-        .eq('id', teamId);
-      
-      if (tError) throw tError;
-
-      // 4. Log the transaction
-      await supabase.from('auction_transactions').insert({
-        player_id: playerId,
-        team_id: teamId,
-        bid_amount: amount
-      });
-
-      return true;
-    } catch (err) {
-      console.error('Error recording auction bid:', err);
-      return false;
-    }
-  },
-
   async getSiteConfig(key: string): Promise<any> {
     try {
       const { data, error } = await supabase
@@ -279,20 +121,6 @@ export const dataService = {
     } catch (err) {
       console.error(`Error fetching site config for ${key}:`, err);
       return null;
-    }
-  },
-
-  async updateSiteConfig(key: string, value: any): Promise<boolean> {
-    try {
-      const { error } = await supabase
-        .from('site_config')
-        .upsert({ key, value, updated_at: new Error().stack?.includes('Admin') ? new Date().toISOString() : undefined });
-      // The updated_at should be handled by DB trigger preferably, but manually for now
-      if (error) throw error;
-      return true;
-    } catch (err) {
-      console.error(`Error updating site config for ${key}:`, err);
-      return false;
     }
   },
 

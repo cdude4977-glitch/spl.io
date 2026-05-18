@@ -4,12 +4,6 @@ import { Mail, Phone, MapPin, Send, Instagram, Twitter, Trophy } from 'lucide-re
 import { TabType } from '../App';
 
 export default function Footer({ onNavigate }: { onNavigate?: (tab: TabType) => void }) {
-  const handleAdminSecret = (e: React.MouseEvent) => {
-    if (e.detail === 3 && onNavigate) { // Triple click secret
-       onNavigate('Admin');
-    }
-  };
-
   return (
     <footer id="contact" className="bg-brand-dark border-t border-white/5 pt-24 pb-12 overflow-hidden relative">
       <div className="section-container relative z-10">
@@ -18,7 +12,6 @@ export default function Footer({ onNavigate }: { onNavigate?: (tab: TabType) => 
           <div className="space-y-12">
             <div className="space-y-6">
                <h2 
-                 onClick={handleAdminSecret}
                  className="text-4xl md:text-6xl font-extrabold uppercase cursor-default select-none"
                >
                  Shalom <span className="text-brand-blue underline decoration-brand-neon underline-offset-8">Premier</span> League

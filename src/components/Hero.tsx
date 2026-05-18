@@ -32,6 +32,7 @@ export default function Hero({ onNavigate }: { onNavigate: (tab: TabType) => voi
         <img 
           src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=2000&auto=format&fit=crop" 
           alt="Stadium" 
+          loading="lazy"
           className="w-full h-full object-cover transform scale-110"
         />
         {/* Floating Particles/Lights */}

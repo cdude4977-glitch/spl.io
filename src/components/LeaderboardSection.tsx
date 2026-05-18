@@ -5,6 +5,33 @@ import { TEAMS } from '../constants';
 import { Team, SportType, AgeCategory, Gender } from '../types';
 import { dataService } from '../services/dataService';
 
+// Memoized Team Row for performance
+const TeamRow = React.memo(({ team, rank }: { team: Team, rank: number }) => (
+  <div className="grid grid-cols-6 p-6 items-center hover:bg-white/5 transition-colors group">
+    <div className="col-span-1 flex items-center gap-3">
+      <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${
+        rank === 1 ? 'bg-yellow-500 text-brand-dark shadow-[0_0_15px_rgba(234,179,8,0.5)]' : 
+        rank === 2 ? 'bg-gray-300 text-brand-dark' :
+        rank === 3 ? 'bg-orange-600 text-white' : 'bg-white/10 text-white/60'
+      }`}>
+        {rank}
+      </span>
+    </div>
+    <div className="col-span-3 flex items-center gap-4">
+      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg overflow-hidden border border-white/10 group-hover:border-brand-neon/50 transition-all shrink-0">
+        <img src={dataService.getPublicLogoUrl(team.logo)} alt={team.name} loading="lazy" className="w-full h-full object-cover" />
+      </div>
+      <h4 className="font-display font-bold group-hover:text-brand-neon transition-colors uppercase italic tracking-tight text-xs sm:text-base">{team.name}</h4>
+    </div>
+    <div className="col-span-1 text-center font-mono text-[10px] sm:text-xs text-white/40">
+      {team.wins} - {team.losses}
+    </div>
+    <div className="col-span-1 text-right font-display font-black text-base sm:text-xl text-brand-neon italic">
+      {team.points}
+    </div>
+  </div>
+));
+
 export default function LeaderboardSection() {
   const [activeSport, setActiveSport] = useState<SportType>('Football');
   const [activeGender, setActiveGender] = useState<Gender>('Boys');
@@ -12,23 +39,35 @@ export default function LeaderboardSection() {
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
+     let isMounted = true;
      const loadData = async () => {
         const data = await dataService.getTeams();
-        setTeams(data);
-        setLoading(false);
+        if (isMounted) {
+          setTeams(data);
+          setLoading(false);
+        }
      };
      loadData();
+     return () => { isMounted = false; };
   }, []);
 
   const sortedTeams = useMemo(() => {
-    return [...teams]
+    return teams
       .filter(t => t.sport === activeSport && t.gender === activeGender && t.ageCategory === activeAge)
       .sort((a, b) => b.points - a.points);
   }, [teams, activeSport, activeGender, activeAge]);
 
   const sports: SportType[] = ['Football', 'Cricket', 'Basketball'];
   const ageCategories: AgeCategory[] = ['U11', 'U13', 'U15', 'U19'];
+
+  if (loading) {
+    return (
+      <div className="min-h-[600px] flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-brand-neon border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <section id="leaderboard" className="py-24 bg-brand-charcoal/30">
@@ -106,42 +145,17 @@ export default function LeaderboardSection() {
                   <div className="col-span-1 text-right">Points</div>
                </div>
                <div className="divide-y divide-white/5 min-h-[400px]">
-                 <AnimatePresence mode="wait">
+                 <AnimatePresence initial={false}>
                    <motion.div
                      key={`${activeSport}-${activeGender}-${activeAge}`}
-                     initial={{ opacity: 0, y: 10 }}
-                     animate={{ opacity: 1, y: 0 }}
-                     exit={{ opacity: 0, y: -10 }}
-                     transition={{ duration: 0.2 }}
+                     initial={{ opacity: 0 }}
+                     animate={{ opacity: 1 }}
+                     exit={{ opacity: 0 }}
+                     transition={{ duration: 0.15 }}
                    >
                      {sortedTeams.length > 0 ? (
                        sortedTeams.map((team, idx) => (
-                       <div 
-                         key={team.id}
-                         className="grid grid-cols-6 p-6 items-center hover:bg-white/5 transition-colors group"
-                       >
-                         <div className="col-span-1 flex items-center gap-3">
-                            <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${
-                              idx === 0 ? 'bg-yellow-500 text-brand-dark shadow-[0_0_15px_rgba(234,179,8,0.5)]' : 
-                              idx === 1 ? 'bg-gray-300 text-brand-dark' :
-                              idx === 2 ? 'bg-orange-600 text-white' : 'bg-white/10 text-white/60'
-                            }`}>
-                              {idx + 1}
-                            </span>
-                         </div>
-                         <div className="col-span-3 flex items-center gap-4">
-                            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg overflow-hidden border border-white/10 group-hover:border-brand-neon/50 transition-all shrink-0">
-                               <img src={dataService.getPublicLogoUrl(team.logo)} alt={team.name} className="w-full h-full object-cover" />
-                            </div>
-                            <h4 className="font-display font-bold group-hover:text-brand-neon transition-colors uppercase italic tracking-tight text-xs sm:text-base">{team.name}</h4>
-                         </div>
-                         <div className="col-span-1 text-center font-mono text-[10px] sm:text-xs text-white/40">
-                            {team.wins} - {team.losses}
-                         </div>
-                         <div className="col-span-1 text-right font-display font-black text-base sm:text-xl text-brand-neon italic">
-                            {team.points}
-                         </div>
-                       </div>
+                         <TeamRow key={team.id} team={team} rank={idx + 1} />
                        ))
                      ) : (
                        <div className="flex flex-col items-center justify-center h-[400px] text-white/20">
@@ -167,19 +181,19 @@ export default function LeaderboardSection() {
                     <h3 className="font-display font-extrabold text-2xl uppercase italic">Player of <br /> the Week</h3>
                   </div>
                   <div className="flex items-center gap-4">
-                     <img src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=100&h=100&auto=format&fit=crop" className="w-16 h-16 rounded-full border-2 border-yellow-500" alt="MVP" />
+                     <img src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=100&h=100&auto=format&fit=crop" loading="lazy" className="w-16 h-16 rounded-full border-2 border-yellow-500" alt="MVP" />
                      <div>
-                        <p className="font-display font-bold text-xl">Arjun Singh</p>
-                        <p className="text-xs text-white/40 uppercase font-mono">Shalom Raiders • Football</p>
+                        <p className="font-display font-bold text-xl">TBD</p>
+                        <p className="text-xs text-white/40 uppercase font-mono">TBD • TBD</p>
                      </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                      <div className="bg-white/5 p-3 rounded-xl">
-                        <p className="text-xl font-bold">5</p>
+                        <p className="text-xl font-bold">0</p>
                         <p className="text-[10px] text-white/40 uppercase tracking-tighter">Goals</p>
                      </div>
                      <div className="bg-white/5 p-3 rounded-xl">
-                        <p className="text-xl font-bold">2</p>
+                        <p className="text-xl font-bold">0</p>
                         <p className="text-[10px] text-white/40 uppercase tracking-tighter">Assists</p>
                      </div>
                   </div>
@@ -192,9 +206,9 @@ export default function LeaderboardSection() {
                </h4>
                <div className="space-y-4">
                  {[
-                   { name: 'Sameer K.', score: '42 Runs', sport: 'Cricket' },
-                   { name: 'Ishaan G.', score: '38 Points', sport: 'Basketball' },
-                   { name: 'Anjali R.', score: '4 Goals', sport: 'Football' }
+                   { name: 'TBD', score: '0', sport: 'Cricket' },
+                   { name: 'TBD', score: '0', sport: 'Basketball' },
+                   { name: 'TBD', score: '0', sport: 'Football' }
                  ].map((player, idx) => (
                    <div key={idx} className="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
                       <div>

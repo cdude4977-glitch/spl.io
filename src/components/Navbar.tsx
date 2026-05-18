@@ -60,6 +60,7 @@ export default function Navbar({ activeTab, setActiveTab }: { activeTab: TabType
             }`}>
               <img 
                 src={dataService.getPublicLogoUrl(branding.schoolLogo)} 
+                loading="lazy"
                 className="w-full h-full object-contain" 
                 alt="Logo" 
               />

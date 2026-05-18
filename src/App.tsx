@@ -1,22 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import StatsSection from './components/StatsSection';
-import SportsGrid from './components/SportsGrid';
-import AuctionSection from './components/AuctionSection';
-import FixturesSection from './components/FixturesSection';
-import LeaderboardSection from './components/LeaderboardSection';
-import RulesSection from './components/RulesSection';
-import TimelineSection from './components/TimelineSection';
-import GallerySection from './components/GallerySection';
 import Footer from './components/Footer';
-import AdminPage from './components/AdminPage';
 import NoticeBanner from './components/NoticeBanner';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronUp } from 'lucide-react';
 import { dataService } from './services/dataService';
 
-export type TabType = 'Home' | 'Timeline' | 'Fixtures' | 'Standings' | 'Leaderboard' | 'Rules' | 'Gallery' | 'Contact' | 'Admin';
+// Lazy load components
+const Hero = lazy(() => import('./components/Hero'));
+const StatsSection = lazy(() => import('./components/StatsSection'));
+const SportsGrid = lazy(() => import('./components/SportsGrid'));
+const FixturesSection = lazy(() => import('./components/FixturesSection'));
+const LeaderboardSection = lazy(() => import('./components/LeaderboardSection'));
+const RulesSection = lazy(() => import('./components/RulesSection'));
+const TimelineSection = lazy(() => import('./components/TimelineSection'));
+const GallerySection = lazy(() => import('./components/GallerySection'));
+
+export type TabType = 'Home' | 'Timeline' | 'Fixtures' | 'Standings' | 'Leaderboard' | 'Rules' | 'Gallery' | 'Contact';
+
+const LoadingFallback = () => (
+  <div className="flex items-center justify-center min-h-[400px]">
+    <div className="w-12 h-12 border-4 border-brand-neon border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,8 +33,23 @@ export default function App() {
   }, [activeTab]);
 
   useEffect(() => {
-    // Simulate initial loading
-    const timer = setTimeout(() => setIsLoading(false), 2000);
+    // Pre-fetch critical data for instant transitions
+    const prefetchData = async () => {
+      try {
+        await Promise.all([
+          dataService.getTeams(),
+          dataService.getPlayers(),
+          dataService.getMatches(),
+          dataService.getNotices()
+        ]);
+      } catch (err) {
+        console.error('Pre-fetch failed:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    prefetchData();
     
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 500);
@@ -37,45 +57,60 @@ export default function App() {
 
     window.addEventListener('scroll', handleScroll);
     return () => {
-      clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   const renderContent = () => {
-    switch (activeTab) {
-      case 'Home':
-        return (
-          <motion.div
-            key="home"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Hero onNavigate={setActiveTab} />
-            <StatsSection />
-            <SportsGrid />
-          </motion.div>
-        );
-      case 'Timeline':
-        return <motion.div key="timeline_page" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><TimelineSection /></motion.div>;
-      case 'Fixtures':
-        return <motion.div key="fixtures" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><FixturesSection /></motion.div>;
-      case 'Standings':
-      case 'Leaderboard':
-        return <motion.div key="standings" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><LeaderboardSection /></motion.div>;
-      case 'Rules':
-        return <motion.div key="rules" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><RulesSection /></motion.div>;
-      case 'Gallery':
-        return <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><GallerySection /></motion.div>;
-      case 'Contact':
-        return <motion.div key="contact_page" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><Footer onNavigate={setActiveTab} /></motion.div>;
-      case 'Admin':
-        return <motion.div key="admin_page" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><AdminPage /></motion.div>;
-      default:
-        return <Hero onNavigate={setActiveTab} />;
-    }
+    return (
+      <Suspense fallback={<LoadingFallback />}>
+        <AnimatePresence mode="wait">
+          {activeTab === 'Home' && (
+            <motion.div
+              key="home"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Hero onNavigate={setActiveTab} />
+              <StatsSection />
+              <SportsGrid />
+            </motion.div>
+          )}
+          {activeTab === 'Timeline' && (
+            <motion.div key="timeline_page" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <TimelineSection />
+            </motion.div>
+          )}
+          {activeTab === 'Fixtures' && (
+            <motion.div key="fixtures" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <FixturesSection />
+            </motion.div>
+          )}
+          {(activeTab === 'Standings' || activeTab === 'Leaderboard') && (
+            <motion.div key="standings" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <LeaderboardSection />
+            </motion.div>
+          )}
+          {activeTab === 'Rules' && (
+            <motion.div key="rules" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <RulesSection />
+            </motion.div>
+          )}
+          {activeTab === 'Gallery' && (
+            <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <GallerySection />
+            </motion.div>
+          )}
+          {activeTab === 'Contact' && (
+            <motion.div key="contact_page" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <Footer onNavigate={setActiveTab} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </Suspense>
+    );
   };
 
   if (isLoading) {
@@ -113,14 +148,11 @@ export default function App() {
       <main className="pt-24 sm:pt-32 lg:pt-36">
         <NoticeBanner />
                 
-
-        <AnimatePresence mode="wait">
-          {renderContent()}
-        </AnimatePresence>
+        {renderContent()}
       </main>
 
       {/* Footer always visible at bottom of page content */}
-      {activeTab !== 'Contact' && activeTab !== 'Admin' && <Footer onNavigate={setActiveTab} />}
+      {activeTab !== 'Contact' && <Footer onNavigate={setActiveTab} />}
 
       {/* Global Cursor Glow */}
       <div className="fixed inset-0 pointer-events-none z-[-1] opacity-30 overflow-hidden">

@@ -108,7 +108,7 @@ export const MATCHES: Match[] = [
     teamAId: 'c-u15-b-1',
     teamBId: 'c-u15-b-2',
     time: '10:00',
-    date: '22 May 2026',
+    date: '23 May 2026',
     venue: 'Cricket Ground',
     status: 'Upcoming',
   }

@@ -30,10 +30,9 @@ export default function NoticeBanner() {
 
   const currentNotice = notices[currentIndex];
 
-  const getIcon = (type: string) => {
-    switch (type) {
-      case 'Alert': return <AlertTriangle className="w-4 h-4 text-red-500" />;
-      case 'Success': return <CheckCircle className="w-4 h-4 text-emerald-500" />;
+  const getIcon = (priority: string) => {
+    switch (priority) {
+      case 'High': return <AlertTriangle className="w-4 h-4 text-red-500" />;
       default: return <Info className="w-4 h-4 text-brand-blue" />;
     }
   };
@@ -58,8 +57,8 @@ export default function NoticeBanner() {
               className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 overflow-hidden"
             >
                <div className="flex items-center gap-2 flex-shrink-0">
-                  {getIcon(currentNotice.type)}
-                  <span className="text-[10px] font-mono font-black uppercase tracking-tighter sm:tracking-widest text-white/40">{currentNotice.type}</span>
+                  {getIcon(currentNotice.priority)}
+                  <span className="text-[10px] font-mono font-black uppercase tracking-tighter sm:tracking-widest text-white/40">{currentNotice.priority}</span>
                </div>
                <p className="text-[11px] font-bold uppercase tracking-tight sm:tracking-normal text-white truncate">
                   <span className="text-brand-neon mr-2">[{currentNotice.title}]</span>
