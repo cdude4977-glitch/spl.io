@@ -25,44 +25,19 @@ export default function App() {
   }, [activeTab]);
 
   useEffect(() => {
-    // Pre-fetch critical data for instant transitions
-    const prefetchData = async () => {
-      try {
-        // First try to load from cache if possible
-        const hasCache = dataService.getCachedTeams() && dataService.getCachedMatches();
-        
-        // Don't block the UI if we have cache, just fire the fetch
-        if (hasCache) {
-          setIsLoading(false);
-          Promise.all([
-            dataService.getTeams(),
-            dataService.getPlayers(),
-            dataService.getMatches(),
-            dataService.getNotices()
-          ]);
-        } else {
-          await Promise.all([
-            dataService.getTeams(),
-            dataService.getPlayers(),
-            dataService.getMatches(),
-            dataService.getNotices()
-          ]);
-          setIsLoading(false);
-        }
-      } catch (err) {
-        console.error('Pre-fetch failed:', err);
-        setIsLoading(false);
-      }
-    };
+    // With static data, we can resolve loading almost instantly
+    // but we keep a tiny delay for the brand intro to feel polished
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
 
-    prefetchData();
-    
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 500);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
