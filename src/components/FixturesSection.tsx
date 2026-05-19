@@ -108,6 +108,7 @@ export default function FixturesSection() {
   const [activeSport, setActiveSport] = useState<SportType>('Football');
   const [activeGender, setActiveGender] = useState<Gender>('Boys');
   const [activeAge, setActiveAge] = useState<AgeCategory>('U15');
+  const [activeStatus, setActiveStatus] = useState<'All' | 'Upcoming' | 'Completed' | 'Live'>('All');
   const [matches, setMatches] = useState<Match[]>(() => dataService.getCachedMatches() || []);
   const [loading, setLoading] = useState(() => !dataService.getCachedMatches());
 
@@ -128,9 +129,10 @@ export default function FixturesSection() {
     return matches.filter(m => 
       m.sport === activeSport && 
       m.gender === activeGender && 
-      m.ageCategory === activeAge
+      m.ageCategory === activeAge &&
+      (activeStatus === 'All' || m.status === activeStatus)
     );
-  }, [matches, activeSport, activeGender, activeAge]);
+  }, [matches, activeSport, activeGender, activeAge, activeStatus]);
 
   const sports: SportType[] = ['Football', 'Cricket', 'Basketball'];
   const ageCategories: AgeCategory[] = ['U11', 'U13', 'U15', 'U19'];
@@ -195,6 +197,21 @@ export default function FixturesSection() {
                   }`}
                 >
                   {age}
+                </button>
+              ))}
+            </div>
+
+            {/* Status Selector */}
+            <div className="flex bg-brand-charcoal overflow-hidden rounded-xl border border-white/10 p-1 shrink-0">
+              {(['All', 'Upcoming', 'Completed', 'Live'] as const).map(status => (
+                <button
+                  key={status}
+                  onClick={() => setActiveStatus(status)}
+                  className={`px-3 sm:px-4 py-2 rounded-lg text-[9px] sm:text-[10px] font-bold transition-all uppercase tracking-widest whitespace-nowrap ${
+                    activeStatus === status ? 'bg-brand-neon text-brand-dark shadow-[0_0_10px_rgba(0,240,255,0.2)]' : 'text-white/40 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {status}
                 </button>
               ))}
             </div>

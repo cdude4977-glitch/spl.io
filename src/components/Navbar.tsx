@@ -9,7 +9,6 @@ const NAV_LINKS: { name: TabType; displayName: string }[] = [
   { name: 'Timeline', displayName: 'Timeline' },
   { name: 'Fixtures', displayName: 'Fixtures' },
   { name: 'Leaderboard', displayName: 'Leaderboard' },
-  { name: 'Teams', displayName: 'Teams' },
   { name: 'Rules', displayName: 'Rules' },
   { name: 'Gallery', displayName: 'Gallery' },
   { name: 'Contact', displayName: 'Contact' },

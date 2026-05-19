@@ -10,11 +10,10 @@ import LeaderboardSection from './components/LeaderboardSection';
 import RulesSection from './components/RulesSection';
 import TimelineSection from './components/TimelineSection';
 import GallerySection from './components/GallerySection';
-import TeamsSection from './components/TeamsSection';
 import { motion, AnimatePresence } from 'motion/react';
 import { dataService } from './services/dataService';
 
-export type TabType = 'Home' | 'Timeline' | 'Fixtures' | 'Standings' | 'Leaderboard' | 'Teams' | 'Rules' | 'Gallery' | 'Contact';
+export type TabType = 'Home' | 'Timeline' | 'Fixtures' | 'Standings' | 'Leaderboard' | 'Rules' | 'Gallery' | 'Contact';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -90,17 +89,6 @@ export default function App() {
             transition={{ duration: 0.15 }}
           >
             <LeaderboardSection />
-          </motion.div>
-        )}
-        {activeTab === 'Teams' && (
-          <motion.div 
-            key="teams_page" 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-          >
-            <TeamsSection />
           </motion.div>
         )}
         {activeTab === 'Rules' && (
