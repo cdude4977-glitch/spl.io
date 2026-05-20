@@ -7,9 +7,9 @@ import { dataService } from '../services/dataService';
 
 // Memoized Team Row for performance
 const TeamRow = React.memo(({ team, rank }: { team: Team, rank: number }) => (
-  <div className="grid grid-cols-6 p-6 items-center hover:bg-white/5 transition-colors group">
-    <div className="col-span-1 flex items-center gap-3">
-      <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${
+  <div className="grid grid-cols-12 p-4 items-center hover:bg-white/5 transition-colors group border-b border-white/5 last:border-0">
+    <div className="col-span-1 flex items-center justify-center">
+      <span className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-[10px] sm:text-xs ${
         rank === 1 ? 'bg-yellow-500 text-brand-dark shadow-[0_0_15px_rgba(234,179,8,0.5)]' : 
         rank === 2 ? 'bg-gray-300 text-brand-dark' :
         rank === 3 ? 'bg-orange-600 text-white' : 'bg-white/10 text-white/60'
@@ -17,16 +17,22 @@ const TeamRow = React.memo(({ team, rank }: { team: Team, rank: number }) => (
         {rank}
       </span>
     </div>
-    <div className="col-span-3 flex items-center gap-4">
-      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg overflow-hidden border border-white/10 group-hover:border-brand-neon/50 transition-all shrink-0">
+    <div className="col-span-4 flex items-center gap-2 sm:gap-4 pl-2">
+      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded overflow-hidden border border-white/10 shrink-0">
         <img src={dataService.getPublicLogoUrl(team.logo)} alt={team.name} loading="lazy" className="w-full h-full object-cover" />
       </div>
-      <h4 className="font-display font-bold group-hover:text-brand-neon transition-colors uppercase italic tracking-tight text-xs sm:text-base">{team.name}</h4>
+      <h4 className="font-display font-bold group-hover:text-brand-neon transition-colors uppercase italic tracking-tight text-[10px] sm:text-sm truncate">{team.name}</h4>
     </div>
-    <div className="col-span-1 text-center font-mono text-[10px] sm:text-xs text-white/40">
-      {team.wins} - {team.losses}
+    <div className="col-span-1 text-center font-mono text-[10px] text-white/60">{team.played}</div>
+    <div className="col-span-1 text-center font-mono text-[10px] text-white/60">{team.wins}</div>
+    <div className="col-span-1 text-center font-mono text-[10px] text-white/60 hidden sm:block">{team.draws}</div>
+    <div className="col-span-1 text-center font-mono text-[10px] text-white/60">{team.losses}</div>
+    <div className="col-span-1 text-center font-mono text-[10px] text-white/60 hidden md:block">{team.gf}</div>
+    <div className="col-span-1 text-center font-mono text-[10px] text-white/60 hidden md:block">{team.ga}</div>
+    <div className="col-span-1 text-center font-mono text-[10px] text-brand-blue font-bold">
+      {team.gd > 0 ? `+${team.gd}` : team.gd}
     </div>
-    <div className="col-span-1 text-right font-display font-black text-base sm:text-xl text-brand-neon italic">
+    <div className="col-span-1 text-right font-display font-black text-xs sm:text-lg text-brand-neon italic">
       {team.points}
     </div>
   </div>
@@ -53,9 +59,13 @@ export default function LeaderboardSection() {
   }, []);
 
   const sortedTeams = useMemo(() => {
-    return teams
+    return [...teams]
       .filter(t => t.sport === activeSport && t.gender === activeGender && t.ageCategory === activeAge)
-      .sort((a, b) => b.points - a.points);
+      .sort((a, b) => {
+        if (b.points !== a.points) return b.points - a.points;
+        if (b.gd !== a.gd) return b.gd - a.gd;
+        return b.gf - a.gf;
+      });
   }, [teams, activeSport, activeGender, activeAge]);
 
   const sports: SportType[] = ['Football', 'Cricket', 'Basketball'];
@@ -138,11 +148,17 @@ export default function LeaderboardSection() {
                   </h3>
                   <span className="text-[10px] font-mono text-white/20 uppercase">{sortedTeams.length} Teams Competing</span>
                </div>
-               <div className="grid grid-cols-6 p-6 border-b border-white/5 bg-white/5 text-[10px] uppercase font-bold tracking-widest text-white/40">
-                  <div className="col-span-1">Rank</div>
-                  <div className="col-span-3">Team</div>
-                  <div className="col-span-1 text-center">W/L</div>
-                  <div className="col-span-1 text-right">Points</div>
+               <div className="grid grid-cols-12 p-6 border-b border-white/5 bg-white/5 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-white/40">
+                  <div className="col-span-1 text-center">#</div>
+                  <div className="col-span-4 pl-2">Team</div>
+                  <div className="col-span-1 text-center">P</div>
+                  <div className="col-span-1 text-center">W</div>
+                  <div className="col-span-1 text-center hidden sm:block">D</div>
+                  <div className="col-span-1 text-center">L</div>
+                  <div className="col-span-1 text-center hidden md:block">GF</div>
+                  <div className="col-span-1 text-center hidden md:block">GA</div>
+                  <div className="col-span-1 text-center">GD</div>
+                  <div className="col-span-1 text-right">Pts</div>
                </div>
                <div className="divide-y divide-white/5 min-h-[400px]">
                  <AnimatePresence initial={false}>
@@ -208,7 +224,7 @@ export default function LeaderboardSection() {
                  {[
                    { name: 'TBD', score: '0', sport: 'Cricket' },
                    { name: 'TBD', score: '0', sport: 'Basketball' },
-                   { name: 'TBD', score: '0', sport: 'Football' }
+                   { name: 'Shresth Tiwari', score: '6', sport: 'Football' }
                  ].map((player, idx) => (
                    <div key={idx} className="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
                       <div>

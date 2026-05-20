@@ -1,5 +1,11 @@
 import { SportType, Team, Player, Match, Notice, AgeCategory, Gender } from './types';
 
+export const SPORT_SPREADSHEETS: Record<SportType, string> = {
+  'Cricket': 'https://1drv.ms/x/c/ce8aecdefb123e28/IQBUagNvmOkRTbbJ9eq4rAswATatZpFpuPDMflnE9Ycr4nY?e=yMMAeF',
+  'Football': 'https://1drv.ms/x/c/ce8aecdefb123e28/IQDac6lTHNczR7SvT5D1d4rfAX0VTV6C5K-uOFRL_s23pI4?e=HMX9Mi',
+  'Basketball': 'https://1drv.ms/x/c/ce8aecdefb123e28/IQBv85UxgtqZQ48AAjh6vSnGARWnQ_o_RojtDvdxdd-ls48'
+};
+
 const generateTeams = (): Team[] => {
   const sports: SportType[] = ['Cricket', 'Football', 'Basketball'];
   const ages: AgeCategory[] = ['U11', 'U13', 'U15', 'U19'];
@@ -37,11 +43,12 @@ const generateTeams = (): Team[] => {
     ages.forEach(age => {
       genders.forEach(gender => {
         teamDefinitions[sport].forEach((def, i) => {
+          const teamId = `${sport[0].toLowerCase()}-${age.toLowerCase()}-${gender[0].toLowerCase()}-${i + 1}`;
           teams.push({
-            id: `${sport[0].toLowerCase()}-${age.toLowerCase()}-${gender[0].toLowerCase()}-${i + 1}`,
+            id: teamId,
             name: def.name,
             logo: def.logo,
-            captain: 'Pending',
+            captain: 'TBD',
             sport,
             ageCategory: age,
             gender,
@@ -52,12 +59,45 @@ const generateTeams = (): Team[] => {
             losses: 0,
             draws: 0,
             points: 0,
+            gf: 0,
+            ga: 0,
+            gd: 0,
             color: def.color
           });
         });
       });
     });
   });
+
+  // --- Manual Overrides from User Images ---
+  
+  // Football U15 Boys
+  const f_u15_b_overrides: Record<string, Partial<Team>> = {
+    'f-u15-b-5': { played: 1, wins: 1, losses: 0, draws: 0, points: 3, gf: 4, ga: 2, gd: 2 }, // Real Shalom
+    'f-u15-b-3': { played: 2, wins: 1, losses: 1, draws: 0, points: 3, gf: 8, ga: 8, gd: 0 }, // Shalom Spurs
+    'f-u15-b-4': { played: 1, wins: 0, losses: 0, draws: 1, points: 1, gf: 1, ga: 1, gd: 0 }, // Shalom Athletico
+    'f-u15-b-1': { played: 1, wins: 0, losses: 0, draws: 1, points: 1, gf: 1, ga: 1, gd: 0 }, // Shalom City
+    'f-u15-b-2': { played: 1, wins: 0, losses: 1, draws: 0, points: 0, gf: 4, ga: 6, gd: -2 }, // Shalom United (FC Shalom)
+  };
+
+  // Football U19 Boys
+  const f_u19_b_overrides: Record<string, Partial<Team>> = {
+    'f-u19-b-2': { played: 2, wins: 2, losses: 0, draws: 0, points: 6, gf: 6, ga: 4, gd: 2 }, // Shalom United
+    'f-u19-b-4': { played: 2, wins: 1, losses: 1, draws: 0, points: 3, gf: 5, ga: 4, gd: 1 }, // Shalom Athletico
+    'f-u19-b-5': { played: 2, wins: 1, losses: 1, draws: 0, points: 3, gf: 4, ga: 4, gd: 0 }, // Real Shalom
+    'f-u19-b-1': { played: 2, wins: 1, losses: 1, draws: 0, points: 3, gf: 4, ga: 5, gd: -1 }, // Shalom City
+    'f-u19-b-3': { played: 2, wins: 0, losses: 2, draws: 0, points: 0, gf: 3, ga: 5, gd: -2 }, // Shalom Spurs
+  };
+
+  teams.forEach(team => {
+    if (f_u15_b_overrides[team.id]) {
+      Object.assign(team, f_u15_b_overrides[team.id]);
+    }
+    if (f_u19_b_overrides[team.id]) {
+      Object.assign(team, f_u19_b_overrides[team.id]);
+    }
+  });
+
   return teams;
 };
 

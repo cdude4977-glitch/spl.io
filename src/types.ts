@@ -40,6 +40,9 @@ export interface Team {
   losses: number;
   draws: number;
   points: number;
+  gf: number;
+  ga: number;
+  gd: number;
   color: string;
 }
 
