@@ -89,13 +89,60 @@ const generateTeams = (): Team[] => {
     'f-u19-b-3': { played: 2, wins: 0, losses: 2, draws: 0, points: 0, gf: 3, ga: 5, gd: -2 }, // Shalom Spurs
   };
 
+  // Basketball U11/U13 Girls
+  const b_u11_u13_g_overrides: Record<string, Partial<Team>> = {
+    'b-u11-g-3': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 }, // Pacers
+    'b-u11-g-1': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 }, // Warriors
+    'b-u11-g-5': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 }, // Swishers
+    'b-u11-g-2': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 }, // Sonics
+    'b-u13-g-3': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 },
+    'b-u13-g-1': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 },
+    'b-u13-g-5': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 },
+    'b-u13-g-2': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 },
+  };
+
+  // Basketball U11/U13 Boys
+  const b_u11_u13_b_overrides: Record<string, Partial<Team>> = {
+    'b-u11-b-2': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 }, // Sonics
+    'b-u11-b-3': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 }, // Pacers
+    'b-u11-b-5': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 }, // Swishers
+    'b-u11-b-1': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 }, // Warriors
+    'b-u13-b-2': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 },
+    'b-u13-b-3': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 },
+    'b-u13-b-5': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 },
+    'b-u13-b-1': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 },
+  };
+
+  // Basketball U15 Boys
+  const b_u15_b_overrides: Record<string, Partial<Team>> = {
+    'b-u15-b-2': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 }, // Sonics
+    'b-u15-b-5': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 }, // Swishers
+    'b-u15-b-1': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 }, // Warriors
+    'b-u15-b-3': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 }, // Pacers
+  };
+
+  // Cricket U11/U13 Boys
+  const c_u11_b_overrides: Record<string, Partial<Team>> = {
+    'c-u11-b-1': { played: 2, wins: 1, losses: 1, draws: 0, points: 5 }, // Hurricanes
+    'c-u11-b-2': { played: 1, wins: 1, losses: 0, draws: 0, points: 5 }, // Thunders
+    'c-u11-b-4': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Stormers
+  };
+
+  const c_u13_b_overrides: Record<string, Partial<Team>> = {
+    'c-u13-b-1': { played: 1, wins: 1, losses: 0, draws: 0, points: 5 }, // Hurricanes
+    'c-u13-b-3': { played: 1, wins: 1, losses: 0, draws: 0, points: 5 }, // Tornados
+    'c-u13-b-2': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Thunders
+    'c-u13-b-4': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Stormers
+  };
+
   teams.forEach(team => {
-    if (f_u15_b_overrides[team.id]) {
-      Object.assign(team, f_u15_b_overrides[team.id]);
-    }
-    if (f_u19_b_overrides[team.id]) {
-      Object.assign(team, f_u19_b_overrides[team.id]);
-    }
+    if (f_u15_b_overrides[team.id]) Object.assign(team, f_u15_b_overrides[team.id]);
+    if (f_u19_b_overrides[team.id]) Object.assign(team, f_u19_b_overrides[team.id]);
+    if (b_u11_u13_g_overrides[team.id]) Object.assign(team, b_u11_u13_g_overrides[team.id]);
+    if (b_u11_u13_b_overrides[team.id]) Object.assign(team, b_u11_u13_b_overrides[team.id]);
+    if (b_u15_b_overrides[team.id]) Object.assign(team, b_u15_b_overrides[team.id]);
+    if (c_u11_b_overrides[team.id]) Object.assign(team, c_u11_b_overrides[team.id]);
+    if (c_u13_b_overrides[team.id]) Object.assign(team, c_u13_b_overrides[team.id]);
   });
 
   return teams;

@@ -222,9 +222,12 @@ export default function LeaderboardSection() {
                </h4>
                <div className="space-y-4">
                  {[
-                   { name: 'TBD', score: '0', sport: 'Cricket' },
-                   { name: 'TBD', score: '0', sport: 'Basketball' },
-                   { name: 'Shresth Tiwari', score: '6', sport: 'Football' }
+                   { name: 'Ahsan Ul Huq', score: 'MOTM (15 runs, 1 wkt)', sport: 'Cricket U11' },
+                   { name: 'Devansh', score: 'MOTM (16 runs, 1 wkt)', sport: 'Cricket U11' },
+                   { name: 'Sahi Singh', score: 'MOTM (10 runs, 1 wkt)', sport: 'Cricket U13' },
+                   { name: 'Harsit Jha', score: 'MOTM (14 runs, 1 wkt)', sport: 'Cricket U13' },
+                   { name: 'Arunodhay Singh', score: '18pts', sport: 'Basketball' },
+                   { name: 'Shresth Tiwari', score: '6 goals', sport: 'Football' }
                  ].map((player, idx) => (
                    <div key={idx} className="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
                       <div>
