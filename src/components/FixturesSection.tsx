@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Calendar, MapPin, Clock, Trophy, User, Users } from 'lucide-react';
+import { Calendar, MapPin, Clock, Trophy, User, Users, Star } from 'lucide-react';
 import { MATCHES, TEAMS } from '../constants';
 import { Match, SportType, AgeCategory, Gender } from '../types';
 import { dataService } from '../services/dataService';
@@ -34,10 +34,10 @@ const MatchCard = React.memo(({ match }: { match: Match }) => {
         <div className="flex-1 flex flex-col md:flex-row items-center justify-around gap-8 md:gap-16">
           {/* Team A */}
           <div className="flex flex-col items-center gap-4 group">
-            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center border border-white/10 group-hover:border-brand-neon transition-colors overflow-hidden p-2">
+            <div className={`w-16 h-16 sm:w-20 sm:h-20 bg-white/5 rounded-full flex items-center justify-center border border-white/10 group-hover:border-brand-neon transition-colors overflow-hidden p-2 ${match.winnerId === match.teamAId ? 'ring-2 ring-brand-neon' : ''}`}>
                <img src={dataService.getPublicLogoUrl(teamA?.logo || '')} alt={teamA?.name} loading="lazy" className="w-full h-full object-contain" />
             </div>
-            <h4 className="font-display font-extrabold text-lg uppercase tracking-tighter text-center max-w-[120px]">{teamA?.name}</h4>
+            <h4 className="font-display font-extrabold text-xs sm:text-base md:text-lg uppercase tracking-tighter text-center max-w-[120px]">{teamA?.name}</h4>
           </div>
 
           {/* Score/VS */}
@@ -47,38 +47,44 @@ const MatchCard = React.memo(({ match }: { match: Match }) => {
                <span className="px-2 py-0.5 rounded bg-brand-neon/10 text-[8px] font-bold text-brand-neon uppercase tracking-widest">{match.ageCategory}</span>
              </div>
              {match.status === 'Upcoming' ? (
-                <div className="text-4xl font-display font-black text-white/10 italic select-none">VS</div>
+                <div className="text-2xl sm:text-4xl font-display font-black text-white/10 italic select-none">VS</div>
              ) : (
-                <div className="flex items-center gap-6">
-                  <span className="text-5xl md:text-6xl font-display font-black text-brand-neon">{match.scoreA || '0'}</span>
-                  <span className="text-2xl font-display font-black text-white/20">/</span>
-                  <span className="text-5xl md:text-6xl font-display font-black text-brand-neon">{match.scoreB || '0'}</span>
+                <div className="flex flex-col items-center gap-2">
+                   <div className="text-2xl sm:text-3xl md:text-5xl font-display font-black text-brand-neon italic whitespace-nowrap text-center">
+                     {match.score || `${match.scoreA || '0'} - ${match.scoreB || '0'}`}
+                   </div>
+                   {match.motm && (
+                     <div className="flex items-center gap-1.5 px-3 py-1 bg-yellow-500/10 rounded-full border border-yellow-500/20">
+                       <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
+                       <span className="text-[10px] font-bold uppercase tracking-tight text-yellow-500">{match.motm}</span>
+                     </div>
+                   )}
                 </div>
              )}
           </div>
 
           {/* Team B */}
           <div className="flex flex-col items-center gap-4 group">
-            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center border border-white/10 group-hover:border-brand-neon transition-colors overflow-hidden p-2">
+            <div className={`w-16 h-16 sm:w-20 sm:h-20 bg-white/5 rounded-full flex items-center justify-center border border-white/10 group-hover:border-brand-neon transition-colors overflow-hidden p-2 ${match.winnerId === match.teamBId ? 'ring-2 ring-brand-neon' : ''}`}>
                <img src={dataService.getPublicLogoUrl(teamB?.logo || '')} alt={teamB?.name} loading="lazy" className="w-full h-full object-contain" />
             </div>
-            <h4 className="font-display font-extrabold text-lg uppercase tracking-tighter text-center max-w-[120px]">{teamB?.name}</h4>
+            <h4 className="font-display font-extrabold text-xs sm:text-base md:text-lg uppercase tracking-tighter text-center max-w-[120px]">{teamB?.name}</h4>
           </div>
         </div>
 
         {/* Match Info */}
-        <div className="lg:border-l border-white/10 lg:pl-10 space-y-4 text-sm text-white/60">
+        <div className="lg:border-l border-white/10 lg:pl-10 space-y-4 text-xs sm:text-sm text-white/60">
            <div className="flex items-center gap-3">
-             <Calendar className="w-4 h-4 text-brand-neon" />
+             <Calendar className="w-4 h-4 text-brand-neon focus-none shadow-none" />
              {match.date}
            </div>
            <div className="flex items-center gap-3">
-             <Clock className="w-4 h-4 text-brand-neon" />
+             <Clock className="w-4 h-4 text-brand-neon focus-none shadow-none" />
              {match.time}
            </div>
            <div className="flex items-center gap-3">
-             <MapPin className="w-4 h-4 text-brand-neon" />
-             {match.venue}
+             <MapPin className="w-4 h-4 text-brand-neon focus-none shadow-none" />
+             <span className="truncate max-w-[150px]">{match.venue}</span>
            </div>
            {match.result && (
              <div className="pt-2 flex items-center gap-2 text-green-400 font-bold">

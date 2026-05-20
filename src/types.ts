@@ -60,6 +60,9 @@ export interface Match {
   result?: string;
   scoreA?: string;
   scoreB?: string;
+  score?: string;
+  winnerId?: string;
+  motm?: string;
 }
 
 export interface Notice {

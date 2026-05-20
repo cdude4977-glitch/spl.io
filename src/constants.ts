@@ -259,47 +259,57 @@ export const PLAYERS: Player[] = [
 ];
 
 export const MATCHES: Match[] = [
-  // Cricket Morning
-  { id: 'cm1', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-1', teamBId: 'c-u13-b-3', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  { id: 'cm2', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-5', teamBId: 'c-u13-b-2', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  { id: 'cm3', sport: 'Cricket', ageCategory: 'U11', gender: 'Boys', teamAId: 'c-u11-b-1', teamBId: 'c-u11-b-5', time: '07:00 - 07:30 AM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  { id: 'cm4', sport: 'Cricket', ageCategory: 'U11', gender: 'Boys', teamAId: 'c-u11-b-1', teamBId: 'c-u11-b-3', time: '07:30 - 08:00 AM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  // Cricket Evening
-  { id: 'cm5', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-1', teamBId: 'c-u19-b-3', time: '04:00 - 04:30 PM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  { id: 'cm6', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-5', teamBId: 'c-u19-b-1', time: '04:30 - 05:00 PM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  { id: 'cm7', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-1', teamBId: 'c-u15-b-4', time: '05:00 - 05:30 PM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  { id: 'cm8', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-2', teamBId: 'c-u15-b-3', time: '05:30 - 06:00 PM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  // --- CRICKET 20 MAY (WED) ---
+  { id: 'c-u13-wed-1', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-1', teamBId: 'c-u13-b-3', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Completed', score: 'Hurricanes won by 1 wicket', winnerId: 'c-u13-b-1', motm: 'Sahi Singh (10 runs, 1 wkt)' },
+  { id: 'c-u13-wed-2', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-5', teamBId: 'c-u13-b-2', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Completed', score: 'Tornados won by 6 wickets', winnerId: 'c-u13-b-2', motm: 'Harsit Jha (14 runs, 1 wkt)' },
+  { id: 'c-u11-wed-1', sport: 'Cricket', ageCategory: 'U11', gender: 'Boys', teamAId: 'c-u11-b-1', teamBId: 'c-u11-b-5', time: '07:00 - 07:30 AM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Completed', score: 'Thunders won by 20 runs', winnerId: 'c-u11-b-5', motm: 'Ahsan Ul Huq (15 runs, 1 wkt)' },
+  { id: 'c-u11-wed-2', sport: 'Cricket', ageCategory: 'U11', gender: 'Boys', teamAId: 'c-u11-b-1', teamBId: 'c-u11-b-3', time: '07:30 - 08:00 AM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Completed', score: 'Hurricanes won by 16 runs', winnerId: 'c-u11-b-1', motm: 'Devansh (16 runs, 1 wkt)' },
+  // Evening
+  { id: 'c-u19-wed-1', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-1', teamBId: 'c-u19-b-3', time: '04:00 - 04:30 PM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u19-wed-2', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-1', teamBId: 'c-u19-b-5', time: '04:30 - 05:00 PM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u15-wed-1', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-1', teamBId: 'c-u15-b-4', time: '05:00 - 05:30 PM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u15-wed-2', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-2', teamBId: 'c-u15-b-3', time: '05:30 - 06:00 PM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
 
-  // Basketball Court 1 (U15)
-  { id: 'bm1', sport: 'Basketball', ageCategory: 'U15', gender: 'Boys', teamAId: 'b-u15-b-3', teamBId: 'b-u15-b-1', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Court 1', status: 'Upcoming' },
-  { id: 'bm2', sport: 'Basketball', ageCategory: 'U15', gender: 'Boys', teamAId: 'b-u15-b-5', teamBId: 'b-u15-b-2', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Court 1', status: 'Upcoming' },
-  { id: 'bm3', sport: 'Basketball', ageCategory: 'U15', gender: 'Boys', teamAId: 'b-u15-b-2', teamBId: 'b-u15-b-1', time: '07:00 - 07:30 AM', date: '20 May 2026', venue: 'Court 1', status: 'Upcoming' },
-  { id: 'bm4', sport: 'Basketball', ageCategory: 'U15', gender: 'Boys', teamAId: 'b-u15-b-3', teamBId: 'b-u15-b-5', time: '07:30 - 08:00 AM', date: '20 May 2026', venue: 'Court 1', status: 'Upcoming' },
-  // Basketball Court 2 (U11/U13 Girls)
-  { id: 'bm5', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-3', teamBId: 'b-u11-g-1', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Court 2', status: 'Upcoming' },
-  { id: 'bm6', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-5', teamBId: 'b-u11-g-2', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Court 2', status: 'Upcoming' },
-  { id: 'bm7', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-2', teamBId: 'b-u11-g-1', time: '07:00 - 07:30 AM', date: '20 May 2026', venue: 'Court 2', status: 'Upcoming' },
-  { id: 'bm8', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-3', teamBId: 'b-u11-g-5', time: '07:30 - 08:00 AM', date: '20 May 2026', venue: 'Court 2', status: 'Upcoming' },
-  // Basketball Court 3 (U11/U13 Boys)
-  { id: 'bm9', sport: 'Basketball', ageCategory: 'U13', gender: 'Boys', teamAId: 'b-u13-b-3', teamBId: 'b-u13-b-1', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Court 3', status: 'Upcoming' },
-  { id: 'bm10', sport: 'Basketball', ageCategory: 'U13', gender: 'Boys', teamAId: 'b-u13-b-5', teamBId: 'b-u13-b-2', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Court 3', status: 'Upcoming' },
-  { id: 'bm11', sport: 'Basketball', ageCategory: 'U13', gender: 'Boys', teamAId: 'b-u13-b-2', teamBId: 'b-u13-b-1', time: '07:00 - 07:30 AM', date: '20 May 2026', venue: 'Court 3', status: 'Upcoming' },
-  { id: 'bm12', sport: 'Basketball', ageCategory: 'U13', gender: 'Boys', teamAId: 'b-u13-b-3', teamBId: 'b-u13-b-5', time: '07:30 - 08:00 AM', date: '20 May 2026', venue: 'Court 3', status: 'Upcoming' },
+  // --- CRICKET 21 MAY (THUR) ---
+  { id: 'c-u13-thu-1', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-1', teamBId: 'c-u13-b-2', time: '06:00 - 06:30 AM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u13-thu-2', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-5', teamBId: 'c-u13-b-3', time: '06:30 - 07:00 AM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u13-thu-3', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-6', teamBId: 'c-u13-b-4', time: '07:00 - 07:30 AM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u13-thu-4', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-7', teamBId: 'c-u13-b-8', time: '07:30 - 08:00 AM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u11-thu-1', sport: 'Cricket', ageCategory: 'U11', gender: 'Boys', teamAId: 'c-u11-b-5', teamBId: 'c-u11-b-3', time: '08:00 - 08:30 AM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u19-thu-1', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-5', teamBId: 'c-u19-b-3', time: '04:00 - 04:30 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u19-thu-2', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-5', teamBId: 'c-u19-b-1', time: '04:30 - 05:00 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u15-thu-1', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-1', teamBId: 'c-u15-b-2', time: '05:00 - 05:30 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u15-thu-2', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-4', teamBId: 'c-u15-b-3', time: '05:30 - 06:00 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
 
-  // Football U19
-  { id: 'fm1', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-4', teamBId: 'f-u19-b-2', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Upcoming' },
-  { id: 'fm2', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-4', teamBId: 'f-u19-b-1', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Upcoming' },
-  { id: 'fm3', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-1', teamBId: 'f-u19-b-5', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Ground 2', status: 'Upcoming' },
-  { id: 'fm4', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-4', teamBId: 'f-u19-b-3', time: '07:00 - 07:30 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Upcoming' },
-  { id: 'fm5', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-2', teamBId: 'f-u19-b-3', time: '07:00 - 07:30 AM', date: '20 May 2026', venue: 'Ground 2', status: 'Upcoming' },
-  { id: 'fm6', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-5', teamBId: 'f-u19-b-3', time: '07:30 - 08:00 AM', date: '20 May 2026', venue: 'Ground 2', status: 'Upcoming' },
+  // --- CRICKET 22 MAY (FRI) ---
+  { id: 'c-u13-fri-1', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-1', teamBId: 'c-u13-b-5', time: '06:00 - 06:30 AM', date: '22 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u13-fri-2', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-2', teamBId: 'c-u13-b-3', time: '06:30 - 07:00 AM', date: '22 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u13-fri-3', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-6', teamBId: 'c-u13-b-7', time: '07:00 - 07:30 AM', date: '22 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u13-fri-4', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-4', teamBId: 'c-u13-b-8', time: '07:30 - 08:00 AM', date: '22 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u11-final', sport: 'Cricket', ageCategory: 'U11', gender: 'Boys', teamAId: 'TBD', teamBId: 'TBD', time: '08:00 - 08:30 AM', date: '22 May 2026', venue: 'Cricket Ground', status: 'Upcoming', score: 'FINAL' },
+  { id: 'c-u19-fri-1', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-3', teamBId: 'c-u19-b-5', time: '04:00 - 04:30 PM', date: '22 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u19-fri-2', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-3', teamBId: 'c-u19-b-1', time: '04:30 - 05:00 PM', date: '22 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u15-fri-1', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-1', teamBId: 'c-u15-b-3', time: '05:00 - 05:30 PM', date: '22 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u15-fri-2', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-2', teamBId: 'c-u15-b-4', time: '05:30 - 06:00 PM', date: '22 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+
+  // --- CRICKET 23 MAY (SAT) ---
+  { id: 'c-u13-sat-1', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-6', teamBId: 'c-u13-b-8', time: '06:00 - 06:30 AM', date: '23 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u13-sat-2', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-4', teamBId: 'c-u13-b-7', time: '06:30 - 07:00 AM', date: '23 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u13-final', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'TBD', teamBId: 'TBD', time: '07:00 - 07:30 AM', date: '23 May 2026', venue: 'Cricket Ground', status: 'Upcoming', score: 'FINAL' },
+  { id: 'c-u15-final', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'TBD', teamBId: 'TBD', time: '07:45 - 08:30 AM', date: '23 May 2026', venue: 'Cricket Ground', status: 'Upcoming', score: 'FINAL' },
+
+  // --- OTHER SPORTS (Existing results kept) ---
+  { id: 'fm1', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-4', teamBId: 'f-u19-b-2', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Completed', winnerId: 'f-u19-b-2', score: 'United won 2-1' },
+  { id: 'fm2', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-4', teamBId: 'f-u19-b-1', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Completed', winnerId: 'f-u19-b-4', score: 'Athletico won 3-2' },
+  { id: 'bm1', sport: 'Basketball', ageCategory: 'U15', gender: 'Boys', teamAId: 'b-u15-b-3', teamBId: 'b-u15-b-1', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Court 1', status: 'Completed', winnerId: 'b-u15-b-1', score: 'Warriors won' },
+  { id: 'bm5', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-3', teamBId: 'b-u11-g-1', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Court 2', status: 'Completed', winnerId: 'b-u11-g-3', score: 'Pacers won' },
+  { id: 'bm6', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-5', teamBId: 'b-u11-g-2', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Court 2', status: 'Completed', winnerId: 'b-u11-g-5', score: 'Swishers won' },
+  { id: 'bm7', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-3', teamBId: 'b-u11-g-5', time: '07:00 - 07:30 AM', date: '21 May 2026', venue: 'Court 2', status: 'Completed', winnerId: 'b-u11-g-3', score: 'Pacers won' },
+  { id: 'bm8', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-1', teamBId: 'b-u11-g-2', time: '07:30 - 08:00 AM', date: '21 May 2026', venue: 'Court 2', status: 'Completed', winnerId: 'b-u11-g-1', score: 'Warriors won' },
+  
   // Football U15
-  { id: 'fm7', sport: 'Football', ageCategory: 'U15', gender: 'Boys', teamAId: 'f-u15-b-4', teamBId: 'f-u15-b-2', time: '08:00 - 08:30 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Upcoming' },
-  { id: 'fm8', sport: 'Football', ageCategory: 'U15', gender: 'Boys', teamAId: 'f-u15-b-1', teamBId: 'f-u15-b-5', time: '08:00 - 08:30 AM', date: '20 May 2026', venue: 'Ground 2', status: 'Upcoming' },
-  { id: 'fm9', sport: 'Football', ageCategory: 'U15', gender: 'Boys', teamAId: 'f-u15-b-4', teamBId: 'f-u15-b-1', time: '08:30 - 09:00 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Upcoming' },
-  { id: 'fm10', sport: 'Football', ageCategory: 'U15', gender: 'Boys', teamAId: 'f-u15-b-2', teamBId: 'f-u15-b-3', time: '08:30 - 09:00 AM', date: '20 May 2026', venue: 'Ground 2', status: 'Upcoming' },
-  { id: 'fm11', sport: 'Football', ageCategory: 'U15', gender: 'Boys', teamAId: 'f-u15-b-4', teamBId: 'f-u15-b-3', time: '09:00 - 09:30 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Upcoming' },
-  { id: 'fm12', sport: 'Football', ageCategory: 'U15', gender: 'Boys', teamAId: 'f-u15-b-5', teamBId: 'f-u15-b-3', time: '09:00 - 09:30 AM', date: '20 May 2026', venue: 'Ground 2', status: 'Upcoming' },
+  { id: 'fm7', sport: 'Football', ageCategory: 'U15', gender: 'Boys', teamAId: 'f-u15-b-5', teamBId: 'f-u15-b-2', time: '08:00 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Completed', winnerId: 'f-u15-b-5', score: 'Real Shalom won 4-2' },
+  { id: 'fm8', sport: 'Football', ageCategory: 'U15', gender: 'Boys', teamAId: 'f-u15-b-1', teamBId: 'f-u15-b-4', time: '09:00 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Completed', score: 'Draw 1-1' },
 ];
 
 export const NOTICES: Notice[] = [
