@@ -300,8 +300,8 @@ export const MATCHES: Match[] = [
   { id: 'c-u15-final', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'TBD', teamBId: 'TBD', time: '07:45 - 08:30 AM', date: '23 May 2026', venue: 'Cricket Ground', status: 'Upcoming', score: 'FINAL' },
 
   // --- OTHER SPORTS (Existing results kept) ---
-  { id: 'fm1', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-4', teamBId: 'f-u19-b-2', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Completed', winnerId: 'f-u19-b-2', score: 'United won 2-1' },
-  { id: 'fm2', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-4', teamBId: 'f-u19-b-1', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Completed', winnerId: 'f-u19-b-4', score: 'Athletico won 3-2' },
+  { id: 'fm1', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-4', teamBId: 'f-u19-b-2', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Completed', winnerId: 'f-u19-b-2', score: 'United won 3-2' },
+  { id: 'fm2', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-4', teamBId: 'f-u19-b-1', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Completed', winnerId: 'f-u19-b-4', score: 'Athletico won 3-1' },
   { id: 'bm1', sport: 'Basketball', ageCategory: 'U15', gender: 'Boys', teamAId: 'b-u15-b-3', teamBId: 'b-u15-b-1', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Court 1', status: 'Completed', winnerId: 'b-u15-b-1', score: 'Warriors won' },
   { id: 'bm5', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-3', teamBId: 'b-u11-g-1', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Court 2', status: 'Completed', winnerId: 'b-u11-g-3', score: 'Pacers won' },
   { id: 'bm6', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-5', teamBId: 'b-u11-g-2', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Court 2', status: 'Completed', winnerId: 'b-u11-g-5', score: 'Swishers won' },

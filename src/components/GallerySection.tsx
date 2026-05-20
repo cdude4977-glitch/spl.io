@@ -6,6 +6,7 @@ const GALLERY_IMAGES = [
   { url: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/GALLERY/WhatsApp%20Image%202026-04-04%20at%2019.22.04.jpeg', title: 'Match Day', sport: 'Football' },
   { url: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/GALLERY/WhatsApp%20Image%202026-05-18%20at%2023.58.56.jpeg', title: 'MVP Moment', sport: 'Football' },
   { url: 'https://content3.jdmagicbox.com/v2/comp/gurgaon/52/011p89152/catalogue/shalom-hills-international-school-sushant-lok-phase-1-gurgaon-cbse-schools-ep3v8xdyg0.jpg', title: 'Stadium View', sport: 'Basketball' },
+  { url: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-20%20at%2021.17.26.jpeg', title: 'Award Ceremony', sport: 'Football' },
 ];
 
 export default function GallerySection() {
