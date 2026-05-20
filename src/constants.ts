@@ -18,7 +18,7 @@ const generateTeams = (): Team[] => {
       { name: 'Shalom Stormers', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.35%20(2).jpeg', color: '#22c55e' },
       { name: 'Shalom Lightning', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.35%20(1).jpeg', color: '#06b6d4' },
       { name: 'Shalom Thunders', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.35.jpeg', color: '#15803d' },
-      { name: 'Shalom Super Kings', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.36%20(1).jpeg', color: '#facc15' },
+      { name: 'Shalom Kings', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.36%20(1).jpeg', color: '#facc15' },
       { name: 'Shalom Titans', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-19%20at%2016.37.23%20(2).jpeg', color: '#1e1b4b' },
       { name: 'Shalom Rangers', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-19%20at%2016.37.23%20(1).jpeg', color: '#b91c1c' }
     ],
@@ -33,8 +33,9 @@ const generateTeams = (): Team[] => {
       { name: 'Shalom Hills Warriors', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.25.02%20(1).jpeg', color: '#1d4ed8' },
       { name: 'Shalom Hills Sonics', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.25.02.jpeg', color: '#2563eb' },
       { name: 'Shalom Hills Pacers', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.25.01%20(1).jpeg', color: '#fbbf24' },
-      { name: 'Shalom Hills Rovers', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.25.01.jpeg', color: '#4338ca' },
-      { name: 'Shalom Hills Swishers', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-19%20at%2019.08.23.jpeg', color: '#8b5cf6' }
+      { name: 'Shalom Hills Thunder', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.35.jpeg', color: '#4338ca' },
+      { name: 'Shalom Hills Swishers', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-19%20at%2019.08.23.jpeg', color: '#8b5cf6' },
+      { name: 'Shalom Hills Spurs', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.41%20(3).jpeg', color: '#1e3a8a' }
     ]
   };
 
@@ -124,15 +125,15 @@ const generateTeams = (): Team[] => {
   // Cricket U11/U13 Boys
   const c_u11_b_overrides: Record<string, Partial<Team>> = {
     'c-u11-b-1': { played: 2, wins: 1, losses: 1, draws: 0, points: 5 }, // Hurricanes
-    'c-u11-b-2': { played: 1, wins: 1, losses: 0, draws: 0, points: 5 }, // Thunders
-    'c-u11-b-4': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Stormers
+    'c-u11-b-5': { played: 1, wins: 1, losses: 0, draws: 0, points: 5 }, // Thunders
+    'c-u11-b-3': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Stormers
   };
 
   const c_u13_b_overrides: Record<string, Partial<Team>> = {
     'c-u13-b-1': { played: 1, wins: 1, losses: 0, draws: 0, points: 5 }, // Hurricanes
-    'c-u13-b-3': { played: 1, wins: 1, losses: 0, draws: 0, points: 5 }, // Tornados
-    'c-u13-b-2': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Thunders
-    'c-u13-b-4': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Stormers
+    'c-u13-b-2': { played: 1, wins: 1, losses: 0, draws: 0, points: 5 }, // Tornados
+    'c-u13-b-5': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Thunders
+    'c-u13-b-3': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Stormers
   };
 
   teams.forEach(team => {
@@ -271,10 +272,10 @@ export const MATCHES: Match[] = [
   { id: 'c-u15-wed-2', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-2', teamBId: 'c-u15-b-3', time: '05:30 - 06:00 PM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
 
   // --- CRICKET 21 MAY (THUR) ---
-  { id: 'c-u13-thu-1', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-1', teamBId: 'c-u13-b-2', time: '06:00 - 06:30 AM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  { id: 'c-u13-thu-2', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-5', teamBId: 'c-u13-b-3', time: '06:30 - 07:00 AM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  { id: 'c-u13-thu-3', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-6', teamBId: 'c-u13-b-4', time: '07:00 - 07:30 AM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  { id: 'c-u13-thu-4', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-7', teamBId: 'c-u13-b-8', time: '07:30 - 08:00 AM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u13-thu-1', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-1', teamBId: 'c-u13-b-2', time: '06:00 - 06:30 AM', date: '21 May 2026', venue: 'Cricket Ground (Pool A)', status: 'Upcoming' },
+  { id: 'c-u13-thu-2', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-5', teamBId: 'c-u13-b-3', time: '06:30 - 07:00 AM', date: '21 May 2026', venue: 'Cricket Ground (Pool A)', status: 'Upcoming' },
+  { id: 'c-u13-thu-3', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-6', teamBId: 'c-u13-b-4', time: '07:00 - 07:30 AM', date: '21 May 2026', venue: 'Cricket Ground (Pool B)', status: 'Upcoming' },
+  { id: 'c-u13-thu-4', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-7', teamBId: 'c-u13-b-8', time: '07:30 - 08:00 AM', date: '21 May 2026', venue: 'Cricket Ground (Pool B)', status: 'Upcoming' },
   { id: 'c-u11-thu-1', sport: 'Cricket', ageCategory: 'U11', gender: 'Boys', teamAId: 'c-u11-b-5', teamBId: 'c-u11-b-3', time: '08:00 - 08:30 AM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
   { id: 'c-u19-thu-1', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-5', teamBId: 'c-u19-b-3', time: '04:00 - 04:30 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
   { id: 'c-u19-thu-2', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-5', teamBId: 'c-u19-b-1', time: '04:30 - 05:00 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
@@ -306,6 +307,29 @@ export const MATCHES: Match[] = [
   { id: 'bm6', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-5', teamBId: 'b-u11-g-2', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Court 2', status: 'Completed', winnerId: 'b-u11-g-5', score: 'Swishers won' },
   { id: 'bm7', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-3', teamBId: 'b-u11-g-5', time: '07:00 - 07:30 AM', date: '21 May 2026', venue: 'Court 2', status: 'Completed', winnerId: 'b-u11-g-3', score: 'Pacers won' },
   { id: 'bm8', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-1', teamBId: 'b-u11-g-2', time: '07:30 - 08:00 AM', date: '21 May 2026', venue: 'Court 2', status: 'Completed', winnerId: 'b-u11-g-1', score: 'Warriors won' },
+
+  // --- BASKETBALL 21 MAY (THUR) ---
+  // Court 1 (U18/U19 Boys)
+  { id: 'b-u19-thu-1', sport: 'Basketball', ageCategory: 'U19', gender: 'Boys', teamAId: 'b-u19-b-3', teamBId: 'b-u19-b-5', time: '06:00 - 06:30 AM', date: '21 May 2026', venue: 'Court 1', status: 'Upcoming' },
+  { id: 'b-u19-thu-2', sport: 'Basketball', ageCategory: 'U19', gender: 'Boys', teamAId: 'b-u19-b-1', teamBId: 'b-u19-b-5', time: '06:30 - 07:00 AM', date: '21 May 2026', venue: 'Court 1', status: 'Upcoming' },
+  { id: 'b-u19-thu-3', sport: 'Basketball', ageCategory: 'U19', gender: 'Boys', teamAId: 'b-u19-b-3', teamBId: 'b-u19-b-1', time: '07:00 - 07:30 AM', date: '21 May 2026', venue: 'Court 1', status: 'Upcoming' },
+  { id: 'b-u19-thu-4', sport: 'Basketball', ageCategory: 'U19', gender: 'Boys', teamAId: 'b-u19-b-4', teamBId: 'b-u19-b-6', time: '07:30 - 08:00 AM', date: '21 May 2026', venue: 'Court 1', status: 'Upcoming' },
+  { id: 'b-u19-thu-5', sport: 'Basketball', ageCategory: 'U19', gender: 'Boys', teamAId: 'b-u19-b-2', teamBId: 'b-u19-b-4', time: '08:00 - 08:30 AM', date: '21 May 2026', venue: 'Court 1', status: 'Upcoming' },
+  { id: 'b-u19-thu-6', sport: 'Basketball', ageCategory: 'U19', gender: 'Boys', teamAId: 'b-u19-b-6', teamBId: 'b-u19-b-2', time: '08:30 - 09:00 AM', date: '21 May 2026', venue: 'Court 1', status: 'Upcoming' },
+  
+  // Court 2 (U15/U18 Girls -> mapped to U15 Girls)
+  { id: 'b-u15g-thu-1', sport: 'Basketball', ageCategory: 'U15', gender: 'Girls', teamAId: 'b-u15-g-3', teamBId: 'b-u15-g-1', time: '06:00 - 06:30 AM', date: '21 May 2026', venue: 'Court 2', status: 'Upcoming' },
+  { id: 'b-u15g-thu-2', sport: 'Basketball', ageCategory: 'U15', gender: 'Girls', teamAId: 'b-u15-g-5', teamBId: 'b-u15-g-2', time: '06:30 - 07:00 AM', date: '21 May 2026', venue: 'Court 2', status: 'Upcoming' },
+  { id: 'b-u15g-thu-3', sport: 'Basketball', ageCategory: 'U15', gender: 'Girls', teamAId: 'b-u15-g-2', teamBId: 'b-u15-g-1', time: '07:00 - 07:30 AM', date: '21 May 2026', venue: 'Court 2', status: 'Upcoming' },
+  { id: 'b-u15g-thu-4', sport: 'Basketball', ageCategory: 'U15', gender: 'Girls', teamAId: 'b-u15-g-3', teamBId: 'b-u15-g-5', time: '07:30 - 08:00 AM', date: '21 May 2026', venue: 'Court 2', status: 'Upcoming' },
+
+  // Court 3 (Mixed)
+  { id: 'b-u11g-thu-1', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-1', teamBId: 'b-u11-g-5', time: '06:00 - 06:30 AM', date: '21 May 2026', venue: 'Court 3', status: 'Upcoming' },
+  { id: 'b-u11g-thu-2', sport: 'Basketball', ageCategory: 'U11', gender: 'Girls', teamAId: 'b-u11-g-5', teamBId: 'b-u11-g-3', time: '06:30 - 07:00 AM', date: '21 May 2026', venue: 'Court 3', status: 'Upcoming' },
+  { id: 'b-u15b-thu-1', sport: 'Basketball', ageCategory: 'U15', gender: 'Boys', teamAId: 'b-u15-b-1', teamBId: 'b-u15-b-2', time: '07:00 - 07:30 AM', date: '21 May 2026', venue: 'Court 3', status: 'Upcoming' },
+  { id: 'b-u15b-thu-2', sport: 'Basketball', ageCategory: 'U15', gender: 'Boys', teamAId: 'b-u15-b-2', teamBId: 'b-u15-b-3', time: '07:30 - 08:00 AM', date: '21 May 2026', venue: 'Court 3', status: 'Upcoming' },
+  { id: 'b-u11b-thu-1', sport: 'Basketball', ageCategory: 'U11', gender: 'Boys', teamAId: 'b-u11-b-1', teamBId: 'b-u11-b-5', time: '08:00 - 08:30 AM', date: '21 May 2026', venue: 'Court 3', status: 'Upcoming' },
+  { id: 'b-u11b-thu-2', sport: 'Basketball', ageCategory: 'U11', gender: 'Boys', teamAId: 'b-u11-b-2', teamBId: 'b-u11-b-3', time: '08:30 - 09:00 AM', date: '21 May 2026', venue: 'Court 3', status: 'Upcoming' },
   
   // Football U15
   { id: 'fm7', sport: 'Football', ageCategory: 'U15', gender: 'Boys', teamAId: 'f-u15-b-5', teamBId: 'f-u15-b-2', time: '08:00 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Completed', winnerId: 'f-u15-b-5', score: 'Real Shalom won 4-2' },
