@@ -218,16 +218,22 @@ export default function LeaderboardSection() {
 
             <div className="glass-card p-6 space-y-4">
                <h4 className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-brand-blue">
-                 <Star className="w-4 h-4" /> Top Scorers
+                 <Star className="w-4 h-4" /> Top Performers
                </h4>
-               <div className="space-y-4">
+               <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
                  {[
-                   { name: 'Ahsan Ul Huq', score: 'MOTM (15 runs, 1 wkt)', sport: 'Cricket U11' },
-                   { name: 'Devansh', score: 'MOTM (16 runs, 1 wkt)', sport: 'Cricket U11' },
-                   { name: 'Sahi Singh', score: 'MOTM (10 runs, 1 wkt)', sport: 'Cricket U13' },
-                   { name: 'Harsit Jha', score: 'MOTM (14 runs, 1 wkt)', sport: 'Cricket U13' },
-                   { name: 'Arunodhay Singh', score: '18pts', sport: 'Basketball' },
-                   { name: 'Shresth Tiwari', score: '6 goals', sport: 'Football' }
+                   { name: 'Naksh Yadav', score: '7 goals', sport: 'Football U15' },
+                   { name: 'Moksh', score: '51 runs', sport: 'Cricket U19' },
+                   { name: 'Harish', score: '43 runs', sport: 'Cricket U15' },
+                   { name: 'Rudraksh', score: '40 runs', sport: 'Cricket U13' },
+                   { name: 'Harshit Jha', score: '39 runs', sport: 'Cricket U13' },
+                   { name: 'Gaurv Yadav', score: '26 runs', sport: 'Cricket U19' },
+                   { name: 'Dhruv Yadav', score: '25 runs', sport: 'Cricket U13' },
+                   { name: 'Tegh Singh', score: '25 runs, 1 wkt', sport: 'Cricket U13' },
+                   { name: 'Aarav Mane', score: '22 runs', sport: 'Cricket U15' },
+                   { name: 'Evaan', score: '3 wickets', sport: 'Cricket U11' },
+                   { name: 'Devansh', score: '16 runs, 1 wkt', sport: 'Cricket U11' },
+                   { name: 'Ahsan Ul Huq', score: '15 runs, 1 wkt', sport: 'Cricket U11' }
                  ].map((player, idx) => (
                    <div key={idx} className="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
                       <div>

@@ -27,7 +27,8 @@ const generateTeams = (): Team[] => {
       { name: 'Shalom United', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.41%20(4).jpeg', color: '#ef4444' },
       { name: 'Shalom Spurs', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.41%20(3).jpeg', color: '#1e3a8a' },
       { name: 'Shalom Athletico', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.40%20(3).jpeg', color: '#dc2626' },
-      { name: 'Real Shalom', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.40%20(2).jpeg', color: '#111827' }
+      { name: 'Real Shalom', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.27.40%20(2).jpeg', color: '#111827' },
+      { name: 'Shalom Blazers', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.32.36%20(1).jpeg', color: '#fb923c' }
     ],
     'Basketball': [
       { name: 'Shalom Hills Warriors', logo: 'https://lnsofwmfvhpzjdwddrhv.supabase.co/storage/v1/object/public/logos/WhatsApp%20Image%202026-05-15%20at%2021.25.02%20(1).jpeg', color: '#1d4ed8' },
@@ -74,76 +75,133 @@ const generateTeams = (): Team[] => {
   
   // Football U15 Boys
   const f_u15_b_overrides: Record<string, Partial<Team>> = {
-    'f-u15-b-5': { played: 1, wins: 1, losses: 0, draws: 0, points: 3, gf: 4, ga: 2, gd: 2 }, // Real Shalom
-    'f-u15-b-3': { played: 2, wins: 1, losses: 1, draws: 0, points: 3, gf: 8, ga: 8, gd: 0 }, // Shalom Spurs
-    'f-u15-b-4': { played: 1, wins: 0, losses: 0, draws: 1, points: 1, gf: 1, ga: 1, gd: 0 }, // Shalom Athletico
-    'f-u15-b-1': { played: 1, wins: 0, losses: 0, draws: 1, points: 1, gf: 1, ga: 1, gd: 0 }, // Shalom City
-    'f-u15-b-2': { played: 1, wins: 0, losses: 1, draws: 0, points: 0, gf: 4, ga: 6, gd: -2 }, // Shalom United (FC Shalom)
+    'f-u15-b-5': { played: 2, wins: 2, losses: 0, draws: 0, points: 6, gf: 8, ga: 2, gd: 6 }, // Real Shalom
+    'f-u15-b-2': { played: 3, wins: 2, losses: 1, draws: 0, points: 6, gf: 11, ga: 9, gd: 2 }, // F.C Shalom (United)
+    'f-u15-b-4': { played: 3, wins: 1, losses: 1, draws: 1, points: 4, gf: 12, ga: 6, gd: 6 }, // Shalom Athletico
+    'f-u15-b-3': { played: 3, wins: 1, losses: 2, draws: 0, points: 3, gf: 10, ga: 17, gd: -7 }, // Shalom Spurs
+    'f-u15-b-1': { played: 3, wins: 0, losses: 2, draws: 1, points: 1, gf: 2, ga: 9, gd: -7 }, // Shalom City
   };
 
   // Football U19 Boys
   const f_u19_b_overrides: Record<string, Partial<Team>> = {
-    'f-u19-b-2': { played: 2, wins: 2, losses: 0, draws: 0, points: 6, gf: 6, ga: 4, gd: 2 }, // Shalom United
-    'f-u19-b-4': { played: 2, wins: 1, losses: 1, draws: 0, points: 3, gf: 5, ga: 4, gd: 1 }, // Shalom Athletico
-    'f-u19-b-5': { played: 2, wins: 1, losses: 1, draws: 0, points: 3, gf: 4, ga: 4, gd: 0 }, // Real Shalom
-    'f-u19-b-1': { played: 2, wins: 1, losses: 1, draws: 0, points: 3, gf: 4, ga: 5, gd: -1 }, // Shalom City
-    'f-u19-b-3': { played: 2, wins: 0, losses: 2, draws: 0, points: 0, gf: 3, ga: 5, gd: -2 }, // Shalom Spurs
+    'f-u19-b-2': { played: 4, wins: 3, losses: 0, draws: 1, points: 10, gf: 11, ga: 6, gd: 5 }, // Shalom United
+    'f-u19-b-4': { played: 4, wins: 2, losses: 1, draws: 1, points: 7, gf: 12, ga: 10, gd: 2 }, // Shalom Athletico
+    'f-u19-b-1': { played: 4, wins: 1, losses: 2, draws: 0, points: 4, gf: 7, ga: 9, gd: -2 }, // Shalom City
+    'f-u19-b-5': { played: 4, wins: 1, losses: 2, draws: 1, points: 4, gf: 8, ga: 11, gd: -3 }, // Real Shalom
+    'f-u19-b-3': { played: 4, wins: 1, losses: 3, draws: 0, points: 3, gf: 9, ga: 11, gd: -2 }, // Shalom Spurs
   };
 
   // Basketball U11/U13 Girls
   const b_u11_u13_g_overrides: Record<string, Partial<Team>> = {
-    'b-u11-g-3': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 }, // Pacers
-    'b-u11-g-1': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 }, // Warriors
-    'b-u11-g-5': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 }, // Swishers
-    'b-u11-g-2': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 }, // Sonics
-    'b-u13-g-3': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 },
-    'b-u13-g-1': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 },
-    'b-u13-g-5': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 },
-    'b-u13-g-2': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 },
+    'b-u11-g-3': { played: 3, wins: 3, losses: 0, draws: 0, points: 6 }, // Pacers
+    'b-u11-g-1': { played: 3, wins: 2, losses: 1, draws: 0, points: 4 }, // Warriors
+    'b-u11-g-2': { played: 3, wins: 2, losses: 1, draws: 0, points: 4 }, // Sonics
+    'b-u11-g-5': { played: 3, wins: 1, losses: 2, draws: 0, points: 2 }, // Swishers
+    'b-u13-g-3': { played: 3, wins: 3, losses: 0, draws: 0, points: 6 },
+    'b-u13-g-1': { played: 3, wins: 2, losses: 1, draws: 0, points: 4 },
+    'b-u13-g-2': { played: 3, wins: 2, losses: 1, draws: 0, points: 4 },
+    'b-u13-g-5': { played: 3, wins: 1, losses: 2, draws: 0, points: 2 },
   };
 
   // Basketball U11/U13 Boys
   const b_u11_u13_b_overrides: Record<string, Partial<Team>> = {
-    'b-u11-b-2': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 }, // Sonics
-    'b-u11-b-3': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 }, // Pacers
-    'b-u11-b-5': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 }, // Swishers
-    'b-u11-b-1': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 }, // Warriors
-    'b-u13-b-2': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 },
-    'b-u13-b-3': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 },
-    'b-u13-b-5': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 },
-    'b-u13-b-1': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 },
+    'b-u11-b-2': { played: 3, wins: 3, losses: 0, draws: 0, points: 6 }, // Sonics
+    'b-u11-b-3': { played: 3, wins: 2, losses: 1, draws: 0, points: 4 }, // Pacers
+    'b-u11-b-1': { played: 3, wins: 1, losses: 2, draws: 0, points: 2 }, // Warriors
+    'b-u11-b-5': { played: 3, wins: 0, losses: 3, draws: 0, points: 0 }, // Swishers
+    'b-u13-b-2': { played: 3, wins: 3, losses: 0, draws: 0, points: 6 },
+    'b-u13-b-3': { played: 3, wins: 2, losses: 1, draws: 0, points: 4 },
+    'b-u13-b-1': { played: 3, wins: 1, losses: 2, draws: 0, points: 2 },
+    'b-u13-b-5': { played: 3, wins: 0, losses: 3, draws: 0, points: 0 },
   };
 
   // Basketball U15 Boys
   const b_u15_b_overrides: Record<string, Partial<Team>> = {
-    'b-u15-b-2': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 }, // Sonics
-    'b-u15-b-5': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 }, // Swishers
-    'b-u15-b-1': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 }, // Warriors
-    'b-u15-b-3': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 }, // Pacers
+    'b-u15-b-2': { played: 3, wins: 3, losses: 0, draws: 0, points: 6 }, // Sonics
+    'b-u15-b-5': { played: 3, wins: 2, losses: 1, draws: 0, points: 4 }, // Swishers
+    'b-u15-b-1': { played: 3, wins: 2, losses: 1, draws: 0, points: 4 }, // Warriors
+    'b-u15-b-3': { played: 3, wins: 0, losses: 3, draws: 0, points: 0 }, // Pacers
   };
 
-  // Cricket U11/U13 Boys
+  // Basketball U15/U18 Girls
+  const b_u15_u18_g_overrides: Record<string, Partial<Team>> = {
+    'b-u15-g-1': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 }, // Warriors
+    'b-u15-g-5': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 }, // Swishers
+    'b-u15-g-2': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 }, // Sonics
+    'b-u15-g-3': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 }, // Pacers
+    'b-u19-g-1': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 }, // Adding U18/U19 girls overrides
+    'b-u19-g-5': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 },
+    'b-u19-g-2': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 },
+    'b-u19-g-3': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 },
+  };
+
+  // Basketball U18 Boys (Mapped to U19)
+  const b_u18_b_overrides: Record<string, Partial<Team>> = {
+    'b-u19-b-5': { played: 2, wins: 2, losses: 0, draws: 0, points: 4 }, // Swishers
+    'b-u19-b-3': { played: 2, wins: 1, losses: 1, draws: 0, points: 2 }, // Pacers
+    'b-u19-b-1': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 }, // Warriors
+    'b-u19-b-4': { played: 2, wins: 1, losses: 0, draws: 0, points: 2 }, // Thunder
+    'b-u19-b-2': { played: 2, wins: 1, losses: 0, draws: 0, points: 2 }, // Sonics
+    'b-u19-b-6': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 }, // Spurs
+  };
+
+  // Cricket U11 Boys
   const c_u11_b_overrides: Record<string, Partial<Team>> = {
-    'c-u11-b-1': { played: 2, wins: 1, losses: 1, draws: 0, points: 5 }, // Hurricanes
-    'c-u11-b-5': { played: 1, wins: 1, losses: 0, draws: 0, points: 5 }, // Thunders
-    'c-u11-b-3': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Stormers
+    'c-u11-b-1': { played: 2, wins: 1, losses: 1, draws: 0, points: 3 }, // Hurricanes
+    'c-u11-b-5': { played: 2, wins: 1, losses: 1, draws: 0, points: 3 }, // Thunders
+    'c-u11-b-3': { played: 2, wins: 1, losses: 1, draws: 0, points: 3 }, // Stormers
   };
 
+  // Cricket U13 Boys
   const c_u13_b_overrides: Record<string, Partial<Team>> = {
-    'c-u13-b-1': { played: 1, wins: 1, losses: 0, draws: 0, points: 5 }, // Hurricanes
-    'c-u13-b-2': { played: 1, wins: 1, losses: 0, draws: 0, points: 5 }, // Tornados
-    'c-u13-b-5': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Thunders
-    'c-u13-b-3': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Stormers
+    'c-u13-b-1': { played: 2, wins: 1, losses: 1, draws: 0, points: 3 }, // Hurricanes
+    'c-u13-b-2': { played: 2, wins: 2, losses: 0, draws: 0, points: 6 }, // Tornados
+    'c-u13-b-5': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 }, // Thunders
+    'c-u13-b-3': { played: 2, wins: 1, losses: 1, draws: 0, points: 3 }, // Stormers
+    'c-u13-b-4': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Lightning
+    'c-u13-b-6': { played: 1, wins: 1, losses: 0, draws: 0, points: 3 }, // Kings
+    'c-u13-b-7': { played: 1, wins: 1, losses: 0, draws: 0, points: 3 }, // Titans
+    'c-u13-b-8': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Rangers
+  };
+
+  // Cricket U15 Boys
+  const c_u15_b_overrides: Record<string, Partial<Team>> = {
+    'c-u15-b-1': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Hurricanes
+    'c-u15-b-3': { played: 1, wins: 0, losses: 1, draws: 0, points: 0 }, // Stormers
+    'c-u15-b-4': { played: 1, wins: 1, losses: 0, draws: 0, points: 3 }, // Lightning
+    'c-u15-b-2': { played: 1, wins: 1, losses: 0, draws: 0, points: 3 }, // Tornados
+  };
+
+  // Cricket U19 Boys
+  const c_u19_b_overrides: Record<string, Partial<Team>> = {
+    'c-u19-b-1': { played: 2, wins: 0, losses: 2, draws: 0, points: 0 }, // Hurricanes
+    'c-u19-b-5': { played: 1, wins: 1, losses: 0, draws: 0, points: 3 }, // Thunders
+    'c-u19-b-3': { played: 1, wins: 1, losses: 0, draws: 0, points: 3 }, // Stormers
+  };
+
+  // Football U13 & Girls
+  const f_u13_g_overrides: Record<string, Partial<Team>> = {
+    'f-u13-b-5': { played: 1, wins: 1, losses: 0, draws: 0, points: 3, gf: 2, ga: 1, gd: 1 }, // Real Shalom
+    'f-u13-b-2': { played: 1, wins: 0, losses: 0, draws: 1, points: 1, gf: 3, ga: 3, gd: 0 }, // Shalom United
+    'f-u13-b-4': { played: 1, wins: 0, losses: 0, draws: 1, points: 1, gf: 4, ga: 4, gd: 0 }, // Shalom Athletico
+    'f-u13-b-3': { played: 1, wins: 0, losses: 0, draws: 1, points: 1, gf: 4, ga: 4, gd: 0 }, // Shalom Spurs
+    'f-u13-b-6': { played: 1, wins: 0, losses: 0, draws: 1, points: 1, gf: 3, ga: 3, gd: 0 }, // Shalom Blazers
+    'f-u13-b-1': { played: 1, wins: 0, losses: 1, draws: 0, points: 0, gf: 1, ga: 2, gd: -1 }, // Shalom City
   };
 
   teams.forEach(team => {
+    if (f_u13_g_overrides[team.id]) Object.assign(team, f_u13_g_overrides[team.id]);
     if (f_u15_b_overrides[team.id]) Object.assign(team, f_u15_b_overrides[team.id]);
     if (f_u19_b_overrides[team.id]) Object.assign(team, f_u19_b_overrides[team.id]);
     if (b_u11_u13_g_overrides[team.id]) Object.assign(team, b_u11_u13_g_overrides[team.id]);
     if (b_u11_u13_b_overrides[team.id]) Object.assign(team, b_u11_u13_b_overrides[team.id]);
     if (b_u15_b_overrides[team.id]) Object.assign(team, b_u15_b_overrides[team.id]);
+    if (b_u15_u18_g_overrides[team.id]) Object.assign(team, b_u15_u18_g_overrides[team.id]);
+    if (b_u18_b_overrides[team.id]) Object.assign(team, b_u18_b_overrides[team.id]);
     if (c_u11_b_overrides[team.id]) Object.assign(team, c_u11_b_overrides[team.id]);
     if (c_u13_b_overrides[team.id]) Object.assign(team, c_u13_b_overrides[team.id]);
+    if (c_u15_b_overrides[team.id]) Object.assign(team, c_u15_b_overrides[team.id]);
+    if (c_u19_b_overrides[team.id]) Object.assign(team, c_u19_b_overrides[team.id]);
   });
 
   return teams;
@@ -272,15 +330,15 @@ export const MATCHES: Match[] = [
   { id: 'c-u15-wed-2', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-2', teamBId: 'c-u15-b-3', time: '05:30 - 06:00 PM', date: '20 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
 
   // --- CRICKET 21 MAY (THUR) ---
-  { id: 'c-u13-thu-1', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-1', teamBId: 'c-u13-b-2', time: '06:00 - 06:30 AM', date: '21 May 2026', venue: 'Cricket Ground (Pool A)', status: 'Upcoming' },
-  { id: 'c-u13-thu-2', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-5', teamBId: 'c-u13-b-3', time: '06:30 - 07:00 AM', date: '21 May 2026', venue: 'Cricket Ground (Pool A)', status: 'Upcoming' },
-  { id: 'c-u13-thu-3', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-6', teamBId: 'c-u13-b-4', time: '07:00 - 07:30 AM', date: '21 May 2026', venue: 'Cricket Ground (Pool B)', status: 'Upcoming' },
-  { id: 'c-u13-thu-4', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-7', teamBId: 'c-u13-b-8', time: '07:30 - 08:00 AM', date: '21 May 2026', venue: 'Cricket Ground (Pool B)', status: 'Upcoming' },
-  { id: 'c-u11-thu-1', sport: 'Cricket', ageCategory: 'U11', gender: 'Boys', teamAId: 'c-u11-b-5', teamBId: 'c-u11-b-3', time: '08:00 - 08:30 AM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  { id: 'c-u19-thu-1', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-5', teamBId: 'c-u19-b-3', time: '04:00 - 04:30 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  { id: 'c-u19-thu-2', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-5', teamBId: 'c-u19-b-1', time: '04:30 - 05:00 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  { id: 'c-u15-thu-1', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-1', teamBId: 'c-u15-b-2', time: '05:00 - 05:30 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
-  { id: 'c-u15-thu-2', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-4', teamBId: 'c-u15-b-3', time: '05:30 - 06:00 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
+  { id: 'c-u13-thu-1', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-1', teamBId: 'c-u13-b-2', time: '06:00 - 06:30 AM', date: '21 May 2026', venue: 'Cricket Ground (Pool A)', status: 'Completed', score: 'Tornados won by 7 wickets', winnerId: 'c-u13-b-2', motm: 'Harshit Jha (39 runs)' },
+  { id: 'c-u13-thu-2', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-5', teamBId: 'c-u13-b-3', time: '06:30 - 07:00 AM', date: '21 May 2026', venue: 'Cricket Ground (Pool A)', status: 'Completed', score: 'Stormers won by 4 wickets', winnerId: 'c-u13-b-3', motm: 'Dhruv Yadav (25 runs)' },
+  { id: 'c-u13-thu-3', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-6', teamBId: 'c-u13-b-4', time: '07:00 - 07:30 AM', date: '21 May 2026', venue: 'Cricket Ground (Pool B)', status: 'Completed', score: 'Kings won by 5 wickets', winnerId: 'c-u13-b-6', motm: 'Tegh Singh (25 runs, 1 wkt)' },
+  { id: 'c-u13-thu-4', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-7', teamBId: 'c-u13-b-8', time: '07:30 - 08:00 AM', date: '21 May 2026', venue: 'Cricket Ground (Pool B)', status: 'Completed', score: 'Titans won by 6 wickets', winnerId: 'c-u13-b-7', motm: 'Rudraksh (40 runs)' },
+  { id: 'c-u11-thu-1', sport: 'Cricket', ageCategory: 'U11', gender: 'Boys', teamAId: 'c-u11-b-5', teamBId: 'c-u11-b-3', time: '08:00 - 08:30 AM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Completed', score: 'Stormers won by 19 runs', winnerId: 'c-u11-b-3', motm: 'Evaan (3 wickts)' },
+  { id: 'c-u19-thu-1', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-5', teamBId: 'c-u19-b-3', time: '04:00 - 04:30 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Completed', score: 'Stormers won by 5 wickets', winnerId: 'c-u19-b-3', motm: 'Gaurv Yadav (26 runs)' },
+  { id: 'c-u19-thu-2', sport: 'Cricket', ageCategory: 'U19', gender: 'Boys', teamAId: 'c-u19-b-5', teamBId: 'c-u19-b-1', time: '04:30 - 05:00 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Completed', score: 'Thunders won by 6 wickets', winnerId: 'c-u19-b-5', motm: 'Moksh (51 runs)' },
+  { id: 'c-u15-thu-1', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-1', teamBId: 'c-u15-b-4', time: '05:00 - 05:30 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Completed', score: 'Lightning won by 7 wickets', winnerId: 'c-u15-b-4', motm: 'Aarav Mane (22 runs)' },
+  { id: 'c-u15-thu-2', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'c-u15-b-3', teamBId: 'c-u15-b-2', time: '05:30 - 06:00 PM', date: '21 May 2026', venue: 'Cricket Ground', status: 'Completed', score: 'Tornados won by 12 runs', winnerId: 'c-u15-b-2', motm: 'Harish (43 runs)' },
 
   // --- CRICKET 22 MAY (FRI) ---
   { id: 'c-u13-fri-1', sport: 'Cricket', ageCategory: 'U13', gender: 'Boys', teamAId: 'c-u13-b-1', teamBId: 'c-u13-b-5', time: '06:00 - 06:30 AM', date: '22 May 2026', venue: 'Cricket Ground', status: 'Upcoming' },
@@ -300,6 +358,17 @@ export const MATCHES: Match[] = [
   { id: 'c-u15-final', sport: 'Cricket', ageCategory: 'U15', gender: 'Boys', teamAId: 'TBD', teamBId: 'TBD', time: '07:45 - 08:30 AM', date: '23 May 2026', venue: 'Cricket Ground', status: 'Upcoming', score: 'FINAL' },
 
   // --- OTHER SPORTS (Existing results kept) ---
+  { id: 'f-u19-res-1', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-2', teamBId: 'f-u19-b-5', time: '08:00 AM', date: '21 May 2026', venue: 'Ground 1', status: 'Completed', score: 'United won 4-1', winnerId: 'f-u19-b-2' },
+  { id: 'f-u19-res-2', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-2', teamBId: 'f-u19-b-1', time: '08:30 AM', date: '21 May 2026', venue: 'Ground 1', status: 'Completed', score: 'Match Draw 1-1' },
+  { id: 'f-u19-res-3', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-3', teamBId: 'f-u19-b-1', time: '09:00 AM', date: '21 May 2026', venue: 'Ground 1', status: 'Completed', score: 'Spurs won 3-2', winnerId: 'f-u19-b-3' },
+  { id: 'f-u19-res-4', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-3', teamBId: 'f-u19-b-4', time: '09:30 AM', date: '21 May 2026', venue: 'Ground 1', status: 'Completed', score: 'Athletico won 4-3', winnerId: 'f-u19-b-4' },
+  { id: 'f-u19-res-5', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-5', teamBId: 'f-u19-b-4', time: '10:00 AM', date: '21 May 2026', venue: 'Ground 1', status: 'Completed', score: 'Match Draw 3-3' },
+  
+  { id: 'f-u15-res-1', sport: 'Football', ageCategory: 'U15', gender: 'Boys', teamAId: 'f-u15-b-2', teamBId: 'f-u15-b-1', time: '10:30 AM', date: '21 May 2026', venue: 'Ground 1', status: 'Completed', score: 'FC Shalom won 4-1', winnerId: 'f-u15-b-2' },
+  { id: 'f-u15-res-2', sport: 'Football', ageCategory: 'U15', gender: 'Boys', teamAId: 'f-u15-b-2', teamBId: 'f-u15-b-4', time: '11:00 AM', date: '21 May 2026', venue: 'Ground 1', status: 'Completed', score: 'FC Shalom won 3-2', winnerId: 'f-u15-b-2' },
+  { id: 'f-u15-res-3', sport: 'Football', ageCategory: 'U15', gender: 'Boys', teamAId: 'f-u15-b-1', teamBId: 'f-u15-b-5', time: '11:30 AM', date: '21 May 2026', venue: 'Ground 1', status: 'Completed', score: 'Real Shalom won 4-0', winnerId: 'f-u15-b-5' },
+  { id: 'f-u15-res-4', sport: 'Football', ageCategory: 'U15', gender: 'Boys', teamAId: 'f-u15-b-3', teamBId: 'f-u15-b-4', time: '12:00 PM', date: '21 May 2026', venue: 'Ground 1', status: 'Completed', score: 'Athletico won 9-2', winnerId: 'f-u15-b-4' },
+
   { id: 'fm1', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-4', teamBId: 'f-u19-b-2', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Completed', winnerId: 'f-u19-b-2', score: 'United won 3-2' },
   { id: 'fm2', sport: 'Football', ageCategory: 'U19', gender: 'Boys', teamAId: 'f-u19-b-4', teamBId: 'f-u19-b-1', time: '06:30 - 07:00 AM', date: '20 May 2026', venue: 'Ground 1', status: 'Completed', winnerId: 'f-u19-b-4', score: 'Athletico won 3-1' },
   { id: 'bm1', sport: 'Basketball', ageCategory: 'U15', gender: 'Boys', teamAId: 'b-u15-b-3', teamBId: 'b-u15-b-1', time: '06:00 - 06:30 AM', date: '20 May 2026', venue: 'Court 1', status: 'Completed', winnerId: 'b-u15-b-1', score: 'Warriors won' },
